@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>574339144556-lmnun61qb2q3odieplvf4rv0lar4a7fo.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.574339144556-lmnun61qb2q3odieplvf4rv0lar4a7fo</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDqhBflcbn8ckqZddhdOqZMr6srHtEl87U</string>
+	<key>GCM_SENDER_ID</key>
+	<string>574339144556</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.reactjs.native.example.BookSnaps</string>
+	<key>PROJECT_ID</key>
+	<string>booksnap-aa2ec</string>
+	<key>STORAGE_BUCKET</key>
+	<string>booksnap-aa2ec.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:574339144556:ios:9cca55e531eee76e2af149</string>
+	<key>DATABASE_URL</key>
+	<string>https://booksnap-aa2ec.firebaseio.com</string>
+</dict>
+</plist>
