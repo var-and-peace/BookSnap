@@ -53,5 +53,16 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+		<!-- Required with iOS 10 and higher -->
+		<key>NSCameraUsageDescription</key>
+		<string>BookSnap needs permission to use your camera</string>
+		
+		<!-- Required with iOS 11 and higher: include this only if you are planning to use the camera roll -->
+		<key>NSPhotoLibraryAddUsageDescription</key>
+		<string>Your message to user when the photo library is accessed for the first time</string>
+		
+		<!-- Include this only if you are planning to use the camera roll -->
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>BookSnap needs permission to access your photos</string>
 </dict>
 </plist>
