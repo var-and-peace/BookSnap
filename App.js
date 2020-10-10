@@ -65,7 +65,7 @@ class PhotoCamera extends React.PureComponent {
       base64: true,
     };
     const data = await this.camera.takePictureAsync(options);
-    console.log(data);
+    console.log(data.uri);
   };
   render() {
     const { type } = this.state;
@@ -77,7 +77,7 @@ class PhotoCamera extends React.PureComponent {
           }}
           type={type}
           style={styles.preview}
-          captureAudio='false'
+          captureAudio={false}
         />
         <View style={styles.topButtons}>
           <TouchableOpacity onPress={this.flipCamera} style={styles.flipButton}>
