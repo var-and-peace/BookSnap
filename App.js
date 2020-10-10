@@ -57,10 +57,10 @@ class PhotoCamera extends React.PureComponent {
   takePhoto = async () => {
     const options = {
       quality: 0.5,
-      base64: true
     }
     const data = await this.camera.takePictureAsync(options)
-    console.log(data.uri)
+    const fileLocation = data.uri.split('//')[1]
+    console.log(data)
   }
   render() {
     const { type } = this.state
@@ -73,10 +73,11 @@ class PhotoCamera extends React.PureComponent {
           type={type}
           style={styles.preview}
           captureAudio={false}
+          onTextRecognized={(data) => console.log(data.textBlocks)}
         />
         <View style={styles.bottomButtons}>
           <TouchableOpacity
-            onPress={this.takePhoto}
+            onPress={(data, text) => this.takePhoto(text)}
             style={styles.recordingButton}
           >
             <Icon name='camera' size={50} color='orange' />
