@@ -27,14 +27,16 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start'
   },
   bottomButtons: {
-    justifyContent: 'flex-end',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
     alignItems: 'center'
   },
   flipButton: {
     alignSelf: 'flex-end'
   },
   recordingButton: {
-    marginTop: 20,
+    marginTop: 10,
     alignSelf: 'center'
   }
 })
