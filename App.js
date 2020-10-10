@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'black'
   },
   preview: {
-    flex: 1,
+    flex: 5,
     justifyContent: 'flex-end',
     alignItems: 'center'
   },
@@ -27,17 +27,15 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start'
   },
   bottomButtons: {
-    flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center'
   },
-
   flipButton: {
-    flex: 1,
     alignSelf: 'flex-end'
   },
   recordingButton: {
-    marginBottom: 0
+    marginTop: 20,
+    alignSelf: 'center'
   }
 })
 
@@ -74,8 +72,6 @@ class PhotoCamera extends React.PureComponent {
           style={styles.preview}
           captureAudio={false}
         />
-        {/* <View style={styles.topButtons}> */}
-        {/* </View> */}
         <View style={styles.bottomButtons}>
           <TouchableOpacity
             onPress={this.takePhoto}
