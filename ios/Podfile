@@ -3,6 +3,15 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '10.0'
 
+pod 'Firebase/Analytics'
+pod 'GoogleMLKit/TextRecognition'
+pod 'react-native-camera', path: '../node_modules/react-native-camera', subspecs: [
+  'TextDetector'
+]
+pod 'react-native-camera', path: '../node_modules/react-native-camera', subspecs: [
+  'BarcodeDetectorMLKit'
+]
+
 target 'BookSnaps' do
   config = use_native_modules!
 
