@@ -26,7 +26,7 @@ class PhotoCamera extends React.PureComponent {
           : RNCamera.Constants.Type.back
     })
 
-  takePhoto = async (data) => {
+  takePhoto = async () => {
     const options = {
       quality: 0.5,
       base64: true,
@@ -73,7 +73,7 @@ class PhotoCamera extends React.PureComponent {
         />
         <View style={styles.bottomButtons}>
           <TouchableOpacity
-            onPress={(data) => this.takePhoto(data)}
+            onPress={() => this.takePhoto()}
             style={styles.recordingButton}
           >
             <Icon name='camera' size={50} color='orange' />
