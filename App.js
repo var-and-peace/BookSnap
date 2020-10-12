@@ -1,94 +1,74 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
 import React from 'react'
-import { View, TouchableOpacity, StyleSheet, Dimensions } from 'react-native'
-import { RNCamera } from 'react-native-camera'
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import Library from './src/Components/Library'
+import Graph from './src/Components/Graph'
+import Camera from './src/Components/Camera'
+import Profile from './src/Components/Profile'
+import Extras from './src/Components/Extras'
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: 'black'
-  },
-  preview: {
-    flex: 5,
-    justifyContent: 'flex-end',
-    alignItems: 'center'
-  },
-  topButtons: {
-    flex: 1,
-    alignItems: 'flex-start'
-  },
-  bottomButtons: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center'
-  },
-  flipButton: {
-    alignSelf: 'flex-end'
-  },
-  recordingButton: {
-    marginTop: 10,
-    alignSelf: 'center'
-  }
-})
+const Tabs = createMaterialBottomTabNavigator()
 
-class PhotoCamera extends React.PureComponent {
-  state = {
-    type: RNCamera.Constants.Type.back
-  }
-
-  flipCamera = () =>
-    this.setState({
-      type:
-        this.state.type === RNCamera.Constants.Type.back
-          ? RNCamera.Constants.Type.front
-          : RNCamera.Constants.Type.back
-    })
-
-  takePhoto = async () => {
-    const options = {
-      quality: 0.5,
-    }
-    const data = await this.camera.takePictureAsync(options)
-    const fileLocation = data.uri.split('//')[1]
-    console.log(fileLocation)
-  }
+class App extends React.Component {
   render() {
-    const { type } = this.state
     return (
-      <View style={styles.container}>
-        <RNCamera
-          ref={(cam) => {
-            this.camera = cam
-          }}
-          type={type}
-          style={styles.preview}
-          captureAudio={false}
-          onTextRecognized={(data) => console.log(data.textBlocks)}
-        />
-        <View style={styles.bottomButtons}>
-          <TouchableOpacity
-            onPress={this.takePhoto}
-            style={styles.recordingButton}
-          >
-            <Icon name='camera' size={50} color='orange' />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this.flipCamera} style={styles.flipButton}>
-            <Icon name='refresh' size={35} color='orange' />
-          </TouchableOpacity>
-        </View>
-      </View>
+      <NavigationContainer>
+        <Tabs.Navigator
+          barStyle={{ backgroundColor: 'black'}}
+          tabBarOptions={{ showIcon: true }}
+          labeled={false}
+        >
+          <Tabs.Screen 
+            name='library'
+            component={Library} 
+            options={{ tabBarIcon:(tabInfo) => (<Icon
+              name="book"
+              color='white'
+              size={24}
+            />)}}
+          />
+          <Tabs.Screen 
+            name='graph' 
+            component={Graph}
+            options={{ tabBarIcon:(tabInfo) => (<Icon
+              name="area-chart"
+              color='white'
+              size={24}
+            />)}}
+          />
+          <Tabs.Screen 
+            name='camera' 
+            component={Camera}
+            options={{ tabBarIcon:(tabInfo) => (<Icon
+              name="camera"
+              color='white'
+              size={24}
+            />)}}
+          />
+          <Tabs.Screen 
+            name='profile' 
+            component={Profile}
+            options={{ tabBarIcon:(tabInfo) => (<Icon
+              name="user"
+              color='white'
+              size={24}
+            />)}}
+          />
+          <Tabs.Screen 
+            name='extras' 
+            component={Extras}
+            options={{ tabBarIcon:(tabInfo) => (<Icon
+              name="bars"
+              color='white'
+              size={24}
+            />)}}
+          />
+        </Tabs.Navigator>
+      </NavigationContainer>
     )
   }
 }
 
-export default PhotoCamera
+export default App
