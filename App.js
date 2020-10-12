@@ -13,7 +13,7 @@ const Tabs = createMaterialBottomTabNavigator()
 
 class App extends React.Component {
   render() {
-    return (
+    return ( 
       <NavigationContainer>
         <Tabs.Navigator
           barStyle={{ backgroundColor: 'black'}}
