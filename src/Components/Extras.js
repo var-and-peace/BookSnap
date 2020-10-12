@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-class Camera extends React.Component {
+class Extras extends React.Component {
     render(){
         return (
           <View
@@ -10,9 +10,9 @@ class Camera extends React.Component {
               justifyContent: "center",
               alignItems: "center"
             }}>
-            <Text>Welcome to Camera!</Text>
+            <Text>Welcome to Extras!</Text>
           </View>
         )
     }
 }
-export default Camera;
+export default Extras;
