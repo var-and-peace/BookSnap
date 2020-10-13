@@ -1,5 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import { connect } from 'react-redux'
+import { getBooks } from '../reducers/libraryReducer'
 
 class Extras extends React.Component {
     render(){
@@ -15,4 +17,13 @@ class Extras extends React.Component {
         )
     }
 }
-export default Extras;
+
+const mapState = state => ({
+    library: state.library
+  })
+  
+  const mapDispatch = dispatch => ({
+    getBooks: () => dispatch(getBooks())
+  })
+  
+  export default connect(mapState, mapDispatch)(Extras) 
