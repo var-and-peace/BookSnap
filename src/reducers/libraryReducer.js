@@ -11,6 +11,11 @@ initialLibrary = [
         id: 2,
         title: 'Catcher in the Rye',
         author: 'J.D. Salinger'
+    },
+    {
+        id: 3,
+        title: 'A Brave New World',
+        author: 'Alduous Huxley'
     }
 ]
 
