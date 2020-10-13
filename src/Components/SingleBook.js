@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import { connect } from 'react-redux'
 
 class SingleBook extends React.Component {
     render(){
@@ -10,9 +11,14 @@ class SingleBook extends React.Component {
               justifyContent: "center",
               alignItems: "center"
             }}>
-            <Text>Welcome to SingleBooks!</Text>
+            <Text>{this.props.book.title} by {this.props.book.author}</Text>
           </View>
         )
     }
 }
-export default SingleBook;
+
+const mapState = state => ({
+  book: state.selectedBook
+})
+
+export default connect(mapState)(SingleBook)

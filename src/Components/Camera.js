@@ -118,4 +118,4 @@ const styles = StyleSheet.create({
     marginTop: 10,
     alignSelf: 'center'
   }
-})d
+})

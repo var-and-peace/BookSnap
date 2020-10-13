@@ -1,5 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import { connect } from 'react-redux'
+import { getBooks } from '../reducers/libraryReducer'
 
 class Graph extends React.Component {
     render(){
@@ -15,4 +17,13 @@ class Graph extends React.Component {
         )
     }
 }
-export default Graph;
+
+const mapState = state => ({
+  library: state.library
+})
+
+const mapDispatch = dispatch => ({
+  getBooks: () => dispatch(getBooks())
+})
+
+export default connect(mapState, mapDispatch)(Graph) 
