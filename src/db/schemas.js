@@ -1,7 +1,7 @@
-export const LIBRARY_SCHEMA = 'library'
-export const USER_SCHEMA = 'user'
+const LIBRARY_SCHEMA = 'Library'
+const USER_SCHEMA = 'User'
 
-export const LibrarySchema = {
+const LibrarySchema = {
   name: LIBRARY_SCHEMA,
   primaryKey: 'BookID',
   properties: {
@@ -14,12 +14,12 @@ export const LibrarySchema = {
     year: 'string',
     unread: 'bool',
     isReading: 'bool',
-    rating: 'number',
+    rating: 'int',
     isFavorite: 'bool'
   }
 }
 
-export class User {
+class User {
   get fullName() {
     return this.firstName + ' ' + this.lastName
   }
@@ -35,4 +35,11 @@ User.schema = {
     profilePic: 'string',
     library: { type: 'list', objectType: LIBRARY_SCHEMA }
   }
+}
+
+module.exports = {
+  LIBRARY_SCHEMA,
+  USER_SCHEMA,
+  User,
+  LibrarySchema
 }
