@@ -37,7 +37,7 @@ class PhotoCamera extends React.PureComponent {
     this.setState({ base64: picture.base64 })
   }
 
-  onTextFoun = (data) => {
+  onTextFound = (data) => {
     let foundWords = []
     if (data && data.textBlocks && data.textBlocks.length > 0) {
       for (let i = 0; i < data.textBlocks.length; i++) {
@@ -118,4 +118,4 @@ const styles = StyleSheet.create({
     marginTop: 10,
     alignSelf: 'center'
   }
-})d
+})
