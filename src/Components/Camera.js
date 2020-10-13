@@ -11,6 +11,8 @@ import { View, TouchableOpacity, StyleSheet, Dimensions } from 'react-native'
 import { RNCamera } from 'react-native-camera'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Orientation from 'react-native-orientation'
+import axios from 'axios'
+import ip_address from '../../ip_address'
 
 class PhotoCamera extends React.PureComponent {
   state = {
@@ -45,6 +47,11 @@ class PhotoCamera extends React.PureComponent {
     // console.log('HERE IS WHERE THE PICTURE IS LOCATED', pictureLocation)
     console.log('BASE 64', picture.base64)
     this.setState({ base64: picture.base64 })
+    try {
+      await axios.get(`http://${ip_address}:3000/phone`)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   onTextFound = (data) => {
@@ -82,7 +89,7 @@ class PhotoCamera extends React.PureComponent {
           // onTextRecognized={(data) => this.onTextFound(data)}
         />
         <View style={styles.cameraButton}>
-          <TouchableOpacity onPress={() => this.takePhoto()}>
+          <TouchableOpacity onPress={this.takePhoto}>
             <Icon name='circle' size={50} color='orange' />
           </TouchableOpacity>
         </View>
