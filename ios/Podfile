@@ -17,6 +17,8 @@ target 'BookSnaps' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+  pod 'react-native-orientation', :path => '../node_modules/react-native-orientation'
+
   target 'BookSnapsTests' do
     inherit! :complete
     # Pods for testing
