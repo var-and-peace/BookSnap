@@ -3,9 +3,9 @@ const USER_SCHEMA = 'User'
 
 const LibrarySchema = {
   name: LIBRARY_SCHEMA,
-  primaryKey: 'BookID',
+  primaryKey: 'BookId',
   properties: {
-    BookID: 'int',
+    BookId: 'int',
     title: 'string',
     author: 'string',
     ISBN: 'string',
@@ -15,7 +15,8 @@ const LibrarySchema = {
     unread: 'bool',
     isReading: 'bool',
     rating: 'int',
-    isFavorite: 'bool'
+    isFavorite: 'bool',
+    pageNumber: 'int'
   }
 }
 
