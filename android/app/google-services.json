@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "574339144556",
+    "firebase_url": "https://booksnap-aa2ec.firebaseio.com",
+    "project_id": "booksnap-aa2ec",
+    "storage_bucket": "booksnap-aa2ec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:574339144556:android:f6a731eb56fce6132af149",
+        "android_client_info": {
+          "package_name": "com.booksnap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "574339144556-3mueut95ii5icfs1q7o11a03k1a6l29m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdo-Wwg0vUFXpJ5HK7j-Rk8o5HsRA183E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "574339144556-3mueut95ii5icfs1q7o11a03k1a6l29m.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "574339144556-lmnun61qb2q3odieplvf4rv0lar4a7fo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.BookSnaps"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
