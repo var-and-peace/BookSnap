@@ -10,12 +10,23 @@ import React from 'react'
 import { View, TouchableOpacity, StyleSheet, Dimensions } from 'react-native'
 import { RNCamera } from 'react-native-camera'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import Orientation from 'react-native-orientation'
+import axios from 'axios'
+import ip_address from '../../ip_address'
 
 class PhotoCamera extends React.PureComponent {
   state = {
     type: RNCamera.Constants.Type.back,
     wordList: [],
     base64: ''
+  }
+
+  componentDidMount() {
+    console.log('Camera mounts')
+    Orientation.lockToPortrait()
+    this.props.navigation.addListener('blur', () =>
+      Orientation.unlockAllOrientations()
+    )
   }
 
   flipCamera = () =>
@@ -29,32 +40,38 @@ class PhotoCamera extends React.PureComponent {
   takePhoto = async () => {
     const options = {
       quality: 0.5,
-      base64: true,
+      base64: true
     }
     const picture = await this.camera.takePictureAsync(options)
     const pictureLocation = picture.uri.split('//')[1]
-    console.log('HERE IS WHERE THE PICTURE IS LOCATED', pictureLocation)
+    // console.log('HERE IS WHERE THE PICTURE IS LOCATED', pictureLocation)
+    console.log('BASE 64', picture.base64)
     this.setState({ base64: picture.base64 })
+    try {
+      await axios.get(`http://${ip_address}:3000/phone`)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
-  onTextFoun = (data) => {
+  onTextFound = (data) => {
     let foundWords = []
     if (data && data.textBlocks && data.textBlocks.length > 0) {
       for (let i = 0; i < data.textBlocks.length; i++) {
         let text = data.textBlocks[i].value
-        if(text && text.trim().length > 0) {
+        if (text && text.trim().length > 0) {
           let words = text.split(/[\s,.?]+/)
-          if(words && words.length > 0) {
+          if (words && words.length > 0) {
             for (let j = 0; j < words.length; j++) {
-              if(words[j].trim().length > 0) {
+              if (words[j].trim().length > 0) {
                 foundWords.push(words[j])
               }
             }
           }
         }
       }
-    this.setState({ wordList: foundWords })
-    console.log(this.state)
+      this.setState({ wordList: foundWords })
+      console.log(this.state)
     }
   }
 
@@ -69,17 +86,11 @@ class PhotoCamera extends React.PureComponent {
           type={type}
           style={styles.preview}
           captureAudio={false}
-          onTextRecognized={(data) => this.onTextFound(data)}
+          // onTextRecognized={(data) => this.onTextFound(data)}
         />
-        <View style={styles.bottomButtons}>
-          <TouchableOpacity
-            onPress={() => this.takePhoto()}
-            style={styles.recordingButton}
-          >
-            <Icon name='camera' size={50} color='orange' />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this.flipCamera} style={styles.flipButton}>
-            <Icon name='refresh' size={35} color='orange' />
+        <View style={styles.cameraButton}>
+          <TouchableOpacity onPress={this.takePhoto}>
+            <Icon name='circle' size={50} color='orange' />
           </TouchableOpacity>
         </View>
       </View>
@@ -95,6 +106,14 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: 'black'
+  },
+  cameraButton: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 10,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   preview: {
     flex: 5,
@@ -115,7 +134,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end'
   },
   recordingButton: {
-    marginTop: 10,
-    alignSelf: 'center'
+    width: 10,
+    height: 10
   }
 })

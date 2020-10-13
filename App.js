@@ -1,11 +1,13 @@
 // React
 import React from 'react'
+
 // React-Redux
 import { Provider } from 'react-redux'
 import store from './src/store'
 // React-Navigator
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
+
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 import Icon from 'react-native-vector-icons/FontAwesome'
 // Components
@@ -76,6 +78,13 @@ class App extends React.Component {
         </NavigationContainer>
       </Provider>
     )
+  }
+}
+
+const styles = {
+  navContainer: {
+    margin: 0,
+    padding: 0
   }
 }
 
