@@ -1,6 +1,8 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { VictoryBar, VictoryChart } from 'victory-native';
+import { connect } from 'react-redux'
+import { getBooks } from '../reducers/libraryReducer'
 
 const data = [
   {quarter: 1, earnings: 13000},
@@ -28,5 +30,15 @@ class Graph extends React.Component {
           </View>
         )
     }
+
 }
-export default Graph;
+
+const mapState = (state) => ({
+  library: state.library
+})
+
+const mapDispatch = (dispatch) => ({
+  getBooks: () => dispatch(getBooks())
+})
+
+export default connect(mapState, mapDispatch)(Graph)
