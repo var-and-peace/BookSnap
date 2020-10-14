@@ -9,7 +9,7 @@ const GOT_BOOK = 'GOT_BOOK'
 // ACTION CREATORS
 export const gotBook = (book) => ({
   type: GOT_BOOK,
-  book
+  book,
 })
 
 // THUNK CREATORS
@@ -21,13 +21,13 @@ export const setBook = (bookId) => async (dispatch) => {
       book = {
         id: 1,
         title: 'Great Gatsby',
-        author: 'F. Scott Fitzgerald'
+        author: 'F. Scott Fitzgerald',
       }
     else
       book = {
         id: 2,
         title: 'Catcher in the Rye',
-        author: 'J.D. Salinger'
+        author: 'J.D. Salinger',
       }
     dispatch(gotBook(book))
   } catch (err) {
@@ -46,4 +46,3 @@ const singleBookReducer = (state = initialBook, action) => {
 }
 
 export default singleBookReducer
-

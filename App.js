@@ -35,7 +35,7 @@ class App extends React.Component {
               options={{
                 tabBarIcon: (tabInfo) => (
                   <Icon name='book' color='white' size={24} />
-                )
+                ),
               }}
             />
             <Tabs.Screen
@@ -44,7 +44,7 @@ class App extends React.Component {
               options={{
                 tabBarIcon: (tabInfo) => (
                   <Icon name='area-chart' color='white' size={24} />
-                )
+                ),
               }}
             />
             <Tabs.Screen
@@ -53,7 +53,7 @@ class App extends React.Component {
               options={{
                 tabBarIcon: (tabInfo) => (
                   <Icon name='camera' color='white' size={24} />
-                )
+                ),
               }}
             />
             <Tabs.Screen
@@ -62,7 +62,7 @@ class App extends React.Component {
               options={{
                 tabBarIcon: (tabInfo) => (
                   <Icon name='user' color='white' size={24} />
-                )
+                ),
               }}
             />
             <Tabs.Screen
@@ -71,7 +71,7 @@ class App extends React.Component {
               options={{
                 tabBarIcon: (tabInfo) => (
                   <Icon name='bars' color='white' size={24} />
-                )
+                ),
               }}
             />
           </Tabs.Navigator>
@@ -84,8 +84,8 @@ class App extends React.Component {
 const styles = {
   navContainer: {
     margin: 0,
-    padding: 0
-  }
+    padding: 0,
+  },
 }
 
 export default App

@@ -9,7 +9,7 @@ const GOT_PHOTOS = 'GOT_PHOTOS'
 // ACTION CREATORS
 export const gotPhotos = (photos) => ({
   type: GOT_PHOTOS,
-  photos
+  photos,
 })
 
 // THUNK CREATORS
@@ -34,4 +34,3 @@ const cameraReducer = (state = initialPhotos, action) => {
 }
 
 export default cameraReducer
-

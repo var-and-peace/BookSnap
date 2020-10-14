@@ -5,18 +5,18 @@ initialLibrary = [
   {
     id: 1,
     title: 'Great Gatsby',
-    author: 'F. Scott Fitzgerald'
+    author: 'F. Scott Fitzgerald',
   },
   {
     id: 2,
     title: 'Catcher in the Rye',
-    author: 'J.D. Salinger'
+    author: 'J.D. Salinger',
   },
   {
     id: 3,
     title: 'A Brave New World',
-    author: 'Alduous Huxley'
-  }
+    author: 'Alduous Huxley',
+  },
 ]
 
 // ACTION CONSTANTS
@@ -25,7 +25,7 @@ const GOT_BOOKS = 'GOT_BOOKS'
 // ACTION CREATORS
 export const gotBooks = (books) => ({
   type: GOT_BOOKS,
-  books
+  books,
 })
 
 // THUNK CREATORS
@@ -50,4 +50,3 @@ const libraryReducer = (state = initialLibrary, action) => {
 }
 
 export default libraryReducer
-

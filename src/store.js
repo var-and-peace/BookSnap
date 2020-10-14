@@ -7,7 +7,7 @@ import cameraReducer from './reducers/cameraReducer'
 const rootReducer = combineReducers({
   library: libraryReducer,
   selectedBook: singleBookReducer,
-  photos: cameraReducer
+  photos: cameraReducer,
 })
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
