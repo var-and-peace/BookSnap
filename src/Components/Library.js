@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react'
+import { Text, View } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { connect } from 'react-redux'
 import { getBooks } from '../reducers/libraryReducer'
@@ -22,14 +23,16 @@ class Library extends React.Component {
           </Stack.Navigator>
         )
     }
+
 }
 
-const mapState = state => ({
+const mapState = (state) => ({
   library: state.library
 })
 
-const mapDispatch = dispatch => ({
+const mapDispatch = (dispatch) => ({
   getBooks: () => dispatch(getBooks())
 })
 
-export default connect(mapState, mapDispatch)(Library) 
+export default connect(mapState, mapDispatch)(Library)
+

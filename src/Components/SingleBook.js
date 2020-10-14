@@ -1,5 +1,5 @@
-import React from 'react';
-import { Text, View } from 'react-native';
+import React from 'react'
+import { Text, View } from 'react-native'
 import { connect } from 'react-redux'
 import { getBook } from '../reducers/singleBookReducer'
 
@@ -19,9 +19,10 @@ class SingleBook extends React.Component {
           </View>
         )
     }
+
 }
 
-const mapState = state => ({
+const mapState = (state) => ({
   book: state.selectedBook
 })
 

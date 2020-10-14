@@ -7,9 +7,9 @@ initialBook = {}
 const GOT_BOOK = 'GOT_BOOK'
 
 // ACTION CREATORS
-export const gotBook = book => ({
-    type: GOT_BOOK,
-    book
+export const gotBook = (book) => ({
+  type: GOT_BOOK,
+  book,
 })
 
 // THUNK CREATORS
@@ -43,12 +43,12 @@ export const setBook = bookId => async dispatch => {
 
 // SINGLE BOOK REDUCER
 const singleBookReducer = (state = initialBook, action) => {
-    switch (action.type) {
-        case GOT_BOOK:
-            return action.book
-        default: 
-            return state
-    }
+  switch (action.type) {
+    case GOT_BOOK:
+      return action.book
+    default:
+      return state
+  }
 }
 
 export default singleBookReducer

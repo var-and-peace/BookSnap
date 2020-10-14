@@ -1,5 +1,13 @@
-import React from 'react';
-import { Text, View, Button, FlatList, StyleSheet, Dimensions, TouchableWithoutFeedback } from 'react-native';
+import React from 'react'
+import {
+  Text,
+  View,
+  Button,
+  FlatList,
+  StyleSheet,
+  Dimensions,
+  TouchableWithoutFeedback
+} from 'react-native'
 import { connect } from 'react-redux'
 import { getBooks } from '../reducers/libraryReducer'
 import { setBook } from '../reducers/singleBookReducer'
@@ -8,11 +16,11 @@ const HEIGHT = Dimensions.get('window').height / 3.2
 const numColumns = 2
 
 class AllBooks extends React.Component {
-    constructor(){
-        super()
-        this.formatData = this.formatData.bind(this)
-        this.renderBook = this.renderBook.bind(this)
-    }
+  constructor() {
+    super()
+    this.formatData = this.formatData.bind(this)
+    this.renderBook = this.renderBook.bind(this)
+  }
     componentDidMount(){
         this.props.getBooks()
     }
@@ -53,40 +61,41 @@ class AllBooks extends React.Component {
             />
           </View>
         )
-    }
+  }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 10
-    },
-    item: {
-        backgroundColor: '#FFC771',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        height: HEIGHT,
-        flex: 1,
-        margin: 10,
-        padding: 10,
-        borderRadius: 10
-    },
-    itemText: {
-        color: '#fff',
-        fontSize: 30
-    },
-    itemInvisible: {
-        backgroundColor: 'transparent'
-    }
+  container: {
+    flex: 1,
+    padding: 10
+  },
+  item: {
+    backgroundColor: '#FFC771',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    height: HEIGHT,
+    flex: 1,
+    margin: 10,
+    padding: 10,
+    borderRadius: 10
+  },
+  itemText: {
+    color: '#fff',
+    fontSize: 30
+  },
+  itemInvisible: {
+    backgroundColor: 'transparent'
+  }
 })
 
-const mapState = state => ({
+const mapState = (state) => ({
   library: state.library
 })
 
-const mapDispatch = dispatch => ({
+const mapDispatch = (dispatch) => ({
   getBooks: () => dispatch(getBooks()),
   setBook: (bookId) => dispatch(setBook(bookId))
 })
 
-export default connect(mapState, mapDispatch)(AllBooks) 
+export default connect(mapState, mapDispatch)(AllBooks)
+
