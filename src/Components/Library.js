@@ -1,5 +1,5 @@
-import React from 'react';
-import { Text, View } from 'react-native';
+import React from 'react'
+import { Text, View } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { connect } from 'react-redux'
 import { getBooks } from '../reducers/libraryReducer'
@@ -9,28 +9,25 @@ import AllBooks from './AllBooks'
 const Stack = createStackNavigator()
 
 class Library extends React.Component {
-    render(){
-        return (
-          <Stack.Navigator>
-            <Stack.Screen name='Library' component={AllBooks}/>
-            {
-              this.props.library.map(book => {
-                return (
-                  <Stack.Screen name={book.title} component={SingleBook}/>
-                )
-              })
-            }
-          </Stack.Navigator>
-        )
-    }
+  render() {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen name='Library' component={AllBooks} />
+        {this.props.library.map((book) => {
+          return <Stack.Screen name={book.title} component={SingleBook} />
+        })}
+      </Stack.Navigator>
+    )
+  }
 }
 
-const mapState = state => ({
+const mapState = (state) => ({
   library: state.library
 })
 
-const mapDispatch = dispatch => ({
+const mapDispatch = (dispatch) => ({
   getBooks: () => dispatch(getBooks())
 })
 
-export default connect(mapState, mapDispatch)(Library) 
+export default connect(mapState, mapDispatch)(Library)
+
