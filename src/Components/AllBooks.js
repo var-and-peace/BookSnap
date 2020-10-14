@@ -20,7 +20,7 @@ class AllBooks extends React.Component {
         const totalRows = Math.floor(data.length / numColumns)
         let totalLastRow = data.length - (totalRows * numColumns)
         while (totalLastRow !== 0 && totalLastRow !== numColumns) {
-            data.push({empty: true})
+            data.push({title: 'blank', empty: true})
             totalLastRow++
         }
         return data
@@ -30,7 +30,11 @@ class AllBooks extends React.Component {
             return <View style={[styles.item, styles.itemInvisible]}/>
         }
         return (
-            <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate(book.item.title)}>
+            <TouchableWithoutFeedback onPress={() => {
+                this.props.setBook(book.item.id)
+                this.props.navigation.navigate(book.item.title)
+                }
+            }>
                 <View style={styles.item}>
                     <Text style={styles.itemText}>{book.item.title}</Text>
                     <Text style={styles.itemText}>{book.item.author}</Text>

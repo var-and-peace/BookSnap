@@ -13,6 +13,14 @@ export const gotBook = book => ({
 })
 
 // THUNK CREATORS
+export const getBook = () => async (dispatch, getState) => {
+    try {
+        let selectedBook = getState().selectedBook
+        dispatch(gotBook(selectedBook))
+    } catch (err) {
+        console.error(err)
+    }
+}
 export const setBook = bookId => async dispatch => {
     try {
         console.log('SETTING BOOK')
