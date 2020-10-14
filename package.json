@@ -38,7 +38,7 @@
     "victory-native": "^35.0.1"
     "realm": "^6.1.4",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
 
   },
   "devDependencies": {
