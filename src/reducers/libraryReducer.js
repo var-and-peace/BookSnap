@@ -2,21 +2,11 @@ import axios from 'axios'
 
 // INITIAL LIBRARY STATE
 initialLibrary = [
-  {
-    id: 1,
-    title: 'Great Gatsby',
-    author: 'F. Scott Fitzgerald',
-  },
-  {
-    id: 2,
-    title: 'Catcher in the Rye',
-    author: 'J.D. Salinger',
-  },
-  {
-    id: 3,
-    title: 'A Brave New World',
-    author: 'Alduous Huxley',
-  },
+    { id: 1, title: 'Great Gatsby', author: 'F. Scott Fitzgerald'},
+    { id: 2, title: 'Catcher in the Rye', author: 'J.D. Salinger'},
+    { id: 3, title: 'A Brave New World', author: 'Alduous Huxley'},
+    { id: 4, title: 'Slaughterhouse Five', author: 'Kurt Vonnegut'},
+    { id: 5, title: 'Howl', author: 'Allen Ginsburg'}
 ]
 
 // ACTION CONSTANTS
