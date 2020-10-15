@@ -35,7 +35,6 @@ export const getBooks = () => async (dispatch) => {
 }
 
 export const addBook = (book) => async (dispatch) => {
-  // book = {title: , author: }
   try {
     const { data: xml } = await axios.get(
       `https://www.goodreads.com/book/title.xml?author=${book.author
@@ -44,15 +43,32 @@ export const addBook = (book) => async (dispatch) => {
         .split(' ')
         .join('+')}`
     )
-    const bookData = convert.xml2js(xml)
-    console.log('Here is the parsed data from GoodReads!', bookData)
+    const bookData = convert.xml2js(xml, { compact: true })
+    const bookInfo = bookData.GoodreadsResponse.book
+    const author = bookInfo.authors.author.name._text
+    const ISBN = bookInfo.isbn._cdata
+    const description = bookInfo.description._cdata
+    const title = bookInfo.work.original_title._text
+    const genres = bookData.popular_shelves
+    const coverImage = bookInfo.image_url._text
+    const year = bookInfo.work.original_publication_year._text
+    const BookId = ++bookInfo.id._text
+    const bookObj = {
+      BookId,
+      title,
+      author,
+      ISBN,
+      coverImage,
+      year,
+    }
+    console.log(bookObj)
     const library = await Realm.open({
       schema: [LibrarySchema],
     })
     library.write(() => {
-      library.create('Library', book)
+      library.create('Library', bookObj)
     })
-    dispatch(addedBook(book))
+    dispatch(addedBook(bookObj))
   } catch (err) {
     console.error(err)
   }

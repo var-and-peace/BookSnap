@@ -16,7 +16,7 @@ const LibrarySchema = {
     isReading: 'bool',
     rating: 'int',
     isFavorite: 'bool',
-    pageNumber: 'int'
+    pageNumber: 'int',
   }
 }
 
