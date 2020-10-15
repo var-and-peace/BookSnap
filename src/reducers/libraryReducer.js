@@ -32,8 +32,9 @@ export const getBooks = () => async (dispatch) => {
     console.error(err)
   }
 }
-export const addBook = book => async dispatch => {
+export const addBook = book => async dispatch => { // book = {title: , author: }
     try {
+        const xml = await axios.get(`https://www.goodreads.com/book/title.xml?author=${book.author.split(' ').join('+')}&key=swlLnKRkZ9AWD5M3fGBbVw&title=${book.title.split(' ').join('+')}`)
         const library = await Realm.open({
             schema: [LibrarySchema]
         })
