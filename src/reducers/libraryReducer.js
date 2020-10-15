@@ -3,6 +3,7 @@ const Realm = require('realm')
 import { LIBRARY_SCHEMA, LibrarySchema } from '../db/schemas'
 
 // INITIAL LIBRARY STATE
+
 initialLibrary = []
 
 // ACTION CONSTANTS

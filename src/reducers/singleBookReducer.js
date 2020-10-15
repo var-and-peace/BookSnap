@@ -23,6 +23,7 @@ export const getBook = () => async (dispatch, getState) => {
     console.error(err)
   }
 }
+
 export const setBook = (bookId) => async (dispatch) => {
   try {
     const library = await Realm.open({
@@ -36,6 +37,7 @@ export const setBook = (bookId) => async (dispatch) => {
   } catch (err) {
     console.error(err)
   }
+
 }
 
 // SINGLE BOOK REDUCER
