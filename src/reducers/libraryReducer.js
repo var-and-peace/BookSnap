@@ -7,16 +7,21 @@ initialLibrary = []
 
 // ACTION CONSTANTS
 const GOT_BOOKS = 'GOT_BOOKS'
+const ADDED_BOOK = 'ADDED_BOOK'
 
 // ACTION CREATORS
 export const gotBooks = (books) => ({
-  type: GOT_BOOKS,
-  books,
+    type: GOT_BOOKS,
+    books,
+})
+export const addedBook = book => ({
+    type: ADDED_BOOK,
+    book
 })
 
 // THUNK CREATORS
 export const getBooks = () => async (dispatch) => {
-  try {
+    try {
     const library = await Realm.open({
         schema: [LibrarySchema]
     })
@@ -27,12 +32,27 @@ export const getBooks = () => async (dispatch) => {
     console.error(err)
   }
 }
+export const addBook = book => async dispatch => {
+    try {
+        const library = await Realm.open({
+            schema: [LibrarySchema]
+        })
+        library.write(() => {
+            library.create('Library', book)
+        })
+        dispatch(addedBook(book))
+    } catch (err) {
+        console.error(err)
+    }
+}
 
 // LIBRARY REDUCER
 const libraryReducer = (state = initialLibrary, action) => {
   switch (action.type) {
     case GOT_BOOKS:
       return action.books
+    case ADDED_BOOK:
+        return [...state, action.book]
     default:
       return state
   }
