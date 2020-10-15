@@ -53,6 +53,7 @@ export const addBook = (book) => async (dispatch) => {
     const coverImage = bookInfo.image_url._text
     const year = bookInfo.work.original_publication_year._text
     const BookId = ++bookInfo.id._text
+    const numPages = ++bookInfo.num_pages._cdata
     const bookObj = {
       BookId,
       title,
@@ -60,6 +61,7 @@ export const addBook = (book) => async (dispatch) => {
       ISBN,
       coverImage,
       year,
+      numPages,
     }
     console.log(bookObj)
     const library = await Realm.open({
