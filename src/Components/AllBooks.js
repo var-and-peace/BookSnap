@@ -5,7 +5,7 @@ import {
   FlatList,
   StyleSheet,
   Dimensions,
-  TouchableWithoutFeedback
+  Pressable
 } from 'react-native'
 import { connect } from 'react-redux'
 import { getBooks } from '../reducers/libraryReducer'
@@ -37,16 +37,14 @@ class AllBooks extends React.Component {
             return <View style={[styles.item, styles.itemInvisible]}/>
         }
         return (
-            <TouchableWithoutFeedback onPress={() => {
-                this.props.setBook(book.item.id)
+            <Pressable style={styles.item} onPress={() => {
+                this.props.setBook(book.item.BookId)
                 this.props.navigation.navigate(book.item.title)
                 }
             }>
-                <View style={styles.item}>
-                    <Text style={styles.itemText}>{book.item.title}</Text>
-                    <Text style={styles.itemText}>{book.item.author}</Text>
-                </View>
-            </TouchableWithoutFeedback>
+                <Text style={styles.itemText}>{book.item.title}</Text>
+                <Text style={styles.itemText}>{book.item.author}</Text>
+            </Pressable>
         )
     }
     render(){
