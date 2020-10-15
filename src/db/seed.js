@@ -1,4 +1,5 @@
-const { User, LibrarySchema } = require('./schemas')
+const { LibrarySchema, UserSchema } = require('./schemas')
+
 const Realm = require('realm')
 
 const libraryFiller = [
@@ -9,7 +10,6 @@ const libraryFiller = [
     unread: true,
     isReading: false,
     rating: 3,
-    isFavorite: true,
     ISBN: 'HONESTLY IDK',
     coverImage:
       'https://www.promotionalbooktours.com/wp-content/uploads/2014/08/library_book.jpg',
@@ -24,7 +24,6 @@ const libraryFiller = [
     isReading: false,
     rating: 5,
     isFavorite: true,
-    ISBN: 'HONESTLY IDK',
     coverImage:
       'https://www.promotionalbooktours.com/wp-content/uploads/2014/08/library_book.jpg',
     year: '2000',
@@ -33,7 +32,6 @@ const libraryFiller = [
   {
     title: 'Green Eggs and Ham',
     author: 'Dr. Seuss',
-    genre: 'Kids',
     unread: false,
     isReading: false,
     rating: 3,
@@ -46,24 +44,27 @@ const libraryFiller = [
   },
 ]
 
-;async () => {
+const seed = async () => {
   try {
-    const realm = await Realm.open({ schema: [LibrarySchema, User] })
-    realm.write(async () => {
-      await realm.create('User', {
-        UserId: 1,
-        firstName: 'Mike',
-        lastName: 'Maurer',
-        profilePic: 'loser.jpg',
-        library: [],
-      })
-      await Promise.all(
-        libraryFiller.map((book) => {
-          realm.create('Library', book)
+    const library = await Realm.open({ schema: [LibrarySchema] })
+    const user = await Realm.open({ schema: [UserSchema] })
+    user.write(
+      async () =>
+        await user.create('User', {
+          firstName: 'Mike',
+          lastName: 'Maurer',
+          profilePic: 'loser.jpg',
+          library: [],
         })
-      )
-    })
+    )
+    await Promise.all(
+      libraryFiller.map((book) => {
+        library.create('Library', book)
+      })
+    )
   } catch (err) {
     console.error('Error seeding database', err)
   }
 }
+
+seed()

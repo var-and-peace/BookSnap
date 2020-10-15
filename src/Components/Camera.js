@@ -7,7 +7,7 @@
  */
 
 import React from 'react'
-import { View, TouchableOpacity, StyleSheet, Dimensions } from 'react-native'
+import { View, TouchableOpacity, StyleSheet } from 'react-native'
 import { RNCamera } from 'react-native-camera'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Orientation from 'react-native-orientation'
@@ -43,9 +43,6 @@ class PhotoCamera extends React.PureComponent {
       base64: true,
     }
     const picture = await this.camera.takePictureAsync(options)
-    const pictureLocation = picture.uri.split('//')[1]
-    // console.log('HERE IS WHERE THE PICTURE IS LOCATED', pictureLocation)
-    console.log('BASE 64', picture.base64)
     this.setState({ base64: picture.base64 })
     try {
       await axios.get(`http://${ip_address}:3000/phone`)
