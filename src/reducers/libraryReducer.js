@@ -1,13 +1,10 @@
 import axios from 'axios'
+const Realm = require('realm')
+import { LIBRARY_SCHEMA, LibrarySchema } from '../db/schemas'
 
 // INITIAL LIBRARY STATE
-initialLibrary = [
-  { id: 1, title: 'Great Gatsby', author: 'F. Scott Fitzgerald' },
-  { id: 2, title: 'Catcher in the Rye', author: 'J.D. Salinger' },
-  { id: 3, title: 'A Brave New World', author: 'Alduous Huxley' },
-  { id: 4, title: 'Slaughterhouse Five', author: 'Kurt Vonnegut' },
-  { id: 5, title: 'Howl', author: 'Allen Ginsburg' },
-]
+
+initialLibrary = []
 
 // ACTION CONSTANTS
 const GOT_BOOKS = 'GOT_BOOKS'
@@ -21,8 +18,11 @@ export const gotBooks = (books) => ({
 // THUNK CREATORS
 export const getBooks = () => async (dispatch) => {
   try {
-    // const books = await axios.get('/HTTP ADDRESS TO GET LIBRARY')
-    const books = initialLibrary
+    const library = await Realm.open({
+        schema: [LibrarySchema]
+    })
+    let books = await [...library.objects(LIBRARY_SCHEMA)]
+    console.log(books)
     dispatch(gotBooks(books))
   } catch (err) {
     console.error(err)
