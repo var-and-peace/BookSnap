@@ -1,6 +1,7 @@
 import axios from 'axios'
 const Realm = require('realm')
 import { LIBRARY_SCHEMA, LibrarySchema } from '../db/schemas'
+import convert from 'xml-js'
 
 // INITIAL LIBRARY STATE
 initialLibrary = []
@@ -11,19 +12,19 @@ const ADDED_BOOK = 'ADDED_BOOK'
 
 // ACTION CREATORS
 export const gotBooks = (books) => ({
-    type: GOT_BOOKS,
-    books,
+  type: GOT_BOOKS,
+  books,
 })
-export const addedBook = book => ({
-    type: ADDED_BOOK,
-    book
+export const addedBook = (book) => ({
+  type: ADDED_BOOK,
+  book,
 })
 
 // THUNK CREATORS
 export const getBooks = () => async (dispatch) => {
-    try {
+  try {
     const library = await Realm.open({
-        schema: [LibrarySchema]
+      schema: [LibrarySchema],
     })
     let books = await [...library.objects(LIBRARY_SCHEMA)]
     console.log(books)
@@ -32,19 +33,28 @@ export const getBooks = () => async (dispatch) => {
     console.error(err)
   }
 }
-export const addBook = book => async dispatch => { // book = {title: , author: }
-    try {
-        const xml = await axios.get(`https://www.goodreads.com/book/title.xml?author=${book.author.split(' ').join('+')}&key=swlLnKRkZ9AWD5M3fGBbVw&title=${book.title.split(' ').join('+')}`)
-        const library = await Realm.open({
-            schema: [LibrarySchema]
-        })
-        library.write(() => {
-            library.create('Library', book)
-        })
-        dispatch(addedBook(book))
-    } catch (err) {
-        console.error(err)
-    }
+export const addBook = (book) => async (dispatch) => {
+  // book = {title: , author: }
+  try {
+    const { data: xml } = await axios.get(
+      `https://www.goodreads.com/book/title.xml?author=${book.author
+        .split(' ')
+        .join('+')}&key=swlLnKRkZ9AWD5M3fGBbVw&title=${book.title
+        .split(' ')
+        .join('+')}`
+    )
+    const bookData = convert.xml2js(xml)
+    console.log(bookData)
+    const library = await Realm.open({
+      schema: [LibrarySchema],
+    })
+    library.write(() => {
+      library.create('Library', book)
+    })
+    dispatch(addedBook(book))
+  } catch (err) {
+    console.error(err)
+  }
 }
 
 // LIBRARY REDUCER
@@ -53,7 +63,7 @@ const libraryReducer = (state = initialLibrary, action) => {
     case GOT_BOOKS:
       return action.books
     case ADDED_BOOK:
-        return [...state, action.book]
+      return [...state, action.book]
     default:
       return state
   }
