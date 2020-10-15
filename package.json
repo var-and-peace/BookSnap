@@ -36,9 +36,10 @@
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "react-router-native": "^5.2.0",
-    "realm": "^6.1.4",
+    "realm": "^10.0.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "stream": "^0.0.2",
     "victory-native": "^35.0.1",
     "xml-js": "^1.6.11"
   },
