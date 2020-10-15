@@ -18,6 +18,8 @@ import Extras from './src/Components/Extras'
 const Realm = require('realm')
 import { LIBRARY_SCHEMA, USER_SCHEMA, LibrarySchema, User } from './src/db/schemas'
 
+import BookForm from './src/Components/BookForm'
+
 const Tabs = createMaterialBottomTabNavigator()
 
 class App extends React.Component {
@@ -72,8 +74,8 @@ class App extends React.Component {
               }}
             />
             <Tabs.Screen
-              name='extras'
-              component={Extras}
+              name='Add a Book'
+              component={BookForm}
               options={{
                 tabBarIcon: (tabInfo) => (
                   <Icon name='bars' color='white' size={24} />
