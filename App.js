@@ -14,11 +14,11 @@ import Graph from './src/Components/Graph'
 import Camera from './src/Components/Camera'
 import Profile from './src/Components/Profile'
 import Extras from './src/Components/Extras'
+import BookForm from './src/Components/BookForm'
 // Realm
 const Realm = require('realm')
 import { LIBRARY_SCHEMA, USER_SCHEMA, LibrarySchema, User } from './src/db/schemas'
 
-import BookForm from './src/Components/BookForm'
 
 const Tabs = createMaterialBottomTabNavigator()
 

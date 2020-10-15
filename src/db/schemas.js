@@ -8,15 +8,15 @@ const LibrarySchema = {
     BookId: 'int',
     title: 'string',
     author: 'string',
-    ISBN: 'string?',
-    coverImage: 'string?',
-    genre: 'string?',
-    year: 'string?',
-    unread: 'bool?',
-    isReading: 'bool?',
-    rating: 'int?',
-    isFavorite: 'bool?',
-    pageNumber: 'int?'
+    ISBN: 'string',
+    coverImage: 'string',
+    genre: 'string',
+    year: 'string',
+    unread: 'bool',
+    isReading: 'bool',
+    rating: 'int',
+    isFavorite: 'bool',
+    pageNumber: 'int'
   }
 }
 
