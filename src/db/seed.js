@@ -54,8 +54,9 @@ const libraryFiller = [
   },
 ]
 
-Realm.open({ schema: [LibrarySchema, User] })
-  .then((realm) => {
+;async () => {
+  try {
+    const realm = await Realm.open({ schema: [LibrarySchema, User] })
     realm.write(() =>
       realm.create('User', {
         UserId: 1,
@@ -65,10 +66,12 @@ Realm.open({ schema: [LibrarySchema, User] })
         library: [],
       })
     )
-    realm.write(() => {
-      realm.create('Library', libraryFiller[0])
-      realm.create('Library', libraryFiller[1])
-      realm.create('Library', libraryFiller[2])
+    realm.write(async () => {
+      await Promise.all(libraryFiller.map(book => {
+        realm.create('Library', book)
+      }))
     })
-  })
-  .catch((err) => console.error('Error seeding database', err))
+  } catch (err) {
+    console.error('Error seeding database', err)
+  }
+}
