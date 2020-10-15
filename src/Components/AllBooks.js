@@ -5,8 +5,7 @@ import {
   FlatList,
   StyleSheet,
   Dimensions,
-  Pressable
-
+  Pressable,
 } from 'react-native'
 import { connect } from 'react-redux'
 import { getBooks } from '../reducers/libraryReducer'
@@ -31,34 +30,23 @@ class AllBooks extends React.Component {
       data.push({ title: 'blank', empty: true })
       totalLastRow++
     }
-
-    renderBook(book){
-        if (book.item.empty){
-            return <View style={[styles.item, styles.itemInvisible]}/>
-        }
-        return (
-            <Pressable style={styles.item} onPress={() => {
-                this.props.setBook(book.item.BookId)
-                this.props.navigation.navigate(book.item.title)
-                }
-            }>
-                <Text style={styles.itemText}>{book.item.title}</Text>
-                <Text style={styles.itemText}>{book.item.author}</Text>
-            </Pressable>
-        )
+    return data
+  }
+  renderBook(book) {
+    if (book.item.empty) {
+      return <View style={[styles.item, styles.itemInvisible]} />
     }
     return (
-      <TouchableWithoutFeedback
+      <Pressable
+        style={styles.item}
         onPress={() => {
-          this.props.setBook(book.item.id)
+          this.props.setBook(book.item.BookId)
           this.props.navigation.navigate(book.item.title)
         }}
       >
-        <View style={styles.item}>
-          <Text style={styles.itemText}>{book.item.title}</Text>
-          <Text style={styles.itemText}>{book.item.author}</Text>
-        </View>
-      </TouchableWithoutFeedback>
+        <Text style={styles.itemText}>{book.item.title}</Text>
+        <Text style={styles.itemText}>{book.item.author}</Text>
+      </Pressable>
     )
   }
   render() {

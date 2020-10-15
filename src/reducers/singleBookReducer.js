@@ -24,17 +24,20 @@ export const getBook = () => async (dispatch, getState) => {
   }
 }
 
-export const setBook = bookId => async dispatch => {
-    try {
-        const library = await Realm.open({
-            schema: [LibrarySchema]
-        })
-        let book = await library.objects(LIBRARY_SCHEMA).filtered(`BookId = ${bookId}`)[0]
-        console.log(book)
-        dispatch(gotBook(book))
-    } catch (err) {
-        console.error(err)
-    }
+export const setBook = (bookId) => async (dispatch) => {
+  try {
+    const library = await Realm.open({
+      schema: [LibrarySchema],
+    })
+    let book = await library
+      .objects(LIBRARY_SCHEMA)
+      .filtered(`BookId = ${bookId}`)[0]
+    console.log(book)
+    dispatch(gotBook(book))
+  } catch (err) {
+    console.error(err)
+  }
+
 }
 
 // SINGLE BOOK REDUCER
