@@ -2,7 +2,7 @@ const {
   LIBRARY_SCHEMA,
   USER_SCHEMA,
   User,
-  LibrarySchema
+  LibrarySchema,
 } = require('./schemas')
 const Realm = require('realm')
 
@@ -20,7 +20,7 @@ const libraryFiller = [
     coverImage:
       'https://www.promotionalbooktours.com/wp-content/uploads/2014/08/library_book.jpg',
     year: '2000',
-    pageNumber: 500
+    pageNumber: 500,
   },
   {
     BookId: 2,
@@ -35,7 +35,7 @@ const libraryFiller = [
     coverImage:
       'https://www.promotionalbooktours.com/wp-content/uploads/2014/08/library_book.jpg',
     year: '2000',
-    pageNumber: 365
+    pageNumber: 365,
   },
   {
     BookId: 3,
@@ -50,8 +50,8 @@ const libraryFiller = [
     coverImage:
       'https://www.promotionalbooktours.com/wp-content/uploads/2014/08/library_book.jpg',
     year: '2000',
-    pageNumber: 42
-  }
+    pageNumber: 42,
+  },
 ]
 
 Realm.open({ schema: [LibrarySchema, User] })
@@ -62,7 +62,7 @@ Realm.open({ schema: [LibrarySchema, User] })
         firstName: 'Mike',
         lastName: 'Maurer',
         profilePic: 'loser.jpg',
-        library: []
+        library: [],
       })
     )
     realm.write(() => {

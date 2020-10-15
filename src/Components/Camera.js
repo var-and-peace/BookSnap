@@ -18,7 +18,7 @@ class PhotoCamera extends React.PureComponent {
   state = {
     type: RNCamera.Constants.Type.back,
     wordList: [],
-    base64: ''
+    base64: '',
   }
 
   componentDidMount() {
@@ -34,13 +34,13 @@ class PhotoCamera extends React.PureComponent {
       type:
         this.state.type === RNCamera.Constants.Type.back
           ? RNCamera.Constants.Type.front
-          : RNCamera.Constants.Type.back
+          : RNCamera.Constants.Type.back,
     })
 
   takePhoto = async () => {
     const options = {
       quality: 0.5,
-      base64: true
+      base64: true,
     }
     const picture = await this.camera.takePictureAsync(options)
     const pictureLocation = picture.uri.split('//')[1]
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
-    backgroundColor: 'black'
+    backgroundColor: 'black',
   },
   cameraButton: {
     position: 'absolute',
@@ -113,28 +113,28 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 10,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   preview: {
     flex: 5,
     justifyContent: 'flex-end',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   topButtons: {
     flex: 1,
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
   },
   bottomButtons: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   flipButton: {
-    alignSelf: 'flex-end'
+    alignSelf: 'flex-end',
   },
   recordingButton: {
     width: 10,
-    height: 10
-  }
+    height: 10,
+  },
 })
