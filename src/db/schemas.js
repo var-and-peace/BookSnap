@@ -16,8 +16,8 @@ const LibrarySchema = {
     isReading: 'bool',
     rating: 'int',
     isFavorite: 'bool',
-    pageNumber: 'int'
-  }
+    pageNumber: 'int',
+  },
 }
 
 class User {
@@ -34,14 +34,13 @@ User.schema = {
     firstName: 'string',
     lastName: 'string',
     profilePic: 'string',
-    library: { type: 'list', objectType: LIBRARY_SCHEMA }
-  }
+    library: { type: 'list', objectType: LIBRARY_SCHEMA },
+  },
 }
 
 module.exports = {
   LIBRARY_SCHEMA,
   USER_SCHEMA,
   User,
-  LibrarySchema
+  LibrarySchema,
 }
-
