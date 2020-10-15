@@ -2,8 +2,9 @@ import React from 'react'
 import { Text, View, TextInput, Button, StyleSheet } from 'react-native'
 import { useForm, Controller } from 'react-hook-form'
 import { connect } from 'react-redux'
+import { addBook } from '../reducers/libraryReducer'
 
-const BookForm = () => {
+const BookForm = (props) => {
   const { control, handleSubmit, errors } = useForm()
   const onSubmit = (book) => props.addBookData(book)
 
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
 
 const mapDispatch = (dispatch) => ({
   addBookData: (book) => {
-    dispatch(addbook(book))
+    dispatch(addBook(book))
   },
 })
 

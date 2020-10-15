@@ -45,7 +45,7 @@ export const addBook = (book) => async (dispatch) => {
         .join('+')}`
     )
     const bookData = convert.xml2js(xml)
-    console.log(bookData)
+    console.log('Here is the parsed data from GoodReads!', bookData)
     const library = await Realm.open({
       schema: [LibrarySchema],
     })
