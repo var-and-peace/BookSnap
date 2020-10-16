@@ -26,7 +26,7 @@ export const getBooks = () => async (dispatch) => {
     const library = await Realm.open({
       schema: [LibrarySchema],
     })
-    let books = await [...library.objects(LIBRARY_SCHEMA)]
+    let books = [...library.objects(LIBRARY_SCHEMA)]
     dispatch(gotBooks(books))
   } catch (err) {
     console.error(err)
@@ -42,7 +42,7 @@ export const addBook = (book) => async (dispatch) => {
         .split(' ')
         .join('+')}`
     )
-    const newBook = await parse(xml)
+    const newBook = parse(xml)
     const library = await Realm.open({
       schema: [LibrarySchema],
     })
