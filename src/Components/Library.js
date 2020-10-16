@@ -16,7 +16,7 @@ class Library extends React.Component {
         {this.props.library.map((book) => {
           return (
             <Stack.Screen
-              key={book.id}
+              key={book.BookId}
               name={book.title}
               component={SingleBook}
             />

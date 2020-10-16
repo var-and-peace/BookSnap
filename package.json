@@ -21,7 +21,9 @@
     "@react-navigation/stack": "^5.9.3",
     "axios": "^0.20.0",
     "node-fetch": "^2.6.1",
+    "ponyfill": "^0.0.1",
     "react": "16.13.1",
+    "react-hook-form": "^6.9.2",
     "react-native": "0.63.3",
     "react-native-camera": "^3.40.0",
     "react-native-gesture-handler": "^1.8.0",
@@ -35,10 +37,12 @@
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "react-router-native": "^5.2.0",
-    "victory-native": "^35.0.1",
-    "realm": "^6.1.4",
+    "realm": "^10.0.0",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "stream": "^0.0.2",
+    "victory-native": "^35.0.1",
+    "xml-js": "^1.6.11"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
