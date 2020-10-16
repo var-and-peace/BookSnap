@@ -24,13 +24,14 @@ class AllBooks extends React.Component {
     this.props.getBooks()
   }
   formatData(data, numColumns) {
-    const totalRows = Math.floor(data.length / numColumns)
-    let totalLastRow = data.length - totalRows * numColumns
+    const library = [...data]
+    const totalRows = Math.floor(library.length / numColumns)
+    let totalLastRow = library.length - totalRows * numColumns
     while (totalLastRow !== 0 && totalLastRow !== numColumns) {
-      data.push({ title: 'blank', empty: true })
+      library.push({ title: 'blank', empty: true })
       totalLastRow++
     }
-    return data
+    return library
   }
   renderBook(book) {
     if (book.item.empty) {

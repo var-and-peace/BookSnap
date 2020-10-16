@@ -34,16 +34,13 @@ export const getBooks = () => async (dispatch) => {
   }
 }
 
-export const addBook = (book) => async (dispatch) => {
+export const addBook = (input) => async (dispatch) => {
   try {
     const { data: xml } = await axios.get(
-      `https://www.goodreads.com/book/title.xml?author=${book.author
-        .split(' ')
-        .join('+')}&key=swlLnKRkZ9AWD5M3fGBbVw&title=${book.title
-        .split(' ')
-        .join('+')}`
+      `https://www.goodreads.com/search/index.xml?key=swlLnKRkZ9AWD5M3fGBbVw&q=${input.searchQuery.split(' ').join('+')}`
     )
     const newBook = parse(xml)
+    // console.log(newBook)
     const library = await Realm.open({
       schema: [LibrarySchema],
     })
