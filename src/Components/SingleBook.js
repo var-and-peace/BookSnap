@@ -20,10 +20,10 @@ class SingleBook extends React.Component {
           {this.props.book.title} by {this.props.book.author}
         </Text>
         <Text>
-          ID: {this.props.book.BookId} coverImage: {this.props.book.coverImage}
+          ID: {this.props.book.BookId}
         </Text>
         <Image
-          style={{ width: 100, height: 200 }}
+          style={{ width: 180, height: 255 }}
           source={{ uri: this.props.book.coverImage }}
         />
         <Text style={{ padding: 20 }}>{this.props.book.description}</Text>
