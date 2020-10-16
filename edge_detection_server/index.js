@@ -20,24 +20,14 @@ app.get('/', (req, res, next) => {
 
 app.put('/phone', async (req, res, next) => {
   try {
-    // let options = {
-    //   mode: 'text',
-    //   pythonOptions: ['-u'], // get print results in real-time
-    //   args: [req.body.base64]
-    // }
-    // PythonShell.run('script.py', options, function (err, results) {
-    //   if (err) throw err
-    //   // results is an array consisting of messages collected during execution
-    //   console.log('results: %j', results)
-    // })
     let pyshell = new PythonShell('script.py')
     pyshell.send(req.body.base64)
     pyshell.on('message', function (message) {
       // received a message sent from the Python script (a simple "print" statement)
       console.log(message)
+      res.status(204).send(message)
     })
     console.log('closing WARNING')
-    res.sendStatus(200)
   } catch (error) {
     console.error(error)
   }
