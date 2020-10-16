@@ -36,6 +36,9 @@ for line in lines:
 
 # sort by rho
 filtered_lines.sort(key=lambda x: abs(x[0]))
+if (len(filtered_lines) == 0):
+    print('No lines found post-filter')
+    quit()
 
 # batch close lines together
 batches = [[]]
@@ -90,7 +93,7 @@ for i in range(0, len(filtered_lines) - 1):
     rect = cv2.resize(rect, dim)
 
     text = google_vision.detect_text_bytes(
-        cv2.imencode('.jpeg', rect)[1].tostring())
+        cv2.imencode('.jpeg', rect)[1].tobytes())
     textDetected.append([s.split('\n') for s in text])
 
 # format results into strings with no repeats
