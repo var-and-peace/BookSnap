@@ -45,7 +45,9 @@ class PhotoCamera extends React.PureComponent {
     const picture = await this.camera.takePictureAsync(options)
     this.setState({ base64: picture.base64 })
     try {
-      await axios.get(`http://${ip_address}:3000/phone`)
+      await axios.put(`http://${ip_address}:3000/phone`, {
+        base64: picture.base64
+      })
     } catch (error) {
       console.error(error)
     }

@@ -24,6 +24,7 @@ DerivedData
 *.ipa
 *.xcuserstate
 ip_address.js
+/edge_detection_server/booksnap-service_account.json
 
 # Android/IntelliJ
 #
