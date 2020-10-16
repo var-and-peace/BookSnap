@@ -1,13 +1,11 @@
 // React
 import React from 'react'
-
 // React-Redux
 import { Provider } from 'react-redux'
 import store from './src/store'
 // React-Navigator
-import 'react-native-gesture-handler';
-import { NavigationContainer } from '@react-navigation/native';
-
+import 'react-native-gesture-handler'
+import { NavigationContainer } from '@react-navigation/native'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 import Icon from 'react-native-vector-icons/FontAwesome'
 // Components
@@ -16,63 +14,76 @@ import Graph from './src/Components/Graph'
 import Camera from './src/Components/Camera'
 import Profile from './src/Components/Profile'
 import Extras from './src/Components/Extras'
+// Realm
+const Realm = require('realm')
+import {
+  LIBRARY_SCHEMA,
+  USER_SCHEMA,
+  LibrarySchema,
+  UserSchema,
+} from './src/db/schemas'
 
 const Tabs = createMaterialBottomTabNavigator()
 
 class App extends React.Component {
+  async componentDidMount() {
+    const library = await Realm.open({
+      schema: [LibrarySchema],
+    })
+  }
   render() {
-    return ( 
+    return (
       <Provider store={store}>
         <NavigationContainer>
           <Tabs.Navigator
-            barStyle={{ backgroundColor: 'rgb(50,50,50)'}}
+            barStyle={{ backgroundColor: 'rgb(50,50,50)' }}
             tabBarOptions={{ showIcon: true }}
             labeled={false}
           >
-            <Tabs.Screen 
+            <Tabs.Screen
               name='library'
-              component={Library} 
-              options={{ tabBarIcon:(tabInfo) => (<Icon
-                name="book"
-                color='white'
-                size={24}
-              />)}}
+              component={Library}
+              options={{
+                tabBarIcon: (tabInfo) => (
+                  <Icon name='book' color='white' size={24} />
+                ),
+              }}
             />
-            <Tabs.Screen 
-              name='graph' 
+            <Tabs.Screen
+              name='graph'
               component={Graph}
-              options={{ tabBarIcon:(tabInfo) => (<Icon
-                name="area-chart"
-                color='white'
-                size={24}
-              />)}}
+              options={{
+                tabBarIcon: (tabInfo) => (
+                  <Icon name='area-chart' color='white' size={24} />
+                ),
+              }}
             />
-            <Tabs.Screen 
-              name='camera' 
+            <Tabs.Screen
+              name='camera'
               component={Camera}
-              options={{ tabBarIcon:(tabInfo) => (<Icon
-                name="camera"
-                color='white'
-                size={24}
-              />)}}
+              options={{
+                tabBarIcon: (tabInfo) => (
+                  <Icon name='camera' color='white' size={24} />
+                ),
+              }}
             />
-            <Tabs.Screen 
-              name='profile' 
+            <Tabs.Screen
+              name='profile'
               component={Profile}
-              options={{ tabBarIcon:(tabInfo) => (<Icon
-                name="user"
-                color='white'
-                size={24}
-              />)}}
+              options={{
+                tabBarIcon: (tabInfo) => (
+                  <Icon name='user' color='white' size={24} />
+                ),
+              }}
             />
-            <Tabs.Screen 
-              name='extras' 
+            <Tabs.Screen
+              name='extras'
               component={Extras}
-              options={{ tabBarIcon:(tabInfo) => (<Icon
-                name="bars"
-                color='white'
-                size={24}
-              />)}}
+              options={{
+                tabBarIcon: (tabInfo) => (
+                  <Icon name='bars' color='white' size={24} />
+                ),
+              }}
             />
           </Tabs.Navigator>
         </NavigationContainer>
@@ -84,8 +95,8 @@ class App extends React.Component {
 const styles = {
   navContainer: {
     margin: 0,
-    padding: 0
-  }
+    padding: 0,
+  },
 }
 
 export default App
