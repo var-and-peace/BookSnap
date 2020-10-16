@@ -6,10 +6,11 @@ import { addBook } from '../reducers/libraryReducer'
 
 const BookForm = (props) => {
   const { control, handleSubmit, errors } = useForm()
-  const onSubmit = (book) => props.addBookData(book)
+  const onSubmit = (searchQuery) => props.addBookData(searchQuery)
 
   return (
     <View style={styles.container}>
+        <Text>Search</Text>
       <Controller
         control={control}
         style={styles.input}
@@ -21,28 +22,11 @@ const BookForm = (props) => {
             value={value}
           />
         )}
-        name='title'
+        name='searchQuery'
         rules={{ required: true }}
         defaultValue=''
       />
-      {errors.title && <Text>This is required.</Text>}
-
-      <Controller
-        control={control}
-        style={styles.input}
-        render={({ onChange, onBlur, value }) => (
-          <TextInput
-            style={styles.input}
-            onBlur={onBlur}
-            onChangeText={(value) => onChange(value)}
-            value={value}
-          />
-        )}
-        name='author'
-        rules={{ required: true }}
-        defaultValue=''
-      />
-      {errors.author && <Text>This is required.</Text>}
+      {errors.searchQuery && <Text>This is required.</Text>}
 
       <Button title='Submit' onPress={handleSubmit(onSubmit)} />
     </View>

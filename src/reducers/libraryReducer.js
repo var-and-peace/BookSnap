@@ -1,7 +1,7 @@
 import axios from 'axios'
 const Realm = require('realm')
-import { LIBRARY_SCHEMA, LibrarySchema } from '../db/schemas'
-import convert from 'xml-js'
+import { LIBRARY_SCHEMA, LibrarySchema } from '../db/currentSchemas'
+import parse from '../assets/bookParserFunc'
 
 // INITIAL LIBRARY STATE
 
@@ -27,51 +27,27 @@ export const getBooks = () => async (dispatch) => {
     const library = await Realm.open({
       schema: [LibrarySchema],
     })
-    let books = await [...library.objects(LIBRARY_SCHEMA)]
-    console.log(books)
+    let books = [...library.objects(LIBRARY_SCHEMA)]
     dispatch(gotBooks(books))
   } catch (err) {
     console.error(err)
   }
 }
 
-export const addBook = (book) => async (dispatch) => {
+export const addBook = (input) => async (dispatch) => {
   try {
     const { data: xml } = await axios.get(
-      `https://www.goodreads.com/book/title.xml?author=${book.author
-        .split(' ')
-        .join('+')}&key=swlLnKRkZ9AWD5M3fGBbVw&title=${book.title
-        .split(' ')
-        .join('+')}`
+      `https://www.goodreads.com/search/index.xml?key=swlLnKRkZ9AWD5M3fGBbVw&q=${input.searchQuery.split(' ').join('+')}`
     )
-    const bookData = convert.xml2js(xml, { compact: true })
-    const bookInfo = bookData.GoodreadsResponse.book
-    const author = bookInfo.authors.author.name._text
-    const ISBN = bookInfo.isbn._cdata
-    const description = bookInfo.description._cdata
-    const title = bookInfo.work.original_title._text
-    const genres = bookData.popular_shelves
-    const coverImage = bookInfo.image_url._text
-    const year = bookInfo.work.original_publication_year._text
-    const BookId = ++bookInfo.id._text
-    const numPages = ++bookInfo.num_pages._cdata
-    const bookObj = {
-      BookId,
-      title,
-      author,
-      ISBN,
-      coverImage,
-      year,
-      numPages,
-    }
-    console.log(bookObj)
+    const newBook = parse(xml)
+    // console.log(newBook)
     const library = await Realm.open({
       schema: [LibrarySchema],
     })
     library.write(() => {
-      library.create('Library', bookObj)
+      library.create('Library', newBook)
     })
-    dispatch(addedBook(bookObj))
+    dispatch(addedBook(newBook))
   } catch (err) {
     console.error(err)
   }
