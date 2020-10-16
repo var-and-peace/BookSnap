@@ -27,7 +27,6 @@ export const getBooks = () => async (dispatch) => {
       schema: [LibrarySchema],
     })
     let books = await [...library.objects(LIBRARY_SCHEMA)]
-    console.log(books)
     dispatch(gotBooks(books))
   } catch (err) {
     console.error(err)
