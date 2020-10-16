@@ -18,7 +18,10 @@ const LibrarySchema = {
     isFavorite: { type: 'bool', default: false },
     numPages: 'int?',
     currentPage: { type: 'int?', default: 0 },
-    description: { type: 'string?', default: 'No description available at this time.' },
+    description: {
+      type: 'string?',
+      default: 'No description available at this time.',
+    },
   },
 }
 

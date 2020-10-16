@@ -18,7 +18,6 @@ export default (xml) => {
   const description = bookInfo.description._cdata
   const title = bookInfo.work.original_title._text
   const genres = bookObj.popular_shelves
-  console.log(genres)
   const coverImage = bookInfo.image_url._text
   const year = bookInfo.work.original_publication_year._text
   const BookId = ++bookInfo.id._text
@@ -31,6 +30,5 @@ export default (xml) => {
     year,
     description,
   }
-  console.log('New book to be added to the database', newBook)
   return newBook
 }
