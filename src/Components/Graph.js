@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, View } from 'react-native'
-import { VictoryBar, VictoryChart } from 'victory-native'
+import { VictoryBar, VictoryChart, VictoryPie } from 'victory-native'
 import { connect } from 'react-redux'
 import { getBooks } from '../reducers/libraryReducer'
 
@@ -13,6 +13,20 @@ const data = [
 
 class Graph extends React.Component {
   render() {
+    const libraryData = {}
+    const libraryDataArr = []
+    this.props.library.forEach(book => {
+      if (libraryData[book.author]) {
+        libraryData[book.author] ++
+      }
+      else {
+        libraryData[book.author] = 1
+      }
+    })
+    Object.keys(libraryData).forEach(key => {
+      libraryDataArr.push({ author: key, value: libraryData[key]})
+    })
+    console.log(libraryDataArr)
     return (
       <View
         style={{
@@ -22,9 +36,7 @@ class Graph extends React.Component {
         }}
       >
         <Text>Welcome to Graphs!</Text>
-        <VictoryChart>
-          <VictoryBar data={data} x='quarter' y='earnings' />
-        </VictoryChart>
+        <VictoryPie data={libraryDataArr} x='author' y='value'/>
       </View>
     )
   }
