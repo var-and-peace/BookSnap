@@ -1,7 +1,7 @@
 import axios from 'axios'
 const Realm = require('realm')
-import { LIBRARY_SCHEMA, LibrarySchema } from '../db/schemas'
-import convert from 'xml-js'
+import { LIBRARY_SCHEMA, LibrarySchema } from '../db/currentSchemas'
+import parse from '../assets/bookParserFunc'
 
 // INITIAL LIBRARY STATE
 initialLibrary = []
@@ -43,34 +43,14 @@ export const addBook = (book) => async (dispatch) => {
         .split(' ')
         .join('+')}`
     )
-    const bookData = convert.xml2js(xml, { compact: true })
-    const bookInfo = bookData.GoodreadsResponse.book
-    const author = bookInfo.authors.author.name._text
-    const ISBN = bookInfo.isbn._cdata
-    const description = bookInfo.description._cdata
-    const title = bookInfo.work.original_title._text
-    const genres = bookData.popular_shelves
-    const coverImage = bookInfo.image_url._text
-    const year = bookInfo.work.original_publication_year._text
-    const BookId = ++bookInfo.id._text
-    const numPages = ++bookInfo.num_pages._cdata
-    const bookObj = {
-      BookId,
-      title,
-      author,
-      ISBN,
-      coverImage,
-      year,
-      numPages,
-    }
-    console.log(bookObj)
+    const newBook = await parse(xml)
     const library = await Realm.open({
       schema: [LibrarySchema],
     })
     library.write(() => {
-      library.create('Library', bookObj)
+      library.create('Library', newBook)
     })
-    dispatch(addedBook(bookObj))
+    dispatch(addedBook(newBook))
   } catch (err) {
     console.error(err)
   }

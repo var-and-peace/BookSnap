@@ -1,6 +1,6 @@
 import axios from 'axios'
 const Realm = require('realm')
-import { LIBRARY_SCHEMA, LibrarySchema } from '../db/schemas'
+import { LIBRARY_SCHEMA, LibrarySchema } from '../db/currentSchemas'
 
 // INITIAL LIBRARY STATE
 initialBook = {}
