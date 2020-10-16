@@ -3,9 +3,7 @@ const USER_SCHEMA = 'User'
 
 const LibrarySchema = {
   name: LIBRARY_SCHEMA,
-  primaryKey: 'BookId',
   properties: {
-    BookId: 'int',
     title: 'string',
     author: 'string',
     ISBN: 'string',
@@ -22,13 +20,7 @@ const LibrarySchema = {
   },
 }
 
-class User {
-  get fullName() {
-    return this.firstName + ' ' + this.lastName
-  }
-}
-
-User.schema = {
+const UserSchema = {
   name: USER_SCHEMA,
   properties: {
     firstName: 'string',
@@ -41,6 +33,6 @@ User.schema = {
 module.exports = {
   LIBRARY_SCHEMA,
   USER_SCHEMA,
-  User,
+  UserSchema,
   LibrarySchema,
 }

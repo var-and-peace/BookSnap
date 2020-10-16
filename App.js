@@ -17,15 +17,20 @@ import Extras from './src/Components/Extras'
 import BookForm from './src/Components/BookForm'
 // Realm
 const Realm = require('realm')
-import { LIBRARY_SCHEMA, USER_SCHEMA, LibrarySchema, User } from './src/db/schemas'
+import {
+  LIBRARY_SCHEMA,
+  USER_SCHEMA,
+  LibrarySchema,
+  UserSchema,
+} from './src/db/schemas'
 
 
 const Tabs = createMaterialBottomTabNavigator()
 
 class App extends React.Component {
-  async componentDidMount(){
+  async componentDidMount() {
     const library = await Realm.open({
-      schema: [LibrarySchema]
+      schema: [LibrarySchema],
     })
   }
   render() {
