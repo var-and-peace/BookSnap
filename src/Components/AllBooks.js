@@ -47,7 +47,7 @@ class AllBooks extends React.Component {
         }}
       >
         <Image
-          style={{ width: 100, height: 200 }}
+          style={{ width: 180, height: 255 }}
           source={{ uri: book.item.coverImage }}
         />
       </Pressable>
