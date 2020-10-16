@@ -22,10 +22,11 @@ class SingleBook extends React.Component {
         <Text>
           ID: {this.props.book.BookId} coverImage: {this.props.book.coverImage}
         </Text>
-        <Image style={{width: 100, height: 200}} source={this.props.book.coverImage} />
-        <Text style={{padding: 20}}>
-          {this.props.book.description}
-        </Text>
+        <Image
+          style={{ width: 100, height: 200 }}
+          source={{ uri: this.props.book.coverImage }}
+        />
+        <Text style={{ padding: 20 }}>{this.props.book.description}</Text>
       </View>
     )
   }

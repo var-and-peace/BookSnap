@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Dimensions,
   Pressable,
+  Image,
 } from 'react-native'
 import { connect } from 'react-redux'
 import { getBooks } from '../reducers/libraryReducer'
@@ -45,8 +46,10 @@ class AllBooks extends React.Component {
           this.props.navigation.navigate(book.item.title)
         }}
       >
-        <Text style={styles.itemText}>{book.item.title}</Text>
-        <Text style={styles.itemText}>{book.item.author}</Text>
+        <Image
+          style={{ width: 100, height: 200 }}
+          source={{ uri: book.item.coverImage }}
+        />
       </Pressable>
     )
   }
