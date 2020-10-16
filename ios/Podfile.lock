@@ -461,7 +461,7 @@ PODS:
     - React-Core (= 0.63.3)
     - React-cxxreact (= 0.63.3)
     - React-jsi (= 0.63.3)
-  - RealmJS (6.1.4):
+  - RealmJS (10.0.0):
     - GCDWebServer
     - React
   - RNCMaskedView (0.1.10):
@@ -719,7 +719,7 @@ SPEC CHECKSUMS:
   React-RCTText: 65a6de06a7389098ce24340d1d3556015c38f746
   React-RCTVibration: 8e9fb25724a0805107fc1acc9075e26f814df454
   ReactCommon: 4167844018c9ed375cc01a843e9ee564399e53c3
-  RealmJS: 899b4839a8bee46e248bc277995ad58da855e41f
+  RealmJS: 361a8910fb904a2798b3a94a3a9020cc8942773d
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
   RNGestureHandler: 7a5833d0f788dbd107fbb913e09aa0c1ff333c39
   RNReanimated: dd8c286ab5dd4ba36d3a7fef8bff7e08711b5476

@@ -2012,6 +2012,13 @@ bser@2.1.1:
   dependencies:
     node-int64 "^0.4.0"
 
+bson@^4.0.3:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/bson/-/bson-4.2.0.tgz#15b5beffed6e44883de9922a2e1896fba4042cd4"
+  integrity sha512-c3MlJqdROnCRvDr/+MLfaDvQ7CvGI4p1hKX45/fvgzSwKRdOjsfRug1NJJ8ty5mXCNtUdjJEWzoZWcBQxV4TyA==
+  dependencies:
+    buffer "^5.6.0"
+
 buffer-crc32@^0.2.13:
   version "0.2.13"
   resolved "https://registry.yarnpkg.com/buffer-crc32/-/buffer-crc32-0.2.13.tgz#0d333e3f00eac50aa1454abd30ef8c2a5d9a7242"
@@ -6640,11 +6647,20 @@ readable-stream@^2.0.1, readable-stream@^2.0.6, readable-stream@^2.2.2, readable
     string_decoder "~1.1.1"
     util-deprecate "~1.0.1"
 
-realm@^6.1.4:
-  version "6.1.4"
-  resolved "https://registry.yarnpkg.com/realm/-/realm-6.1.4.tgz#186a901452e6253193f30649cd346ea07e88d632"
-  integrity sha512-5EWKlxYa0JZMl2EnqEz8S5NIFZJswLQ1FPMbOqDWVHbkAZfcrCyGCQdbWwWvyhaa+KK0qg8Q39EY0VXLYuWbqw==
+realm-network-transport@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/realm-network-transport/-/realm-network-transport-0.7.0.tgz#4b32e1fa6ef0a10361cd5b044f5d18f59faf72b1"
+  integrity sha512-w81+N+YrFBkWZWFlspDPrpot50xCkfr+AB+NCQjsTI6OfVF0igqhLfl3frwrSS61fQiL5XrZrFYFV6BWU0F+iA==
   dependencies:
+    abort-controller "^3.0.0"
+    node-fetch "^2.6.0"
+
+realm@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/realm/-/realm-10.0.0.tgz#9db5427007d22f5960bd6898bd66143d7cf18ba1"
+  integrity sha512-yYOtbVRAe4hFPxpzZNX2hSlGhbK5tG1Y0tG67e/rLu/wnDEGmRTHwm17m8S30ijpaHqP7x1jYTu+mrC3seahbQ==
+  dependencies:
+    bson "^4.0.3"
     command-line-args "^4.0.6"
     deepmerge "2.1.0"
     deprecated-react-native-listview "0.0.6"
@@ -6657,6 +6673,7 @@ realm@^6.1.4:
     node-pre-gyp "^0.15.0"
     progress "^2.0.3"
     prop-types "^15.6.2"
+    realm-network-transport "^0.7.0"
     request "^2.88.0"
     stream-counter "^1.0.0"
     sync-request "^3.0.1"
