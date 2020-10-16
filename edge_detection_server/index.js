@@ -1,14 +1,13 @@
 const express = require('express')
 const morgan = require('morgan')
 const app = express()
-
-// will use ngrok to listen to localhost from phone
+const { PythonShell } = require('python-shell')
 
 // logging middleware
 app.use(morgan('dev'))
 
 // body parsing middleware
-app.use(express.json())
+app.use(express.json({ limit: '50mb' }))
 app.use(express.urlencoded({ extended: true }))
 
 app.get('/', (req, res, next) => {
@@ -19,10 +18,16 @@ app.get('/', (req, res, next) => {
   }
 })
 
-app.get('/phone', (req, res, next) => {
+app.put('/phone', async (req, res, next) => {
   try {
-    console.log('RECEIVED')
-    res.sendStatus(200)
+    let pyshell = new PythonShell('script.py')
+    pyshell.send(req.body.base64)
+    pyshell.on('message', function (message) {
+      // received a message sent from the Python script (a simple "print" statement)
+      console.log(message)
+      res.status(204).send(message)
+    })
+    console.log('closing WARNING')
   } catch (error) {
     console.error(error)
   }

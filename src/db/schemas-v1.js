@@ -3,32 +3,22 @@ const USER_SCHEMA = 'User'
 
 const LibrarySchema = {
   name: LIBRARY_SCHEMA,
-  primaryKey: 'BookId',
   properties: {
-    BookId: 'int',
     title: 'string',
     author: 'string',
-    ISBN: 'string',
-    coverImage: { type: 'string', default: 'img.jpg' },
-    genre: 'string?',
-    year: 'string',
-    unread: { type: 'bool', default: false },
-    isReading: { type: 'bool', default: false },
+    ISBN: 'string?',
+    coverImage: 'string?',
+    genre: 'string',
+    year: 'string?',
+    unread: { type: 'bool?', default: true },
+    isReading: 'bool?',
     rating: 'int?',
     isFavorite: { type: 'bool', default: false },
-    numPages: 'int?',
-    currentPage: 'int?',
-    description: 'string?',
+    pageNumber: 'int?',
   },
 }
 
-class User {
-  get fullName() {
-    return this.firstName + ' ' + this.lastName
-  }
-}
-
-User.schema = {
+const UserSchema = {
   name: USER_SCHEMA,
   properties: {
     firstName: 'string',
@@ -41,6 +31,6 @@ User.schema = {
 module.exports = {
   LIBRARY_SCHEMA,
   USER_SCHEMA,
-  User,
+  UserSchema,
   LibrarySchema,
 }
