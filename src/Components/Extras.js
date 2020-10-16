@@ -10,7 +10,7 @@ class Extras extends React.Component {
         style={{
           flex: 1,
           justifyContent: 'center',
-          alignItems: 'center'
+          alignItems: 'center',
         }}
       >
         <Text>Welcome to Extras!</Text>
@@ -20,12 +20,11 @@ class Extras extends React.Component {
 }
 
 const mapState = (state) => ({
-  library: state.library
+  library: state.library,
 })
 
 const mapDispatch = (dispatch) => ({
-  getBooks: () => dispatch(getBooks())
+  getBooks: () => dispatch(getBooks()),
 })
 
 export default connect(mapState, mapDispatch)(Extras)
-

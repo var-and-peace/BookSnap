@@ -4,6 +4,7 @@ import { LIBRARY_SCHEMA, LibrarySchema } from '../db/currentSchemas'
 import parse from '../assets/bookParserFunc'
 
 // INITIAL LIBRARY STATE
+
 initialLibrary = []
 
 // ACTION CONSTANTS
