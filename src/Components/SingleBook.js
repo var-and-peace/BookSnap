@@ -1,13 +1,16 @@
 import React from 'react'
-import { Text, View, Image } from 'react-native'
+import { Text, View, Image, StyleSheet, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
 import { getBook } from '../reducers/singleBookReducer'
+
+const HEIGHT = Dimensions.get('window').height / 3.2
 
 class SingleBook extends React.Component {
   componentDidMount() {
     this.props.getBook()
   }
   render() {
+    console.log(this.props.book.coverImage)
     return (
       <View
         style={{
@@ -20,10 +23,19 @@ class SingleBook extends React.Component {
           {this.props.book.title} by {this.props.book.author}
         </Text>
         <Text>ID: {this.props.book.BookId}</Text>
-        <Image
-          style={{ width: 180, height: 255 }}
-          source={{ uri: this.props.book.coverImage }}
-        />
+        {
+          this.props.book.coverImage === 'https://s.gr-assets.com/assets/nophoto/book/111x148-bcc042a9c91a29c1d680899eff700a03.png' ? (
+            <View style={styles.item}>
+              <Text style={styles.itemText}>{this.props.book.title}</Text>
+              <Text style={styles.itemText}>{this.props.book.author}</Text>
+            </View>
+          ) : (
+            <Image
+              style={{ width: 177, height: HEIGHT, borderRadius: 10 }}
+              source={{ uri: this.props.book.coverImage }}
+            />
+          )
+        }
         <Text style={{ padding: 20 }}>{this.props.book.description}</Text>
       </View>
     )
@@ -39,3 +51,20 @@ const mapDispatch = (dispatch) => ({
 })
 
 export default connect(mapState, mapDispatch)(SingleBook)
+
+const styles = StyleSheet.create({
+  item: {
+    backgroundColor: '#FFC771',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    height: HEIGHT,
+    width: 177,
+    margin: 10,
+    padding: 2,
+    borderRadius: 10,
+  },
+  itemText: {
+    color: '#fff',
+    fontSize: 22,
+  }
+})

@@ -6,6 +6,7 @@ import {
   Dimensions,
   Pressable,
   Image,
+  Text
 } from 'react-native'
 import { connect } from 'react-redux'
 import { getBooks } from '../reducers/libraryReducer'
@@ -45,10 +46,19 @@ class AllBooks extends React.Component {
           this.props.navigation.navigate(book.item.title)
         }}
       >
-        <Image
-          style={{ width: 180, height: 255 }}
-          source={{ uri: book.item.coverImage }}
-        />
+        {
+          book.item.coverImage === 'https://s.gr-assets.com/assets/nophoto/book/111x148-bcc042a9c91a29c1d680899eff700a03.png' ? (
+            <View style={styles.item}>
+              <Text style={styles.itemText}>{book.item.title}</Text>
+              <Text style={styles.itemText}>{book.item.author}</Text>
+            </View>
+          ) : (
+            <Image
+              style={{ width: 177, height: HEIGHT, borderRadius: 10 }}
+              source={{ uri: book.item.coverImage }}
+            />
+          )
+        }
       </Pressable>
     )
   }
@@ -78,12 +88,11 @@ const styles = StyleSheet.create({
     height: HEIGHT,
     flex: 1,
     margin: 10,
-    padding: 10,
     borderRadius: 10,
   },
   itemText: {
     color: '#fff',
-    fontSize: 30,
+    fontSize: 22,
   },
   itemInvisible: {
     backgroundColor: 'transparent',
