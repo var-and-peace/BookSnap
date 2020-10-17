@@ -22,7 +22,6 @@ class PhotoCamera extends React.PureComponent {
   }
 
   componentDidMount() {
-    console.log('Camera mounts')
     Orientation.lockToPortrait()
     this.props.navigation.addListener('blur', () =>
       Orientation.unlockAllOrientations()
@@ -48,7 +47,6 @@ class PhotoCamera extends React.PureComponent {
       const res = await axios.post(`http://${ip_address}:3000/phone`, {
         base64: picture.base64,
       })
-      console.log('res', res.data)
     } catch (error) {
       console.error(error)
     }
@@ -71,7 +69,6 @@ class PhotoCamera extends React.PureComponent {
         }
       }
       this.setState({ wordList: foundWords })
-      console.log(this.state)
     }
   }
 
@@ -86,7 +83,6 @@ class PhotoCamera extends React.PureComponent {
           type={type}
           style={styles.preview}
           captureAudio={false}
-          // onTextRecognized={(data) => this.onTextFound(data)}
         />
         <View style={styles.cameraButton}>
           <TouchableOpacity onPress={this.takePhoto}>

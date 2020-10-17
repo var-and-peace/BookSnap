@@ -16,13 +16,12 @@ import Profile from './src/Components/Profile'
 import BookForm from './src/Components/BookForm'
 // Realm
 const Realm = require('realm')
-import { LIBRARY_SCHEMA, USER_SCHEMA, LibrarySchema, UserSchema } from './src/db/currentSchemas'
-
+import { LibrarySchema, UserSchema } from './src/db/currentSchemas'
 
 const Tabs = createMaterialBottomTabNavigator()
 
 class App extends React.Component {
-  async componentDidMount(){
+  async componentDidMount() {
     const realms = await Realm.open({
       schema: [LibrarySchema, UserSchema],
     })
@@ -41,16 +40,14 @@ class App extends React.Component {
               name='library'
               component={Library}
               options={{
-                tabBarIcon: (tabInfo) => (
-                  <Icon name='book' color='white' size={24} />
-                ),
+                tabBarIcon: () => <Icon name='book' color='white' size={24} />,
               }}
             />
             <Tabs.Screen
               name='graph'
               component={Graph}
               options={{
-                tabBarIcon: (tabInfo) => (
+                tabBarIcon: () => (
                   <Icon name='area-chart' color='white' size={24} />
                 ),
               }}
@@ -59,7 +56,7 @@ class App extends React.Component {
               name='camera'
               component={Camera}
               options={{
-                tabBarIcon: (tabInfo) => (
+                tabBarIcon: () => (
                   <Icon name='camera' color='white' size={24} />
                 ),
               }}
@@ -68,18 +65,14 @@ class App extends React.Component {
               name='profile'
               component={Profile}
               options={{
-                tabBarIcon: (tabInfo) => (
-                  <Icon name='user' color='white' size={24} />
-                ),
+                tabBarIcon: () => <Icon name='user' color='white' size={24} />,
               }}
             />
             <Tabs.Screen
               name='Add a Book'
               component={BookForm}
               options={{
-                tabBarIcon: (tabInfo) => (
-                  <Icon name='bars' color='white' size={24} />
-                ),
+                tabBarIcon: () => <Icon name='bars' color='white' size={24} />,
               }}
             />
           </Tabs.Navigator>
@@ -87,13 +80,6 @@ class App extends React.Component {
       </Provider>
     )
   }
-}
-
-const styles = {
-  navContainer: {
-    margin: 0,
-    padding: 0,
-  },
 }
 
 export default App

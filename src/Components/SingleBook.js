@@ -19,9 +19,7 @@ class SingleBook extends React.Component {
         <Text>
           {this.props.book.title} by {this.props.book.author}
         </Text>
-        <Text>
-          ID: {this.props.book.BookId}
-        </Text>
+        <Text>ID: {this.props.book.BookId}</Text>
         <Image
           style={{ width: 180, height: 255 }}
           source={{ uri: this.props.book.coverImage }}

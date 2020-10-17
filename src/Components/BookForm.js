@@ -10,7 +10,7 @@ const BookForm = (props) => {
 
   return (
     <View style={styles.container}>
-        <Text>Search</Text>
+      <Text>Search</Text>
       <Controller
         control={control}
         style={styles.input}

@@ -21,7 +21,6 @@ app.get('/', (req, res, next) => {
 app.post('/phone', async (req, res, next) => {
   try {
     let pyshell = new PythonShell('script.py')
-    console.log(req.body)
     pyshell.send(req.body.base64)
     pyshell.on('message', function (message) {
       // received a message sent from the Python script (a simple "print" statement)

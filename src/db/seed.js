@@ -1,4 +1,4 @@
-const { LibrarySchema, UserSchema } = require('./schemas')
+const { LibrarySchema, UserSchema } = require('./currentSchemas')
 
 const Realm = require('realm')
 
