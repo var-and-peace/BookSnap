@@ -13,7 +13,7 @@ import Library from './src/Components/Library'
 import Graph from './src/Components/Graph'
 import Camera from './src/Components/Camera'
 import Profile from './src/Components/Profile'
-import BookForm from './src/Components/BookForm'
+import Extras from './src/Components/Extras'
 // Realm
 const Realm = require('realm')
 import { LibrarySchema, UserSchema } from './src/db/currentSchemas'
@@ -69,8 +69,8 @@ class App extends React.Component {
               }}
             />
             <Tabs.Screen
-              name='Add a Book'
-              component={BookForm}
+              name='Extras'
+              component={Extras}
               options={{
                 tabBarIcon: () => <Icon name='bars' color='white' size={24} />,
               }}
