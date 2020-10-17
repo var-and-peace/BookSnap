@@ -1,4 +1,3 @@
-import axios from 'axios'
 const Realm = require('realm')
 import { LIBRARY_SCHEMA, LibrarySchema } from '../db/currentSchemas'
 
@@ -32,12 +31,10 @@ export const setBook = (bookId) => async (dispatch) => {
     let book = await library
       .objects(LIBRARY_SCHEMA)
       .filtered(`BookId = ${bookId}`)[0]
-    console.log(book)
     dispatch(gotBook(book))
   } catch (err) {
     console.error(err)
   }
-
 }
 
 // SINGLE BOOK REDUCER

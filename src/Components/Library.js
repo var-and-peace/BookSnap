@@ -1,5 +1,4 @@
 import React from 'react'
-import { Text, View } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { connect } from 'react-redux'
 import { getBooks } from '../reducers/libraryReducer'

@@ -8,12 +8,11 @@ export default (xml) => {
     if (!!bookInfo.best_book.author.name) {
       authorArray.push(bookInfo.best_book.author.name._text)
     } else
-    for (let author of bookInfo.best_book.author) {
-      authorArray.push(author.name._text)
-    }
+      for (let author of bookInfo.best_book.author) {
+        authorArray.push(author.name._text)
+      }
     return authorArray
   }
-  //console.log('BOOK INFO: ', bookInfo)
   const author = getAuthors()
   // const ISBN = bookInfo.isbn._cdata
   // const description = bookInfo.description._cdata
