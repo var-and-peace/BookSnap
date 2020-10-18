@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, View } from 'react-native'
-import { VictoryPie } from 'victory-native'
+import { VictoryPie, VictoryTheme } from 'victory-native'
 import { connect } from 'react-redux'
 import { getBooks } from '../reducers/libraryReducer'
 
@@ -27,7 +27,13 @@ class Graph extends React.Component {
         }}
       >
         <Text>Welcome to Graphs!</Text>
-        <VictoryPie data={libraryDataArr} x='author' y='value' />
+        <VictoryPie
+          data={libraryDataArr}
+          theme={VictoryTheme.material}
+          animate={{ duration: 2000, easing: 'bounce' }}
+          x='author'
+          y='value'
+        />
       </View>
     )
   }
