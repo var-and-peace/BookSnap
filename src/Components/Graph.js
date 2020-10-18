@@ -18,6 +18,7 @@ class Graph extends React.Component {
     Object.keys(libraryData).forEach((key) => {
       libraryDataArr.push({ author: key, value: libraryData[key] })
     })
+    const data = libraryDataArr.sort(function(authorA,authorB){return authorB.value-authorA.value}).slice(0,9);
     return (
       <View
         style={{
@@ -26,10 +27,12 @@ class Graph extends React.Component {
           alignItems: 'center',
         }}
       >
-        <Text>Welcome to Graphs!</Text>
-        <svg viewBox={"0 0 width, height"}>
+        <Text>Welcome to Your Top 10</Text>
+        <Text>Authors!</Text>
           <VictoryPie
-            data={libraryDataArr}
+            width="100%"
+            height="auto"
+            data={data}
             theme={VictoryTheme.material}
             animate={{ duration: 2000, easing: 'bounce' }}
             labelPosition={({ index }) => index
@@ -43,7 +46,6 @@ class Graph extends React.Component {
             x='author'
             y='value'
           />
-        </svg>
       </View>
     )
   }
