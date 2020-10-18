@@ -27,21 +27,23 @@ class Graph extends React.Component {
         }}
       >
         <Text>Welcome to Graphs!</Text>
-        <VictoryPie
-          data={libraryDataArr}
-          theme={VictoryTheme.material}
-          animate={{ duration: 2000, easing: 'bounce' }}
-          labelPosition={({ index }) => index
-            ? "centroid"
-            : "startAngle"
-          }
-          labelPlacement={({ index }) => index
-            ? "parallel"
-            : "vertical"
-          }
-          x='author'
-          y='value'
-        />
+        <svg viewBox={"0 0 width, height"}>
+          <VictoryPie
+            data={libraryDataArr}
+            theme={VictoryTheme.material}
+            animate={{ duration: 2000, easing: 'bounce' }}
+            labelPosition={({ index }) => index
+              ? "centroid"
+              : "startAngle"
+            }
+            labelPlacement={({ index }) => index
+              ? "perpendicular"
+              : "vertical"
+            }
+            x='author'
+            y='value'
+          />
+        </svg>
       </View>
     )
   }
