@@ -22,16 +22,20 @@ export const getBook = () => async (dispatch, getState) => {
     console.error(err)
   }
 }
-
 export const setBook = (bookId) => async (dispatch) => {
   try {
-    const library = await Realm.open({
-      schema: [LibrarySchema],
-    })
-    let book = await library
-      .objects(LIBRARY_SCHEMA)
-      .filtered(`BookId = ${bookId}`)[0]
-    dispatch(gotBook(book))
+    if (bookId === 'EMPTY') {
+        dispatch(gotBook({}))
+    }
+    else {
+        const library = await Realm.open({
+          schema: [LibrarySchema],
+        })
+        let book = await library
+          .objects(LIBRARY_SCHEMA)
+          .filtered(`BookId = ${bookId}`)[0]
+        dispatch(gotBook(book))
+    }
   } catch (err) {
     console.error(err)
   }
