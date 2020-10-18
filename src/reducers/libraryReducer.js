@@ -16,13 +16,13 @@ export const gotBooks = (books) => ({
   type: GOT_BOOKS,
   books,
 })
-export const addedBook = (book) => ({
+export const addedBook = book => ({
   type: ADDED_BOOK,
   book,
 })
 
 // THUNK CREATORS
-export const getBooks = () => async (dispatch) => {
+export const getBooks = () => async dispatch => {
   try {
     const library = await Realm.open({
       schema: [LibrarySchema],
@@ -33,8 +33,7 @@ export const getBooks = () => async (dispatch) => {
     console.error(err)
   }
 }
-
-export const addBook = (input) => async (dispatch) => {
+export const addBook = input => async dispatch => {
   try {
     const { data: xml } = await axios.get(
       `https://www.goodreads.com/search/index.xml?key=swlLnKRkZ9AWD5M3fGBbVw&q=${input.searchQuery
@@ -52,6 +51,19 @@ export const addBook = (input) => async (dispatch) => {
   } catch (err) {
     console.error(err)
   }
+}
+export const removeBook = (bookId) => async dispatch => {
+    const library = await Realm.open({
+        schema: [LibrarySchema],
+    })
+    let book = await library
+    .objects(LIBRARY_SCHEMA)
+    .filtered(`BookId = ${bookId}`)[0]
+    library.write(() => {
+        library.delete(book)
+    })
+    let books = await library.objects(LIBRARY_SCHEMA)
+    dispatch(gotBooks(books))
 }
 
 // LIBRARY REDUCER

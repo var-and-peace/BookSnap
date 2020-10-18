@@ -1,7 +1,8 @@
 import React from 'react'
-import { Text, View, Image, StyleSheet, Dimensions } from 'react-native'
+import { Text, View, Image, StyleSheet, Button, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
 import { getBook } from '../reducers/singleBookReducer'
+import { removeBook } from '../reducers/libraryReducer'
 
 const HEIGHT = Dimensions.get('window').height / 3.2
 
@@ -10,7 +11,6 @@ class SingleBook extends React.Component {
     this.props.getBook()
   }
   render() {
-    console.log(this.props.book.coverImage)
     return (
       <View
         style={{
@@ -37,6 +37,10 @@ class SingleBook extends React.Component {
           )
         }
         <Text style={{ padding: 20 }}>{this.props.book.description}</Text>
+        <Button title='Remove from Library' onPress={() => {
+          this.props.navigation.goBack()
+          this.props.removeBook(this.props.book.BookId)
+        }}/>
       </View>
     )
   }
@@ -48,6 +52,7 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => ({
   getBook: () => dispatch(getBook()),
+  removeBook: (bookId) => dispatch(removeBook(bookId))
 })
 
 export default connect(mapState, mapDispatch)(SingleBook)
