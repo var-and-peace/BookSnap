@@ -26,6 +26,9 @@ width = img.shape[1]
 
 # edge detection
 lines = cv2.HoughLines(p_img, 1, np.pi/180, 240)
+if (not lines):
+    print('No lines found!')
+    quit()
 filtered_lines = []
 for line in lines:
     rho, theta = line[0]
@@ -37,7 +40,7 @@ for line in lines:
 # sort by rho
 filtered_lines.sort(key=lambda x: abs(x[0]))
 if (len(filtered_lines) == 0):
-    print('No lines found post-filter')
+    print('No lines found post-filter!')
     quit()
 
 # batch close lines together
@@ -64,8 +67,10 @@ for i in range(len(filtered_lines)):
     x1 = rho/np.cos(theta)
     x2 = x1 - height*np.tan(theta)
     x1, x2 = int(x1), int(x2)
-    cv2.line(img, (x1, 0), (x2, height), (0, 0, 0), 3)
+    cv2.line(img, (x1, 0), (x2, height), (0, 0, 200), 3)
     filtered_lines[i] = [x1, x2]
+
+cv2.imshow('show image', img)
 
 # edge cases - left and right border of image
 filtered_lines.append([width, width])
@@ -73,7 +78,7 @@ filtered_lines.insert(0, [0, 0])
 
 # crop along detected edges and apply text detection
 textDetected = []
-scale_percent = 50  # crop scale percent
+scale_percent = 100  # crop scale percent
 for i in range(0, len(filtered_lines) - 1):
     b1, b2 = filtered_lines[i + 1]
     a1, a2 = filtered_lines[i]
@@ -112,5 +117,5 @@ print(textDetected)
 # dim = (new_width, new_height)
 # img = cv2.resize(img, dim)
 # cv2.imshow('img', img)
-# cv2.waitKey(0)
-# cv2.destroyAllWindows()
+cv2.waitKey(0)
+cv2.destroyAllWindows()
