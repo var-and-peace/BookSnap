@@ -14,6 +14,8 @@ import Graph from './src/Components/Graph'
 import Camera from './src/Components/Camera'
 import Profile from './src/Components/Profile'
 import Extras from './src/Components/Extras'
+// Orientation
+import Orientation from 'react-native-orientation'
 // Realm
 const Realm = require('realm')
 import { LibrarySchema, UserSchema } from './src/db/currentSchemas'
@@ -22,6 +24,7 @@ const Tabs = createMaterialBottomTabNavigator()
 
 class App extends React.Component {
   async componentDidMount() {
+    Orientation.lockToPortrait()
     const realms = await Realm.open({
       schema: [LibrarySchema, UserSchema],
     })

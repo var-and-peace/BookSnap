@@ -11,6 +11,7 @@
     "pod": "cd ios && pod install && cd .."
   },
   "dependencies": {
+    "@google-cloud/vision": "^2.1.2",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/bottom-tabs": "^5.9.2",
     "@react-navigation/core": "^5.12.5",

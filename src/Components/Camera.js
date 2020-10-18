@@ -14,6 +14,9 @@ import Orientation from 'react-native-orientation'
 import axios from 'axios'
 import ip_address from '../../ip_address'
 
+process.env.GOOGLE_APPLICATION_CREDENTIALS =
+  '../../edge_detection_server/booksnap-service_account.json'
+
 class PhotoCamera extends React.PureComponent {
   state = {
     type: RNCamera.Constants.Type.back,
@@ -22,10 +25,10 @@ class PhotoCamera extends React.PureComponent {
   }
 
   componentDidMount() {
-    Orientation.lockToPortrait()
-    this.props.navigation.addListener('blur', () =>
-      Orientation.unlockAllOrientations()
-    )
+    // Orientation.lockToPortrait()
+    // this.props.navigation.addListener('blur', () =>
+    //   Orientation.unlockAllOrientations()
+    // )
   }
 
   flipCamera = () =>
@@ -44,9 +47,11 @@ class PhotoCamera extends React.PureComponent {
     const picture = await this.camera.takePictureAsync(options)
     this.setState({ base64: picture.base64 })
     try {
-      const res = await axios.post(`http://${ip_address}:3000/phone`, {
+      const res = await axios.post(`http://${ip_address}:3000/sd_api`, {
         base64: picture.base64,
       })
+
+      console.log(res.data)
     } catch (error) {
       console.error(error)
     }
