@@ -31,6 +31,14 @@ class Graph extends React.Component {
           data={libraryDataArr}
           theme={VictoryTheme.material}
           animate={{ duration: 2000, easing: 'bounce' }}
+          labelPosition={({ index }) => index
+            ? "centroid"
+            : "startAngle"
+          }
+          labelPlacement={({ index }) => index
+            ? "parallel"
+            : "vertical"
+          }
           x='author'
           y='value'
         />
