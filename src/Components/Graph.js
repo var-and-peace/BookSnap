@@ -21,6 +21,7 @@ class Graph extends React.Component {
         value: libraryData[key],
       })
     })
+
     const data = libraryDataArr
       .sort(function (authorA, authorB) {
         return authorB.value - authorA.value
