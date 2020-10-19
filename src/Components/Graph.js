@@ -16,7 +16,7 @@ class Graph extends React.Component {
       }
     })
     Object.keys(libraryData).forEach((key) => {
-      libraryDataArr.push({ author: key, value: libraryData[key] })
+      libraryDataArr.push({ author: key.replace(' ', '\n'), value: libraryData[key] })
     })
     const data = libraryDataArr
       .sort(function (authorA, authorB) {
@@ -37,7 +37,7 @@ class Graph extends React.Component {
           data={data}
           theme={VictoryTheme.material}
           animate={{ duration: 2000, easing: 'bounce' }}
-          labelPosition={({ index }) => (index ? 'centroid' : 'startAngle')}
+          labelPosition={'centroid'}
           labelPlacement={({ index }) => (index ? 'perpendicular' : 'vertical')}
           x='author'
           y='value'
