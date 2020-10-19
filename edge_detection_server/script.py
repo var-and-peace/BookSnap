@@ -106,8 +106,12 @@ for i in range(len(textDetected)):
     text = list(itertools.chain.from_iterable(textDetected[i]))
     text = ' '.join(text).split()
     text = ' '.join(list(OrderedDict.fromkeys(text)))
-    textDetected[i] = text
+    # include a unique delimeter with each entry to split along
+    textDetected[i] = text + '!!^&*#(@)!!'
 
+
+# filter out empty strings
+textDetected[:] = [text for text in textDetected if text != ""]
 # send an array of detected text strings to express server
 print(textDetected)
 
