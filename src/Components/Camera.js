@@ -13,6 +13,8 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import Orientation from 'react-native-orientation'
 import axios from 'axios'
 import ip_address from '../../ip_address'
+import { getScanResults } from '../reducers/scanReducer'
+import { connect } from 'react-redux'
 
 process.env.GOOGLE_APPLICATION_CREDENTIALS =
   '../../edge_detection_server/booksnap-service_account.json'
@@ -50,8 +52,8 @@ class PhotoCamera extends React.PureComponent {
       const res = await axios.post(`http://${ip_address}:3000/sd_api`, {
         base64: picture.base64,
       })
-
       console.log(res.data)
+      this.props.getScanResults(res.data.message)
     } catch (error) {
       console.error(error)
     }
@@ -79,6 +81,7 @@ class PhotoCamera extends React.PureComponent {
 
   render() {
     const { type } = this.state
+    console.log(this.props.scanResults)
     return (
       <View style={styles.container}>
         <RNCamera
@@ -99,7 +102,15 @@ class PhotoCamera extends React.PureComponent {
   }
 }
 
-export default PhotoCamera
+const mapState = (state) => ({
+  scanResults: state.scanResults,
+})
+
+const mapDispatch = (dispatch) => ({
+  getScanResults: (data) => dispatch(getScanResults(data)),
+})
+
+export default connect(mapState, mapDispatch)(PhotoCamera)
 
 const styles = StyleSheet.create({
   container: {
