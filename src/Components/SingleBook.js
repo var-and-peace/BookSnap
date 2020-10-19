@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, Image, StyleSheet, Button, Dimensions } from 'react-native'
+import { Text, View, Image, StyleSheet, Button, Dimensions, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import { getBook, setBook } from '../reducers/singleBookReducer'
 import { removeBook } from '../reducers/libraryReducer'
@@ -12,9 +12,11 @@ class SingleBook extends React.Component {
   }
   render() {
     return (
-      <View
+      <ScrollView
         style={{
           flex: 1,
+        }}
+        contentContainerStyle={{
           justifyContent: 'center',
           alignItems: 'center',
         }}
@@ -42,7 +44,7 @@ class SingleBook extends React.Component {
             this.props.setBook('EMPTY')
             this.props.navigation.goBack()
         }}/>
-      </View>
+      </ScrollView>
     )
   }
 }

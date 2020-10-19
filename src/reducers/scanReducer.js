@@ -2,7 +2,7 @@ import axios from 'axios'
 import parse from '../assets/bookParserFunc'
 const Realm = require('realm')
 import { LIBRARY_SCHEMA, LibrarySchema } from '../db/currentSchemas'
-import { getBooks } from './libraryReducer'
+
 // INITIAL LIBRARY STATE
 initialScanResults = []
 
@@ -19,7 +19,6 @@ export const gotScanResults = (scanResults) => ({
 export const getScanResults = (scanArray) => async (dispatch) => {
   try {
     // takes the array of scan results and queries Google Books API
-    console.log(scanArray)
     const scanResults = await Promise.all(
       scanArray.map((text) =>
         axios.get(
@@ -30,7 +29,6 @@ export const getScanResults = (scanArray) => async (dispatch) => {
     const scanParse = scanResults
       .filter((result) => result.data.items)
       .map((result) => {
-        console.log('result of api call', result)
         return parse(result.data)
       })
     const library = await Realm.open({
@@ -42,7 +40,6 @@ export const getScanResults = (scanArray) => async (dispatch) => {
       })
     )
     library.close()
-    console.log(scanParse)
     dispatch(gotScanResults(scanResults))
   } catch (err) {
     console.error(err)

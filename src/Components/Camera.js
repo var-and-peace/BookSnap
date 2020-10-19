@@ -1,16 +1,7 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react'
 import { View, TouchableOpacity, StyleSheet } from 'react-native'
 import { RNCamera } from 'react-native-camera'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import Orientation from 'react-native-orientation'
 import axios from 'axios'
 import ip_address from '../../ip_address'
 import { getScanResults } from '../reducers/scanReducer'
@@ -24,13 +15,6 @@ class PhotoCamera extends React.PureComponent {
     type: RNCamera.Constants.Type.back,
     wordList: [],
     base64: '',
-  }
-
-  componentDidMount() {
-    // Orientation.lockToPortrait()
-    // this.props.navigation.addListener('blur', () =>
-    //   Orientation.unlockAllOrientations()
-    // )
   }
 
   flipCamera = () =>
@@ -81,7 +65,6 @@ class PhotoCamera extends React.PureComponent {
 
   render() {
     const { type } = this.state
-    console.log(this.props.scanResults)
     return (
       <View style={styles.container}>
         <RNCamera

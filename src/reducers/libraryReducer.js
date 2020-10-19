@@ -35,18 +35,17 @@ export const getBooks = () => async dispatch => {
 }
 export const addBook = input => async dispatch => {
   try {
-    const { data: xml } = await axios.get(
-      `https://www.goodreads.com/search/index.xml?key=swlLnKRkZ9AWD5M3fGBbVw&q=${input.searchQuery
-        .split(' ')
-        .join('+')}`
-    )
-    const newBook = parse(xml)
+    const { data: queryResult } = await axios.get(
+        `https://www.googleapis.com/books/v1/volumes?q=${input.searchQuery}&maxResults=1`
+      )
+    const newBook = parse(queryResult)
     const library = await Realm.open({
       schema: [LibrarySchema],
     })
     library.write(() => {
       library.create('Library', newBook)
     })
+    library.close()
     dispatch(addedBook(newBook))
   } catch (err) {
     console.error(err)
@@ -58,7 +57,7 @@ export const removeBook = (bookId) => async dispatch => {
     })
     let book = await library
     .objects(LIBRARY_SCHEMA)
-    .filtered(`BookId = ${bookId}`)[0]
+    .filtered(`BookId = '${bookId}'`)[0]
     library.write(() => {
         library.delete(book)
     })

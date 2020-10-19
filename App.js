@@ -11,9 +11,9 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 // Components
 import Library from './src/Components/Library'
 import Graph from './src/Components/Graph'
-import Camera from './src/Components/Camera'
+import Scanner from './src/Components/Scanner'
 import Profile from './src/Components/Profile'
-import Extras from './src/Components/Extras'
+import BookForm from './src/Components/BookForm'
 // Orientation
 import Orientation from 'react-native-orientation'
 // Realm
@@ -47,6 +47,22 @@ class App extends React.Component {
               }}
             />
             <Tabs.Screen
+              name='Search'
+              component={BookForm}
+              options={{
+                tabBarIcon: () => <Icon name='search' color='white' size={24} />,
+              }}
+            />
+            <Tabs.Screen
+              name='camera'
+              component={Scanner}
+              options={{
+                tabBarIcon: () => (
+                  <Icon name='camera' color='white' size={24} />
+                  ),
+                }}
+            />
+            <Tabs.Screen
               name='graph'
               component={Graph}
               options={{
@@ -56,26 +72,10 @@ class App extends React.Component {
               }}
             />
             <Tabs.Screen
-              name='camera'
-              component={Camera}
-              options={{
-                tabBarIcon: () => (
-                  <Icon name='camera' color='white' size={24} />
-                ),
-              }}
-            />
-            <Tabs.Screen
               name='profile'
               component={Profile}
               options={{
                 tabBarIcon: () => <Icon name='user' color='white' size={24} />,
-              }}
-            />
-            <Tabs.Screen
-              name='Extras'
-              component={Extras}
-              options={{
-                tabBarIcon: () => <Icon name='bars' color='white' size={24} />,
               }}
             />
           </Tabs.Navigator>

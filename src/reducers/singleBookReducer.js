@@ -33,7 +33,7 @@ export const setBook = (bookId) => async (dispatch) => {
         })
         let book = await library
           .objects(LIBRARY_SCHEMA)
-          .filtered(`BookId = ${bookId}`)[0]
+          .filtered(`BookId = '${bookId}'`)[0]
         dispatch(gotBook(book))
     }
   } catch (err) {
