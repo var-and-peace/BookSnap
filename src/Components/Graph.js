@@ -24,7 +24,7 @@ class Graph extends React.Component {
       Object.keys(libraryData).forEach((key) => {
         libraryDataArr.push({
           xValue: key.replace(' ', '\n'),
-          xValue: libraryData[key],
+          yValue: libraryData[key],
         })
       })
       return libraryDataArr.sort(function (authorA, authorB) {
@@ -77,7 +77,7 @@ class Graph extends React.Component {
               index ? 'perpendicular' : 'vertical'
             }
             x='xValue'
-            y='xValue'
+            y='yValue'
           />
         </View>
       </View>
