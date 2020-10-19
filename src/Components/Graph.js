@@ -32,41 +32,40 @@ class Graph extends React.Component {
       })
       .slice(0, 10)
     } else if(type === 1){
-
+      this.props.library.forEach((book) => {
+        if (libraryData[book.genre]) {
+          libraryData[book.genre]++
+        } else {
+          libraryData[book.genre] = 1
+        }
+      })
+      Object.keys(libraryData).forEach((key) => {
+        libraryDataArr.push({
+          xValue: key.replace(' ', '\n'),
+          yValue: libraryData[key],
+        })
+      })
+      return libraryDataArr.sort(function (genreA, genreB) {
+        return genreB.value - genreA.value
+      })
+      .slice(0, 10)
     } else{
       return new Error('That is not right. Invalid segment selection.');
     }
   }
   render() {
-    // const libraryData = {}
-    // const libraryDataArr = []
-    // this.props.library.forEach((book) => {
-    //   if (libraryData[book.author]) {
-    //     libraryData[book.author]++
-    //   } else {
-    //     libraryData[book.author] = 1
-    //   }
-    // })
-    // Object.keys(libraryData).forEach((key) => {
-    //   libraryDataArr.push({
-    //     xValue: key.replace(' ', '\n'),
-    //     xValue: libraryData[key],
-    //   })
-    // })
     let data = this.dataSetUp(this.state.selectedIndex);
-    // const data = libraryDataArr
-    //   .sort(function (authorA, authorB) {
-    //     return authorB.value - authorA.value
-    //   })
-    //   .slice(0, 10)
     return (
       <View style={styles.container}>
         <Text>Welcome to Your Top 10</Text>
-        {/* <SegmentedControl
+        <SegmentedControl
         values={['Author', 'Genre']}
         selectedIndex={this.state.selectedIndex}
-        /> */}
-          <Text>Authors!</Text>
+        onChange={(event) => {
+            this.setState({selectedIndex: event.nativeEvent.selectedSegmentIndex});
+          }
+        }
+        />
         <View>
           <VictoryPie
             data={data}
@@ -76,6 +75,7 @@ class Graph extends React.Component {
             labelPlacement={({ index }) =>
               index ? 'perpendicular' : 'vertical'
             }
+            innerRadius={50}
             x='xValue'
             y='yValue'
           />
