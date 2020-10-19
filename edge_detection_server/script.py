@@ -26,7 +26,7 @@ width = img.shape[1]
 
 # edge detection
 lines = cv2.HoughLines(p_img, 1, np.pi/180, 240)
-if (not lines):
+if lines is None:
     print('No lines found!')
     quit()
 filtered_lines = []
@@ -70,7 +70,6 @@ for i in range(len(filtered_lines)):
     cv2.line(img, (x1, 0), (x2, height), (0, 0, 200), 3)
     filtered_lines[i] = [x1, x2]
 
-cv2.imshow('show image', img)
 
 # edge cases - left and right border of image
 filtered_lines.append([width, width])
@@ -109,17 +108,16 @@ for i in range(len(textDetected)):
     # include a unique delimeter with each entry to split along
     textDetected[i] = text + '!!^&*#(@)!!'
 
-
 # filter out empty strings
-textDetected[:] = [text for text in textDetected if text != ""]
+textDetected[:] = [text for text in textDetected if text != '!!^&*#(@)!!']
 # send an array of detected text strings to express server
 print(textDetected)
 
-# scale_percent = 30
-# new_width = int(width * scale_percent / 100)
-# new_height = int(height * scale_percent / 100)
-# dim = (new_width, new_height)
-# img = cv2.resize(img, dim)
-# cv2.imshow('img', img)
+scale_percent = 30
+new_width = int(width * scale_percent / 100)
+new_height = int(height * scale_percent / 100)
+dim = (new_width, new_height)
+img = cv2.resize(img, dim)
+cv2.imshow('img', img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()

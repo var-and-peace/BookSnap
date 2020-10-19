@@ -18,7 +18,9 @@ export const getScanResults = (scanArray) => async (dispatch) => {
     // takes the array of scan results and queries Google Books API
     const scanResults = await Promise.all(
       scanArray.map((text) =>
-        axios.get(`https://www.googleapis.com/books/v1/volumes?q=${text}`)
+        axios.get(
+          `https://www.googleapis.com/books/v1/volumes?q=${text}&maxResults=1`
+        )
       )
     )
     dispatch(gotScanResults(scanResults))
