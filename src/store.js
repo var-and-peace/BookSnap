@@ -2,12 +2,12 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import libraryReducer from './reducers/libraryReducer'
 import singleBookReducer from './reducers/singleBookReducer'
-import cameraReducer from './reducers/cameraReducer'
+import scanReducer from './reducers/scanReducer'
 
 const rootReducer = combineReducers({
   library: libraryReducer,
   selectedBook: singleBookReducer,
-  photos: cameraReducer,
+  scanResults: scanReducer,
 })
 
 const store = createStore(rootReducer, applyMiddleware(thunk))

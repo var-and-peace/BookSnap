@@ -10,24 +10,21 @@ app.use(morgan('dev'))
 app.use(express.json({ limit: '50mb' }))
 app.use(express.urlencoded({ extended: true }))
 
-app.get('/', (req, res, next) => {
-  try {
-    res.send('hi')
-  } catch (error) {
-    console.error(error)
-  }
-})
-
-app.post('/phone', async (req, res, next) => {
+const delim = '!!^&*#(@)!!'
+app.post('/sd_api', async (req, res, next) => {
   try {
     let pyshell = new PythonShell('script.py')
     pyshell.send(req.body.base64)
     pyshell.on('message', function (message) {
-      // received a message sent from the Python script (a simple "print" statement)
-      console.log(message, typeof message)
+      // message format: "['book1', 'book2']". unique delimeter: !!^&*#(@)!!
+      message = message.slice(2, -2)
+      message = message.split(`${delim}', '`)
+      message[message.length - 1] = message[message.length - 1].slice(
+        0,
+        -delim.length
+      )
       res.json({ message })
     })
-    console.log('closing WARNING')
   } catch (error) {
     console.error(error)
   }

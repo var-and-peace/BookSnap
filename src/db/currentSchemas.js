@@ -5,7 +5,7 @@ const LibrarySchema = {
   name: LIBRARY_SCHEMA,
   primaryKey: 'BookId',
   properties: {
-    BookId: 'int',
+    BookId: 'string',
     title: 'string',
     author: 'string[]',
     ISBN: 'string?',
