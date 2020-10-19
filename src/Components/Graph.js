@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, View } from 'react-native'
-import { VictoryPie } from 'victory-native'
+import { VictoryPie, VictoryTheme } from 'victory-native'
 import { connect } from 'react-redux'
 import { getBooks } from '../reducers/libraryReducer'
 
@@ -16,8 +16,13 @@ class Graph extends React.Component {
       }
     })
     Object.keys(libraryData).forEach((key) => {
-      libraryDataArr.push({ author: key, value: libraryData[key] })
+      libraryDataArr.push({ author: key.replace(' ', '\n'), value: libraryData[key] })
     })
+    const data = libraryDataArr
+      .sort(function (authorA, authorB) {
+        return authorB.value - authorA.value
+      })
+      .slice(0, 10)
     return (
       <View
         style={{
@@ -26,8 +31,17 @@ class Graph extends React.Component {
           alignItems: 'center',
         }}
       >
-        <Text>Welcome to Graphs!</Text>
-        <VictoryPie data={libraryDataArr} x='author' y='value' />
+        <Text>Welcome to Your Top 10</Text>
+        <Text>Authors!</Text>
+        <VictoryPie
+          data={data}
+          theme={VictoryTheme.material}
+          animate={{ duration: 2000, easing: 'bounce' }}
+          labelPosition={'centroid'}
+          labelPlacement={({ index }) => (index ? 'perpendicular' : 'vertical')}
+          x='author'
+          y='value'
+        />
       </View>
     )
   }
