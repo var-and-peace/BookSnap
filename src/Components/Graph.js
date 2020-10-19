@@ -3,17 +3,17 @@ import { Text, View, StyleSheet } from 'react-native'
 import { VictoryPie, VictoryTheme } from 'victory-native'
 import { connect } from 'react-redux'
 import { getBooks } from '../reducers/libraryReducer'
-import SegmentedControl from '@react-native-community/segmented-control';
+import SegmentedControl from '@react-native-community/segmented-control'
 
 class Graph extends React.Component {
-  constructor(){
-    super();
-    this.state = {selectedIndex: 0};
+  constructor() {
+    super()
+    this.state = { selectedIndex: 0 }
   }
-  dataSetUp(type){
+  dataSetUp(type) {
     const libraryData = {}
     const libraryDataArr = []
-    if(type === 0){
+    if (type === 0) {
       this.props.library.forEach((book) => {
         if (libraryData[book.author]) {
           libraryData[book.author]++
@@ -27,11 +27,12 @@ class Graph extends React.Component {
           yValue: libraryData[key],
         })
       })
-      return libraryDataArr.sort(function (authorA, authorB) {
-        return authorB.value - authorA.value
-      })
-      .slice(0, 10)
-    } else if(type === 1){
+      return libraryDataArr
+        .sort(function (authorA, authorB) {
+          return authorB.value - authorA.value
+        })
+        .slice(0, 10)
+    } else if (type === 1) {
       this.props.library.forEach((book) => {
         if (libraryData[book.genre]) {
           libraryData[book.genre]++
@@ -45,41 +46,40 @@ class Graph extends React.Component {
           yValue: libraryData[key],
         })
       })
-      return libraryDataArr.sort(function (genreA, genreB) {
-        return genreB.value - genreA.value
-      })
-      .slice(0, 10)
-    } else{
-      return new Error('That is not right. Invalid segment selection.');
+      return libraryDataArr
+        .sort(function (genreA, genreB) {
+          return genreB.value - genreA.value
+        })
+        .slice(0, 10)
+    } else {
+      return new Error('That is not right. Invalid segment selection.')
     }
   }
   render() {
-    let data = this.dataSetUp(this.state.selectedIndex);
+    let data = this.dataSetUp(this.state.selectedIndex)
     return (
       <View style={styles.container}>
         <Text>Welcome to Your Top 10</Text>
         <SegmentedControl
-        values={['Author', 'Genre']}
-        selectedIndex={this.state.selectedIndex}
-        onChange={(event) => {
-            this.setState({selectedIndex: event.nativeEvent.selectedSegmentIndex});
-          }
-        }
+          values={['Author', 'Genre']}
+          selectedIndex={this.state.selectedIndex}
+          onChange={(event) => {
+            this.setState({
+              selectedIndex: event.nativeEvent.selectedSegmentIndex,
+            })
+          }}
         />
-        <View>
-          <VictoryPie
-            data={data}
-            theme={VictoryTheme.material}
-            animate={{ duration: 2000, easing: 'bounce' }}
-            labelPosition={'centroid'}
-            labelPlacement={({ index }) =>
-              index ? 'perpendicular' : 'vertical'
-            }
-            innerRadius={50}
-            x='xValue'
-            y='yValue'
-          />
-        </View>
+        <Text>This should be under the control</Text>
+        <VictoryPie
+          data={data}
+          theme={VictoryTheme.material}
+          animate={{ duration: 2000, easing: 'bounce' }}
+          labelPosition={'centroid'}
+          labelPlacement={({ index }) => (index ? 'perpendicular' : 'vertical')}
+          innerRadius={50}
+          x='xValue'
+          y='yValue'
+        />
       </View>
     )
   }
@@ -95,14 +95,11 @@ const mapDispatch = (dispatch) => ({
 
 const styles = StyleSheet.create({
   pie: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    marginTop: 30,
   },
 })
 

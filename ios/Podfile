@@ -19,6 +19,8 @@ target 'BookSnaps' do
 
   pod 'react-native-orientation', :path => '../node_modules/react-native-orientation'
 
+  pod 'RealmJS', :path => '../node_modules/realm'
+
   target 'BookSnapsTests' do
     inherit! :complete
     # Pods for testing
