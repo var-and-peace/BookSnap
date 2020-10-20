@@ -6,36 +6,50 @@ import ScanResults from './ScanResults'
 import Profile from './Profile'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import { NavigationContainer } from '@react-navigation/native'
+import SegmentedControl from '@react-native-community/segmented-control'
 
 const MaterialTopTabs = createMaterialTopTabNavigator()
 const Stack = createStackNavigator()
 
 class Scanner extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      selectedIndex: 0,
+    }
+  }
   render() {
     return (
-      <MaterialTopTabs.Navigator style={style.topTab}>
-        <MaterialTopTabs.Screen
-          name='Camera'
-          component={Camera}
-          style={style.tab}
+      <React.Fragment>
+        <SegmentedControl
+          values={['One', 'Two']}
+          selectedIndex={this.state.selectedIndex}
+          onChange={(event) => {
+            this.setState({
+              selectedIndex: event.nativeEvent.selectedSegmentIndex,
+            })
+          }}
         />
-        <MaterialTopTabs.Screen
-          name='Results'
-          component={Profile}
-          style={style.tab}
-        />
-      </MaterialTopTabs.Navigator>
+        <MaterialTopTabs.Navigator
+          style={style.tabContainer}
+          tabBarOptions={{ style: style.individualTab }}
+        >
+          <MaterialTopTabs.Screen name='Camera' component={Camera} />
+          <MaterialTopTabs.Screen name='Results' component={Profile} />
+        </MaterialTopTabs.Navigator>
+      </React.Fragment>
     )
   }
 }
 
 const style = {
-  topTab: {
-    paddingTop: 50,
+  tabContainer: {
+    paddingTop: 100,
     backgroundColor: '#F4F1EA',
+    activeTintColor: 'red',
   },
-  tab: {
-    color: 'blue !important',
+  individualTab: {
+    backgroundColor: '#F4F1EA',
   },
 }
 
