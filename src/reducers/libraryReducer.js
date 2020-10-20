@@ -16,13 +16,13 @@ export const gotBooks = (books) => ({
   type: GOT_BOOKS,
   books,
 })
-export const addedBook = book => ({
+export const addedBook = (book) => ({
   type: ADDED_BOOK,
   book,
 })
 
 // THUNK CREATORS
-export const getBooks = () => async dispatch => {
+export const getBooks = () => async (dispatch) => {
   try {
     const library = await Realm.open({
       schema: [LibrarySchema],
@@ -33,11 +33,25 @@ export const getBooks = () => async dispatch => {
     console.error(err)
   }
 }
-export const addBook = input => async dispatch => {
+export const addBookFromResults = (book) => async (dispatch) => {
   try {
+    const library = await Realm.open({
+      schema: [LibrarySchema],
+    })
+    library.write(() => {
+      library.create('Library', book)
+    })
+    dispatch(getBooks())
+  } catch (err) {
+    console.error(err)
+  }
+}
+export const addBook = (input) => async (dispatch) => {
+  try {
+    console.log('addBook runs!!!')
     const { data: queryResult } = await axios.get(
-        `https://www.googleapis.com/books/v1/volumes?q=${input.searchQuery}&maxResults=1`
-      )
+      `https://www.googleapis.com/books/v1/volumes?q=${input.searchQuery}&maxResults=1`
+    )
     const newBook = parse(queryResult)
     const library = await Realm.open({
       schema: [LibrarySchema],
@@ -45,34 +59,32 @@ export const addBook = input => async dispatch => {
     library.write(() => {
       library.create('Library', newBook)
     })
-    dispatch(addedBook(newBook))
+    dispatch(getBooks())
   } catch (err) {
     console.error(err)
   }
 }
-export const removeBook = (bookId) => async dispatch => {
-    const library = await Realm.open({
-        schema: [LibrarySchema],
-    })
-    let book = await library
-    .objects(LIBRARY_SCHEMA)
-    .filtered(`BookId = '${bookId}'`)[0]
-    library.write(() => {
-        library.delete(book)
-    })
-    let books = library.objects(LIBRARY_SCHEMA)
-    dispatch(gotBooks(books))
+export const removeBook = (bookId) => async (dispatch) => {
+  const library = await Realm.open({
+    schema: [LibrarySchema],
+  })
+  let book = library.objects(LIBRARY_SCHEMA).filtered(`BookId = '${bookId}'`)[0]
+  library.write(() => {
+    library.delete(book)
+  })
+  let books = library.objects(LIBRARY_SCHEMA)
+  dispatch(gotBooks(books))
 }
 
 // LIBRARY REDUCER
-const libraryReducer = (state = initialLibrary, action) => {
+const libraryReducer = (library = initialLibrary, action) => {
   switch (action.type) {
     case GOT_BOOKS:
       return action.books
     case ADDED_BOOK:
-      return [...state, action.book]
+      return [...library, action.book]
     default:
-      return state
+      return library
   }
 }
 

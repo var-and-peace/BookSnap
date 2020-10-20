@@ -43,7 +43,7 @@ class AllBooks extends React.Component {
         style={styles.item}
         onPress={() => {
           this.props.setBook(book.item.BookId)
-          this.props.navigation.navigate(book.item.title)
+          this.props.navigation.navigate(book.item.BookId)
         }}
       >
         {book.item.coverImage ===
@@ -75,6 +75,17 @@ class AllBooks extends React.Component {
   }
 }
 
+const mapState = (state) => ({
+  library: state.library,
+})
+
+const mapDispatch = (dispatch) => ({
+  getBooks: () => dispatch(getBooks()),
+  setBook: (bookId) => dispatch(setBook(bookId)),
+})
+
+export default connect(mapState, mapDispatch)(AllBooks)
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -97,14 +108,3 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
 })
-
-const mapState = (state) => ({
-  library: state.library,
-})
-
-const mapDispatch = (dispatch) => ({
-  getBooks: () => dispatch(getBooks()),
-  setBook: (bookId) => dispatch(setBook(bookId)),
-})
-
-export default connect(mapState, mapDispatch)(AllBooks)

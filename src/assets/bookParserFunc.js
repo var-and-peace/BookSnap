@@ -1,13 +1,15 @@
-export default (queryResult) => {
-  const book = queryResult.items[0]
+export default (book) => {
+  const DATE = book.volumeInfo.publishedDate
+  const IMAGE_URL = book.volumeInfo.imageLinks
+  const ISBN_CODE = book.volumeInfo.industryIdentifiers
   return {
     BookId: `${book.id}`,
     title: book.volumeInfo.title,
     author: book.volumeInfo.authors,
-    ISBN: book.volumeInfo.industryIdentifiers[0].identifier,
-    coverImage: book.volumeInfo.imageLinks.thumbnail,
+    ISBN: ISBN_CODE !== undefined ? ISBN_CODE[0].identifier : null,
+    coverImage: IMAGE_URL !== undefined ? IMAGE_URL.thumbnail : null,
     genres: book.volumeInfo.categories,
-    year: book.volumeInfo.publishedDate.slice(0, 4),
+    year: DATE !== undefined ? DATE.slice(0, 4) : null,
     numPages: book.volumeInfo.pageCount,
     description: book.volumeInfo.description,
   }
