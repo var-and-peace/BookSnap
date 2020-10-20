@@ -7,6 +7,7 @@ import { addBook } from '../reducers/libraryReducer'
 const BookForm = (props) => {
   const { control, handleSubmit, errors } = useForm()
   const onSubmit = (searchQuery) => {
+    console.log(searchQuery)
     props.addBookData(searchQuery)
     props.navigation.goBack()
   }

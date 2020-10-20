@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, Image, StyleSheet, Button, Dimensions } from 'react-native'
+import { Text, View, Image, StyleSheet, Button, Dimensions, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import { getBook, setBook, setFavorite } from '../reducers/singleBookReducer'
 import { removeBook } from '../reducers/libraryReducer'
@@ -20,9 +20,11 @@ class SingleBook extends React.Component {
   render() {
     const { isFavorite } = this.state
     return (
-      <View
+      <ScrollView
         style={{
           flex: 1,
+        }}
+        contentContainerStyle={{
           justifyContent: 'center',
           alignItems: 'center',
         }}
@@ -50,8 +52,8 @@ class SingleBook extends React.Component {
             this.props.removeBook(this.props.book.BookId)
             this.props.setBook('EMPTY')
             this.props.navigation.goBack()
-          }}
-        />
+
+        }}/>
         <Button
           title={isFavorite ? 'Add to favorites' : 'Remove from favorites'}
           onPress={() => {
@@ -59,7 +61,7 @@ class SingleBook extends React.Component {
             this.props.setFavorite(this.props.book.BookId, isFavorite)
           }}
         />
-      </View>
+      </ScrollView>
     )
   }
 }
