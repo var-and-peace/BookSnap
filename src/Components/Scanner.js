@@ -28,7 +28,9 @@ class Scanner extends React.Component {
             this.setState({
               selectedIndex: event.nativeEvent.selectedSegmentIndex,
             })
+          
           }}
+          style={style.segmentedTabContainer}
         />
         <MaterialTopTabs.Navigator
           style={style.tabContainer}
@@ -51,6 +53,9 @@ const style = {
   individualTab: {
     backgroundColor: '#F4F1EA',
   },
+  segmentedTabContainer: {
+    paddingTop: 100
+  }
 }
 
 const mapState = (state) => ({
