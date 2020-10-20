@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, StyleSheet } from 'react-native'
+import { Text, View, StyleSheet, Dimensions } from 'react-native'
 import { VictoryPie, VictoryTheme } from 'victory-native'
 import { connect } from 'react-redux'
 import { getBooks } from '../reducers/libraryReducer'
@@ -57,11 +57,12 @@ class Graph extends React.Component {
   }
   render() {
     let data = this.dataSetUp(this.state.selectedIndex)
+    const width = Dimensions.get('window').width
     return (
       <View style={styles.container}>
-        <Text>Welcome to Your Top 10</Text>
+        <Text style={styles.text}>Your Top 10</Text>
         <SegmentedControl
-          values={['Author', 'Genre']}
+          values={['Authors', 'Genres', 'Favorites', 'Finished']}
           selectedIndex={this.state.selectedIndex}
           onChange={(event) => {
             this.setState({
@@ -69,17 +70,21 @@ class Graph extends React.Component {
             })
           }}
         />
-        <Text>This should be under the control</Text>
-        <VictoryPie
-          data={data}
-          theme={VictoryTheme.material}
-          animate={{ duration: 2000, easing: 'bounce' }}
-          labelPosition={'centroid'}
-          labelPlacement={({ index }) => (index ? 'perpendicular' : 'vertical')}
-          innerRadius={50}
-          x='xValue'
-          y='yValue'
-        />
+        <View style={styles.pie}>
+          <VictoryPie
+            width={width * 0.95}
+            data={data}
+            theme={VictoryTheme.material}
+            animate={{ duration: 1000, easing: 'bounce' }}
+            labelPosition={'centroid'}
+            labelPlacement={({ index }) =>
+              index ? 'perpendicular' : 'vertical'
+            }
+            innerRadius={width * 0.2}
+            x='xValue'
+            y='yValue'
+          />
+        </View>
       </View>
     )
   }
@@ -94,12 +99,17 @@ const mapDispatch = (dispatch) => ({
 })
 
 const styles = StyleSheet.create({
-  pie: {
+  text: {
+    fontSize: 20,
+    textAlign: 'center',
+    paddingBottom: 20,
   },
   container: {
-    display: 'flex',
     flexDirection: 'column',
-    marginTop: 30,
+    marginTop: 50,
+  },
+  pie: {
+    alignItems: 'center',
   },
 })
 
