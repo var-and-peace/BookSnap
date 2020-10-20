@@ -25,16 +25,15 @@ export const getBook = () => async (dispatch, getState) => {
 export const setBook = (bookId) => async (dispatch) => {
   try {
     if (bookId === 'EMPTY') {
-        dispatch(gotBook({}))
-    }
-    else {
-        const library = await Realm.open({
-          schema: [LibrarySchema],
-        })
-        let book = await library
-          .objects(LIBRARY_SCHEMA)
-          .filtered(`BookId = ${bookId}`)[0]
-        dispatch(gotBook(book))
+      dispatch(gotBook({}))
+    } else {
+      const library = await Realm.open({
+        schema: [LibrarySchema],
+      })
+      let book = await library
+        .objects(LIBRARY_SCHEMA)
+        .filtered(`BookId = ${bookId}`)[0]
+      dispatch(gotBook(book))
     }
   } catch (err) {
     console.error(err)
@@ -43,9 +42,13 @@ export const setBook = (bookId) => async (dispatch) => {
 
 export const setFavorite = (bookId, isFavorite) => async (dispatch) => {
   try {
-    const fave = await Realm.open({ schema: [LibrarySchema]})
+    const fave = await Realm.open({ schema: [LibrarySchema] })
     fave.write(() => {
-      const faveData = fave.create('Library', { BookId: bookId, isFavorite }, 'modified')
+      const faveData = fave.create(
+        'Library',
+        { BookId: bookId, isFavorite },
+        'modified'
+      )
       dispatch(gotBook(faveData))
     })
   } catch (err) {

@@ -57,7 +57,6 @@ class SingleBook extends React.Component {
           onPress={() => {
             this.setState({ isFavorite: !isFavorite })
             this.props.setFavorite(this.props.book.BookId, isFavorite)
-            console.log(isFavorite)
           }}
         />
       </View>

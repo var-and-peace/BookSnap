@@ -13,13 +13,19 @@ class Library extends React.Component {
   render() {
     return (
       <Stack.Navigator>
-        <Stack.Screen name='Library' component={AllBooks} options={{
-                headerRight: () => (
-                  <Pressable onPress={() => this.props.navigation.navigate('Add Book')}>
-                    <Text style={{fontSize: 30, paddingRight: 20}}>+</Text>
-                  </Pressable>
-                )
-              }}/>
+        <Stack.Screen
+          name='Library'
+          component={AllBooks}
+          options={{
+            headerRight: () => (
+              <Pressable
+                onPress={() => this.props.navigation.navigate('Add Book')}
+              >
+                <Text style={{ fontSize: 30, paddingRight: 20 }}>+</Text>
+              </Pressable>
+            ),
+          }}
+        />
         {this.props.library.map((book) => {
           return (
             <Stack.Screen
