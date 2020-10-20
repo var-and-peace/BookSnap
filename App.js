@@ -18,7 +18,11 @@ import BookForm from './src/Components/BookForm'
 import Orientation from 'react-native-orientation'
 // Realm
 const Realm = require('realm')
-import { LibrarySchema, UserSchema } from './src/db/currentSchemas'
+import {
+  LibrarySchema,
+  UserSchema,
+  ScanResultSchema,
+} from './src/db/currentSchemas'
 
 const Tabs = createMaterialBottomTabNavigator()
 
@@ -26,9 +30,9 @@ class App extends React.Component {
   async componentDidMount() {
     Orientation.lockToPortrait()
     const realms = await Realm.open({
-      schema: [LibrarySchema, UserSchema],
+      schema: [LibrarySchema, UserSchema, ScanResultSchema],
     })
-    return realms
+    // return realms
   }
   render() {
     return (
@@ -50,7 +54,9 @@ class App extends React.Component {
               name='Search'
               component={BookForm}
               options={{
-                tabBarIcon: () => <Icon name='search' color='white' size={24} />,
+                tabBarIcon: () => (
+                  <Icon name='search' color='white' size={24} />
+                ),
               }}
             />
             <Tabs.Screen
@@ -59,8 +65,8 @@ class App extends React.Component {
               options={{
                 tabBarIcon: () => (
                   <Icon name='camera' color='white' size={24} />
-                  ),
-                }}
+                ),
+              }}
             />
             <Tabs.Screen
               name='graph'

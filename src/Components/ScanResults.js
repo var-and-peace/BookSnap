@@ -70,6 +70,17 @@ const sampleBooks = [
     title: 'Native Speaker',
     year: '1996',
   },
+  {
+    BookId: 'THIS_IS_A_BOOK_ID',
+    ISBN: 'some_isbn_string',
+    author: ['BookSnaps'],
+    coverImage:
+      'http://books.google.com/books/content?id=3ccaAAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
+    genres: ['Fiction'],
+    numPages: 368,
+    title: 'A Book With A Really Long Title Just So I Can See Wrapping',
+    year: '1996',
+  },
 ]
 
 class ScanResults extends React.Component {
