@@ -1,16 +1,24 @@
 import React from 'react'
 import { Text, View, Image, StyleSheet, Button, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
-import { getBook, setBook } from '../reducers/singleBookReducer'
+import { getBook, setBook, setFavorite } from '../reducers/singleBookReducer'
 import { removeBook } from '../reducers/libraryReducer'
 
 const HEIGHT = Dimensions.get('window').height / 3.2
 
 class SingleBook extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isFavorite: true,
+    }
+  }
   componentDidMount() {
     this.props.getBook()
+    this.setState({ isFavorite: this.props.book.isFavorite })
   }
   render() {
+    const { isFavorite } = this.state
     return (
       <View
         style={{
@@ -23,25 +31,35 @@ class SingleBook extends React.Component {
           {this.props.book.title} by {this.props.book.author}
         </Text>
         <Text>ID: {this.props.book.BookId}</Text>
-        {
-          this.props.book.coverImage === 'https://s.gr-assets.com/assets/nophoto/book/111x148-bcc042a9c91a29c1d680899eff700a03.png' ? (
-            <View style={styles.item}>
-              <Text style={styles.itemText}>{this.props.book.title}</Text>
-              <Text style={styles.itemText}>{this.props.book.author}</Text>
-            </View>
-          ) : (
-            <Image
-              style={{ width: 177, height: HEIGHT, borderRadius: 10 }}
-              source={{ uri: this.props.book.coverImage }}
-            />
-          )
-        }
+        {this.props.book.coverImage ===
+        'https://s.gr-assets.com/assets/nophoto/book/111x148-bcc042a9c91a29c1d680899eff700a03.png' ? (
+          <View style={styles.item}>
+            <Text style={styles.itemText}>{this.props.book.title}</Text>
+            <Text style={styles.itemText}>{this.props.book.author}</Text>
+          </View>
+        ) : (
+          <Image
+            style={{ width: 177, height: HEIGHT, borderRadius: 10 }}
+            source={{ uri: this.props.book.coverImage }}
+          />
+        )}
         <Text style={{ padding: 20 }}>{this.props.book.description}</Text>
-        <Button title='Remove from Library' onPress={async () => {
+        <Button
+          title='Remove from Library'
+          onPress={() => {
             this.props.removeBook(this.props.book.BookId)
             this.props.setBook('EMPTY')
             this.props.navigation.goBack()
-        }}/>
+          }}
+        />
+        <Button
+          title={isFavorite ? 'Add to favorites' : 'Remove from favorites'}
+          onPress={() => {
+            this.setState({ isFavorite: !isFavorite })
+            this.props.setFavorite(this.props.book.BookId, isFavorite)
+            console.log(isFavorite)
+          }}
+        />
       </View>
     )
   }
@@ -54,7 +72,9 @@ const mapState = (state) => ({
 const mapDispatch = (dispatch) => ({
   getBook: () => dispatch(getBook()),
   removeBook: (bookId) => dispatch(removeBook(bookId)),
-  setBook: (bookId) => dispatch(setBook(bookId))
+  setBook: (bookId) => dispatch(setBook(bookId)),
+  setFavorite: (bookId, isFavorite) =>
+    dispatch(setFavorite(bookId, isFavorite)),
 })
 
 export default connect(mapState, mapDispatch)(SingleBook)
@@ -73,5 +93,5 @@ const styles = StyleSheet.create({
   itemText: {
     color: '#fff',
     fontSize: 22,
-  }
+  },
 })
