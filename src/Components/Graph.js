@@ -97,7 +97,7 @@ class Graph extends React.Component {
             <VictoryChart polar>
               <VictoryArea
                 data={data}
-                labels={({ datum }) => datum.x}
+                labels={({ datum }) => {datum.xValue}}
                 x='xValue'
                 y='yValue'
               />
