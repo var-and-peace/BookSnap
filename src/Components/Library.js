@@ -9,7 +9,6 @@ const Stack = createStackNavigator()
 
 class Library extends React.Component {
   render() {
-    console.log('LIBRARY COMPONENT', this.props.library.map(book => book.BookId))
     return (
       <Stack.Navigator>
         <Stack.Screen
