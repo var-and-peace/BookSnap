@@ -31,16 +31,16 @@ export const getScanResults = (scanArray) => async (dispatch) => {
       .map((result) => {
         return parse(result.data)
       })
-    const library = await Realm.open({
-      schema: [LibrarySchema],
-    })
-    scanParse.forEach((book) =>
-      library.write(() => {
-        library.create(LIBRARY_SCHEMA, book)
-      })
-    )
-    library.close()
-    dispatch(gotScanResults(scanResults))
+    // const library = await Realm.open({
+    //   schema: [LibrarySchema],
+    // })
+    // scanParse.forEach((book) =>
+    //   library.write(() => {
+    //     library.create(LIBRARY_SCHEMA, book)
+    //   })
+    // )
+    // library.close()
+    dispatch(gotScanResults(scanParse))
   } catch (err) {
     console.error(err)
   }
