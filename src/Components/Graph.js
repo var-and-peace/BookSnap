@@ -70,11 +70,18 @@ class Graph extends React.Component {
           />)}
           {this.state.chartIndex === 1 && (<VictoryChart>
             <VictoryBar
-          
+              data={data}
+              labels={({datum}) => datum.x}
+              x='xValue'
+              y='yValue'
             />
           </VictoryChart>)}
           {this.state.chartIndex === 2 && (<VictoryChart polar>
-            <VictoryArea/>
+            <VictoryArea
+            data={data}
+            labels={({ datum }) => datum.x}
+            x='xValue'
+            y='yValue'/>
           </VictoryChart>)}
         </View>
         <View>
