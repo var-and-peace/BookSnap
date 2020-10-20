@@ -12,7 +12,7 @@ const LibrarySchema = {
     coverImage: 'string?',
     genres: { type: 'string[]', default: [''] },
     year: 'string?',
-    unread: { type: 'bool', default: false },
+    unread: { type: 'bool', default: true },
     isReading: { type: 'bool', default: false },
     rating: { type: 'int?', default: 0 },
     isFavorite: { type: 'bool', default: false },
