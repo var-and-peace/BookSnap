@@ -36,17 +36,6 @@ export const getScanResults = (scanArray) => async (dispatch) => {
     console.error(err)
   }
 }
-export const searchBooks = input => async dispatch => {
-  try {
-    const { data: queryResult } = await axios.get(
-      `https://www.googleapis.com/books/v1/volumes?q=${input.searchQuery}&maxResults=10`
-    )
-    const books = queryResult.items.map(book => parse(book))
-    dispatch(gotScanResults(books))
-  } catch (err) {
-    console.error(err)
-  }
-}
 
 // LIBRARY REDUCER
 const scanReducer = (state = initialScanResults, action) => {

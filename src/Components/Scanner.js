@@ -22,7 +22,7 @@ class Scanner extends React.Component {
     return (
       <React.Fragment>
         <SegmentedControl
-          values={['One', 'Two']}
+          values={['Camera', 'Results']}
           selectedIndex={this.state.selectedIndex}
           onChange={(event) => {
             this.setState({
@@ -32,13 +32,14 @@ class Scanner extends React.Component {
           }}
           style={style.segmentedTabContainer}
         />
-        <MaterialTopTabs.Navigator
+        {this.state.selectedIndex === 0 ? <Camera /> : <ScanResults /> }
+        {/* <MaterialTopTabs.Navigator
           style={style.tabContainer}
           tabBarOptions={{ style: style.individualTab }}
         >
           <MaterialTopTabs.Screen name='Camera' component={Camera} />
           <MaterialTopTabs.Screen name='Results' component={Profile} />
-        </MaterialTopTabs.Navigator>
+        </MaterialTopTabs.Navigator> */}
       </React.Fragment>
     )
   }
@@ -48,13 +49,15 @@ const style = {
   tabContainer: {
     paddingTop: 100,
     backgroundColor: '#F4F1EA',
-    activeTintColor: 'red',
   },
   individualTab: {
     backgroundColor: '#F4F1EA',
   },
   segmentedTabContainer: {
-    paddingTop: 100
+    marginTop: 100, 
+    marginLeft: 20, 
+    marginRight: 20,
+    marginBottom: 5
   }
 }
 

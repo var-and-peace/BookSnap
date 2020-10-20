@@ -1,5 +1,6 @@
 const LIBRARY_SCHEMA = 'Library'
 const USER_SCHEMA = 'User'
+const SCAN_RESULT_SCHEMA = 'SCAN_RESULT'
 
 const LibrarySchema = {
   name: LIBRARY_SCHEMA,
@@ -35,9 +36,21 @@ const UserSchema = {
   },
 }
 
+const ScanResultSchema = {
+  name: SCAN_RESULT_SCHEMA,
+  properties: {
+    scanResult: {
+      objectType: LIBRARY_SCHEMA,
+      type: 'list',
+    },
+  },
+}
+
 module.exports = {
   LIBRARY_SCHEMA,
   USER_SCHEMA,
-  UserSchema,
+  SCAN_RESULT_SCHEMA,
   LibrarySchema,
+  UserSchema,
+  ScanResultSchema,
 }
