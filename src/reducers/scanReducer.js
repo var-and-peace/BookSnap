@@ -39,7 +39,6 @@ export const getScanResults = (scanArray) => async (dispatch) => {
         library.create(LIBRARY_SCHEMA, book)
       })
     )
-    library.close()
     dispatch(gotScanResults(scanResults))
   } catch (err) {
     console.error(err)

@@ -45,7 +45,6 @@ export const addBook = input => async dispatch => {
     library.write(() => {
       library.create('Library', newBook)
     })
-    library.close()
     dispatch(addedBook(newBook))
   } catch (err) {
     console.error(err)
@@ -61,7 +60,7 @@ export const removeBook = (bookId) => async dispatch => {
     library.write(() => {
         library.delete(book)
     })
-    let books = await library.objects(LIBRARY_SCHEMA)
+    let books = library.objects(LIBRARY_SCHEMA)
     dispatch(gotBooks(books))
 }
 
