@@ -13,7 +13,7 @@ const BookForm = (props) => {
   }
   const onAdd = (book) => {
     props.addBook(book)
-    // props.navigation.navigate('Library')
+    props.navigation.navigate('Library')
   }
   console.log(props.results)
   return (
@@ -36,38 +36,38 @@ const BookForm = (props) => {
         />
         {errors.searchQuery && <Text>This is required.</Text>}
         <Pressable style={styles.button} onPress={handleSubmit(onSearch)}>
-          <Text style={{color: 'white'}}>Search</Text>
+          <Text style={{ color: 'white' }}>Search</Text>
         </Pressable>
       </View>
       {props.results.length ? (
-        <View style={{padding: 20}}>
-          {
-            props.results.map((book) => {
-              return (
-                <View>
-                  <Text>{book.title} by {book.author}</Text>
-                  <Pressable style={styles.button} onPress={() => onAdd(book)}>
-                    <Text style={{color: 'white'}}>+</Text>
-                  </Pressable>
-                </View>
-              )
-            })
-          }
+        <View style={{ padding: 20 }}>
+          {props.results.map((book) => {
+            return (
+              <View>
+                <Text>
+                  {book.title} by {book.author}
+                </Text>
+                <Pressable style={styles.button} onPress={() => onAdd(book)}>
+                  <Text style={{ color: 'white' }}>+</Text>
+                </Pressable>
+              </View>
+            )
+          })}
         </View>
       ) : (
-        <View/>
+        <View />
       )}
-    </View>   
+    </View>
   )
 }
 
-const mapState = state => ({
-  results: state.scanResults
+const mapState = (state) => ({
+  results: state.scanResults,
 })
 
 const mapDispatch = (dispatch) => ({
   addBook: (book) => dispatch(addBookFromResults(book)),
-  searchBooks: (input) => dispatch(searchBooks(input))
+  searchBooks: (input) => dispatch(searchBooks(input)),
 })
 
 const connectedBookForm = connect(mapState, mapDispatch)(BookForm)
@@ -81,20 +81,20 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 1,
     borderRadius: 10,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   main: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: "space-between",
-    alignContent: 'space-between'
+    justifyContent: 'space-between',
+    alignContent: 'space-between',
   },
   container: {
     flex: 1,
     padding: 10,
     justifyContent: 'space-between',
     alignItems: 'center',
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   button: {
     borderRadius: 10,
@@ -102,6 +102,6 @@ const styles = StyleSheet.create({
     width: 80,
     height: 40,
     justifyContent: 'center',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 })
