@@ -6,8 +6,7 @@ import {
   VictoryBar,
   VictoryArea,
   VictoryChart,
-  VictoryLabel,
-  VictoryTooltip,
+  VictoryLabel
 } from 'victory-native'
 import { connect } from 'react-redux'
 import { getBooks } from '../reducers/libraryReducer'
@@ -80,20 +79,19 @@ class Graph extends React.Component {
             />
           )}
           {this.state.chartIndex === 1 && (
-            <VictoryChart
-              theme={VictoryTheme.material}
-              width={width * 0.9}
-              domainPadding={20}
-            >
-              <VictoryBar
-                horizontal
-                data={data}
-                labels={({ datum }) => datum.x}
-                labelComponent={<VictoryTooltip />}
-                x='xValue'
-                y='yValue'
-              />
-            </VictoryChart>
+              <VictoryChart
+                theme={VictoryTheme.material}
+                width={width * 0.9}
+                domainPadding={20}
+              >
+                <VictoryBar
+                  horizontal
+                  data={data}
+                  labels={({ datum }) => datum.xValue}
+                  labelComponent={<VictoryLabel renderInPortal dx={10} />}
+                  y='yValue'
+                />
+              </VictoryChart>
           )}
           {this.state.chartIndex === 2 && (
             <VictoryChart polar>
