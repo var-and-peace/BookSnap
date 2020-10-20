@@ -31,16 +31,18 @@ export const getScanResults = (scanArray) => async (dispatch) => {
       .map((result) => {
         return parse(result.data)
       })
-    // const library = await Realm.open({
-    //   schema: [LibrarySchema],
-    // })
-    // scanParse.forEach((book) =>
-    //   library.write(() => {
-    //     library.create(LIBRARY_SCHEMA, book)
-    //   })
-    // )
-    // library.close()
     dispatch(gotScanResults(scanParse))
+  } catch (err) {
+    console.error(err)
+  }
+}
+export const searchBooks = input => async dispatch => {
+  try {
+    const { data: queryResult } = await axios.get(
+      `https://www.googleapis.com/books/v1/volumes?q=${input.searchQuery}&maxResults=10`
+    )
+    const books = queryResult.items.map(book => parse(book))
+    dispatch(gotScanResults(books))
   } catch (err) {
     console.error(err)
   }

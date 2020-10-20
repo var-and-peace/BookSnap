@@ -1,5 +1,13 @@
 import React from 'react'
-import { Text, View, Image, StyleSheet, Button, Dimensions, ScrollView } from 'react-native'
+import {
+  Text,
+  View,
+  Image,
+  StyleSheet,
+  Button,
+  Dimensions,
+  ScrollView,
+} from 'react-native'
 import { connect } from 'react-redux'
 import { getBook, setBook, setFavorite } from '../reducers/singleBookReducer'
 import { removeBook } from '../reducers/libraryReducer'
@@ -7,18 +15,12 @@ import { removeBook } from '../reducers/libraryReducer'
 const HEIGHT = Dimensions.get('window').height / 3.2
 
 class SingleBook extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isFavorite: true,
-    }
-  }
   componentDidMount() {
     this.props.getBook()
-    this.setState({ isFavorite: this.props.book.isFavorite })
   }
+
   render() {
-    const { isFavorite } = this.state
+    const { isFavorite } = this.props.book
     return (
       <ScrollView
         style={{
@@ -52,13 +54,12 @@ class SingleBook extends React.Component {
             this.props.removeBook(this.props.book.BookId)
             this.props.setBook('EMPTY')
             this.props.navigation.goBack()
-
-        }}/>
+          }}
+        />
         <Button
-          title={isFavorite ? 'Add to favorites' : 'Remove from favorites'}
+          title={!isFavorite ? 'Add to favorites' : 'Remove from favorites'}
           onPress={() => {
-            this.setState({ isFavorite: !isFavorite })
-            this.props.setFavorite(this.props.book.BookId, isFavorite)
+            this.props.setFavorite(this.props.book.BookId, !isFavorite)
           }}
         />
       </ScrollView>
@@ -74,8 +75,7 @@ const mapDispatch = (dispatch) => ({
   getBook: () => dispatch(getBook()),
   removeBook: (bookId) => dispatch(removeBook(bookId)),
   setBook: (bookId) => dispatch(setBook(bookId)),
-  setFavorite: (bookId, isFavorite) =>
-    dispatch(setFavorite(bookId, isFavorite)),
+  setFavorite: (bookId, isFavorite) => dispatch(setFavorite(bookId, isFavorite)),
 })
 
 export default connect(mapState, mapDispatch)(SingleBook)
