@@ -1,6 +1,14 @@
 import React from 'react'
 import { Text, View, StyleSheet, Dimensions } from 'react-native'
-import { VictoryPie, VictoryTheme, VictoryBar, VictoryArea, VictoryChart } from 'victory-native'
+import {
+  VictoryPie,
+  VictoryTheme,
+  VictoryBar,
+  VictoryArea,
+  VictoryChart,
+  VictoryLabel,
+  VictoryTooltip,
+} from 'victory-native'
 import { connect } from 'react-redux'
 import { getBooks } from '../reducers/libraryReducer'
 import SegmentedControl from '@react-native-community/segmented-control'
@@ -55,45 +63,59 @@ class Graph extends React.Component {
           />
         </View>
         <View style={styles.pie}>
-          {this.state.chartIndex === 0 && (<VictoryPie
-            width={width * 0.95}
-            data={data}
-            theme={VictoryTheme.material}
-            animate={{ duration: 1000, easing: 'bounce' }}
-            labelPosition={'centroid'}
-            labelPlacement={({ index }) =>
-              index ? 'perpendicular' : 'vertical'
-            }
-            innerRadius={width * 0.2}
-            x='xValue'
-            y='yValue'
-          />)}
-          {this.state.chartIndex === 1 && (<VictoryChart>
-            <VictoryBar
+          {this.state.chartIndex === 0 && (
+            <VictoryPie
+              width={width * 0.95}
               data={data}
-              labels={({datum}) => datum.x}
+              theme={VictoryTheme.material}
+              animate={{ duration: 1000, easing: 'bounce' }}
+              domainPadding={20}
+              labelPosition={'centroid'}
+              labelPlacement={({ index }) =>
+                index ? 'perpendicular' : 'vertical'
+              }
+              innerRadius={width * 0.2}
               x='xValue'
               y='yValue'
             />
-          </VictoryChart>)}
-          {this.state.chartIndex === 2 && (<VictoryChart polar>
-            <VictoryArea
-            data={data}
-            labels={({ datum }) => datum.x}
-            x='xValue'
-            y='yValue'/>
-          </VictoryChart>)}
+          )}
+          {this.state.chartIndex === 1 && (
+            <VictoryChart
+              theme={VictoryTheme.material}
+              width={width * 0.9}
+              domainPadding={20}
+            >
+              <VictoryBar
+                horizontal
+                data={data}
+                labels={({ datum }) => datum.x}
+                labelComponent={<VictoryTooltip />}
+                x='xValue'
+                y='yValue'
+              />
+            </VictoryChart>
+          )}
+          {this.state.chartIndex === 2 && (
+            <VictoryChart polar>
+              <VictoryArea
+                data={data}
+                labels={({ datum }) => datum.x}
+                x='xValue'
+                y='yValue'
+              />
+            </VictoryChart>
+          )}
         </View>
         <View>
-        <SegmentedControl
-        values={['Pie Chart', 'Bar Chart', 'Polar Chart']}
-        selectedIndex={this.state.chartIndex}
-        onChange={(event) => {
-          this.setState({
-            chartIndex: event.nativeEvent.selectedSegmentIndex,
-          })
-        }}
-        />
+          <SegmentedControl
+            values={['Pie Chart', 'Bar Chart', 'Polar Chart']}
+            selectedIndex={this.state.chartIndex}
+            onChange={(event) => {
+              this.setState({
+                chartIndex: event.nativeEvent.selectedSegmentIndex,
+              })
+            }}
+          />
         </View>
       </View>
     )
