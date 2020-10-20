@@ -10,66 +10,50 @@ class Graph extends React.Component {
     super()
     this.state = { selectedIndex: 0 }
   }
-  dataSetUp(type) {
-    const libraryData = {}
-    const libraryDataArr = []
-    if (type === 0) {
-      this.props.library.forEach((book) => {
-        if (libraryData[book.author]) {
-          libraryData[book.author]++
-        } else {
-          libraryData[book.author] = 1
-        }
+  countForPie = (value) => {
+    const dataObj = {}
+    const dataArr = []
+    this.props.library.forEach((item) => {
+      if (dataObj[item[value]]) {
+        dataObj[item[value]]++
+      } else {
+        dataObj[item[value]] = 1
+      }
+    })
+    Object.keys(dataObj).forEach((key) => {
+      dataArr.push({
+        xValue: key.replace(' ', '\n'),
+        yValue: dataObj[key],
       })
-      Object.keys(libraryData).forEach((key) => {
-        libraryDataArr.push({
-          xValue: key.replace(' ', '\n'),
-          yValue: libraryData[key],
-        })
-      })
-      return libraryDataArr
-        .sort(function (authorA, authorB) {
-          return authorB.value - authorA.value
-        })
-        .slice(0, 10)
-    } else if (type === 1) {
-      this.props.library.forEach((book) => {
-        if (libraryData[book.genre]) {
-          libraryData[book.genre]++
-        } else {
-          libraryData[book.genre] = 1
-        }
-      })
-      Object.keys(libraryData).forEach((key) => {
-        libraryDataArr.push({
-          xValue: key.replace(' ', '\n'),
-          yValue: libraryData[key],
-        })
-      })
-      return libraryDataArr
-        .sort(function (genreA, genreB) {
-          return genreB.value - genreA.value
-        })
-        .slice(0, 10)
-    } else {
-      return new Error('That is not right. Invalid segment selection.')
-    }
+    })
+    return value === 'author' || value === 'genres'
+      ? dataArr
+          .sort((x, y) => {
+            return y.value - x.value
+          })
+          .slice(0, 10)
+      : dataArr
   }
+
   render() {
-    let data = this.dataSetUp(this.state.selectedIndex)
+    const values = ['author', 'genres', 'isFavorite', 'unread']
+    const idx = this.state.selectedIndex
+    const data = this.countForPie(values[idx])
     const width = Dimensions.get('window').width
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>Your Top 10</Text>
-        <SegmentedControl
-          values={['Authors', 'Genres', 'Favorites', 'Finished']}
-          selectedIndex={this.state.selectedIndex}
-          onChange={(event) => {
-            this.setState({
-              selectedIndex: event.nativeEvent.selectedSegmentIndex,
-            })
-          }}
-        />
+        <Text style={styles.text}>Your Library Statistics</Text>
+        <View style={{ width: width * 0.95, alignSelf: 'center' }}>
+          <SegmentedControl
+            values={['Author', 'Genres', 'Favorites', 'Unfinished']}
+            selectedIndex={this.state.selectedIndex}
+            onChange={(event) => {
+              this.setState({
+                selectedIndex: event.nativeEvent.selectedSegmentIndex,
+              })
+            }}
+          />
+        </View>
         <View style={styles.pie}>
           <VictoryPie
             width={width * 0.95}
