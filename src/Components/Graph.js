@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, View, StyleSheet, Dimensions } from 'react-native'
-import { VictoryPie, VictoryTheme } from 'victory-native'
+import { VictoryPie, VictoryTheme, VictoryBar, VictoryArea, VictoryChart } from 'victory-native'
 import { connect } from 'react-redux'
 import { getBooks } from '../reducers/libraryReducer'
 import SegmentedControl from '@react-native-community/segmented-control'
@@ -8,7 +8,7 @@ import SegmentedControl from '@react-native-community/segmented-control'
 class Graph extends React.Component {
   constructor() {
     super()
-    this.state = { selectedIndex: 0 }
+    this.state = { statIndex: 0, chartIndex: 0 }
   }
   countForPie = (value) => {
     const dataObj = {}
@@ -37,7 +37,7 @@ class Graph extends React.Component {
 
   render() {
     const values = ['author', 'genres', 'isFavorite', 'unread']
-    const idx = this.state.selectedIndex
+    const idx = this.state.statIndex
     const data = this.countForPie(values[idx])
     const width = Dimensions.get('window').width
     return (
@@ -45,17 +45,17 @@ class Graph extends React.Component {
         <Text style={styles.text}>Your Library Statistics</Text>
         <View style={{ width: width * 0.95, alignSelf: 'center' }}>
           <SegmentedControl
-            values={['Author', 'Genres', 'Favorites', 'Unfinished']}
-            selectedIndex={this.state.selectedIndex}
+            values={['Author', 'Genres', 'Favorites', 'Unread']}
+            selectedIndex={this.state.statIndex}
             onChange={(event) => {
               this.setState({
-                selectedIndex: event.nativeEvent.selectedSegmentIndex,
+                statIndex: event.nativeEvent.selectedSegmentIndex,
               })
             }}
           />
         </View>
         <View style={styles.pie}>
-          <VictoryPie
+          {this.state.chartIndex === 0 && (<VictoryPie
             width={width * 0.95}
             data={data}
             theme={VictoryTheme.material}
@@ -67,7 +67,26 @@ class Graph extends React.Component {
             innerRadius={width * 0.2}
             x='xValue'
             y='yValue'
-          />
+          />)}
+          {this.state.chartIndex === 1 && (<VictoryChart>
+            <VictoryBar
+          
+            />
+          </VictoryChart>)}
+          {this.state.chartIndex === 2 && (<VictoryChart polar>
+            <VictoryArea/>
+          </VictoryChart>)}
+        </View>
+        <View>
+        <SegmentedControl
+        values={['Pie Chart', 'Bar Chart', 'Polar Chart']}
+        selectedIndex={this.state.chartIndex}
+        onChange={(event) => {
+          this.setState({
+            chartIndex: event.nativeEvent.selectedSegmentIndex,
+          })
+        }}
+        />
         </View>
       </View>
     )
