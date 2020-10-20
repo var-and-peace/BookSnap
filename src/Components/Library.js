@@ -3,13 +3,13 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { connect } from 'react-redux'
 import { getBooks } from '../reducers/libraryReducer'
 import SingleBook from './SingleBook'
-import BookForm from './BookForm'
 import AllBooks from './AllBooks'
 
 const Stack = createStackNavigator()
 
 class Library extends React.Component {
   render() {
+    console.log('LIBRARY COMPONENT', this.props.library.map(book => book.BookId))
     return (
       <Stack.Navigator>
         <Stack.Screen
@@ -17,15 +17,14 @@ class Library extends React.Component {
           component={AllBooks}
         />
         {this.props.library.map((book) => {
-          return (
+          return ( 
             <Stack.Screen
               key={book.BookId}
-              name={book.title}
+              name={book.BookId}
               component={SingleBook}
             />
           )
         })}
-        <Stack.Screen name='Add Book' component={BookForm} />
       </Stack.Navigator>
     )
   }

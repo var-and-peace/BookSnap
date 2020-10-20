@@ -33,6 +33,19 @@ export const getBooks = () => async dispatch => {
     console.error(err)
   }
 }
+export const addBookFromResults = book => async dispatch => {
+  try {
+    const library = await Realm.open({
+      schema: [LibrarySchema],
+    })
+    library.write(() => { 
+      library.create('Library', book)
+    })
+    dispatch(addedBook(book))
+  } catch (err) {
+    console.error(err)
+  }
+}
 export const addBook = input => async dispatch => {
   try {
     const { data: queryResult } = await axios.get(
@@ -54,7 +67,7 @@ export const removeBook = (bookId) => async dispatch => {
     const library = await Realm.open({
         schema: [LibrarySchema],
     })
-    let book = await library
+    let book = library
     .objects(LIBRARY_SCHEMA)
     .filtered(`BookId = '${bookId}'`)[0]
     library.write(() => {
@@ -65,14 +78,14 @@ export const removeBook = (bookId) => async dispatch => {
 }
 
 // LIBRARY REDUCER
-const libraryReducer = (state = initialLibrary, action) => {
+const libraryReducer = (library = initialLibrary, action) => {
   switch (action.type) {
     case GOT_BOOKS:
       return action.books
     case ADDED_BOOK:
-      return [...state, action.book]
+      return [...library, action.book]
     default:
-      return state
+      return library
   }
 }
 
