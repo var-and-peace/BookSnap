@@ -5,7 +5,7 @@ import {
   VictoryTheme,
   VictoryBar,
   VictoryChart,
-  VictoryLabel
+  VictoryLabel,
 } from 'victory-native'
 import { connect } from 'react-redux'
 import { getBooks } from '../reducers/libraryReducer'
@@ -20,6 +20,7 @@ class Graph extends React.Component {
     const dataObj = {}
     const dataArr = []
     this.props.library.forEach((item) => {
+      console.log('>>>>>>>>>>>>>>>>>>>', [ ...item.genres, item.author])
       if (dataObj[item[value]]) {
         dataObj[item[value]]++
       } else {
@@ -51,6 +52,7 @@ class Graph extends React.Component {
         <Text style={styles.text}>Your Library Statistics</Text>
         <View style={{ width: width * 0.95, alignSelf: 'center' }}>
           <SegmentedControl
+            tintColor='#ac694e'
             values={['Author', 'Genres', 'Favorites', 'Unread']}
             selectedIndex={this.state.statIndex}
             onChange={(event) => {
@@ -69,32 +71,31 @@ class Graph extends React.Component {
               animate={{ duration: 1000, easing: 'bounce' }}
               domainPadding={20}
               labelPosition={'centroid'}
-              labelPlacement={({ index }) =>
-                index ? 'perpendicular' : 'vertical'
-              }
+              labelPlacement={'perpendicular'}
               innerRadius={width * 0.2}
               x='xValue'
               y='yValue'
             />
           )}
           {this.state.chartIndex === 1 && (
-              <VictoryChart
-                theme={VictoryTheme.material}
-                width={width * 0.9}
-                domainPadding={20}
-              >
-                <VictoryBar
-                  horizontal
-                  data={data}
-                  labels={({ datum }) => datum.xValue}
-                  labelComponent={<VictoryLabel renderInPortal dx={10} />}
-                  y='yValue'
-                />
-              </VictoryChart>
+            <VictoryChart
+              theme={VictoryTheme.material}
+              width={width * 0.9}
+              domainPadding={20}
+            >
+              <VictoryBar
+                horizontal
+                data={data}
+                labels={({ datum }) => datum.xValue}
+                labelComponent={<VictoryLabel renderInPortal dx={10} />}
+                y='yValue'
+              />
+            </VictoryChart>
           )}
         </View>
         <View>
           <SegmentedControl
+            tintColor='#ac694e'
             values={['Pie Chart', 'Bar Chart']}
             selectedIndex={this.state.chartIndex}
             onChange={(event) => {
@@ -103,6 +104,9 @@ class Graph extends React.Component {
               })
             }}
           />
+        </View>
+        <View>
+          <Text>HEY THERE</Text>
         </View>
       </View>
     )
@@ -122,11 +126,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     paddingBottom: 20,
-    marginTop: 50
+    marginTop: 50,
   },
   container: {
     flexDirection: 'column',
-    backgroundColor: '#fff1e6'
+    backgroundColor: '#fff1e6',
   },
   pie: {
     alignItems: 'center',
