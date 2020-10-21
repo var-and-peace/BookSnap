@@ -18,14 +18,14 @@ const BookCard = (props) => {
             <FontAwesomeIcon
               name={'check-circle'}
               size={30}
-              color='#cb997e'
+              color='#774936'
               onPress={() => toggleCheck(!buttonChecked)}
             />
           ) : (
             <FontAwesomeIcon
               name={'circle-thin'}
               size={30}
-              color='#cb997e'
+              color='#774936'
               onPress={() => toggleCheck(!buttonChecked)}
             />
           ))}
@@ -82,12 +82,13 @@ const style = {
     backgroundColor: BookCardColor,
   },
   coverImage: {
-    width: 75,
-    height: 120,
+    width: 62.5,
+    height: 100,
   },
   cardProfile: {
     display: 'flex',
     borderBottomWidth: 1,
+    borderColor: '#c38e70',
     width: '100%',
     flexDirection: 'row',
     margin: 0,
@@ -100,7 +101,7 @@ const style = {
     width: '65%',
   },
   title: {
-    fontSize: 23,
+    fontSize: 19,
     fontFamily: 'Times New Roman',
   },
   author: {
@@ -111,7 +112,7 @@ const style = {
   buttonContainer: {
     display: 'flex',
     justifyContent: 'center',
-    marginLeft: 5,
+    marginLeft: 10,
     marginRight: 5,
     // borderRightWidth: 2,
   },

@@ -101,7 +101,7 @@ class ScanResults extends React.Component {
   render() {
     return (
       <View style={style.resultContainer}>
-        <Text>Results</Text>
+        <Text>Snap Results</Text>
         <ScrollView>
           <View>
             {sampleBooks.map((book) => (
