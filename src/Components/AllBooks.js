@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
+    backgroundColor: '#fff1e6'
   },
   item: {
     backgroundColor: '#FFC771',

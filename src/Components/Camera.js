@@ -36,7 +36,6 @@ class PhotoCamera extends React.PureComponent {
       const res = await axios.post(`http://${ip_address}:3000/sd_api`, {
         base64: picture.base64,
       })
-      console.log(res.data)
       this.props.getScanResults(res.data.message)
     } catch (error) {
       console.error(error)
