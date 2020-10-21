@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 import { useForm, Controller } from 'react-hook-form'
 import { connect } from 'react-redux'
-import { addBookFromResults } from '../reducers/libraryReducer'
+import { addBook } from '../reducers/libraryReducer'
 import { searchBooks } from '../reducers/searchReducer'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import BookCard from './BookCard'
@@ -41,7 +41,10 @@ const BookForm = (props) => {
           name='searchQuery'
           defaultValue=''
         />
-        <TouchableOpacity style={styles.button} onPress={handleSubmit(onSearch)}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={handleSubmit(onSearch)}
+        >
           <Text style={{ color: 'white' }}>Submit</Text>
         </TouchableOpacity>
       </View>
@@ -63,7 +66,7 @@ const mapState = (state) => ({
 })
 
 const mapDispatch = (dispatch) => ({
-  addBook: (book) => dispatch(addBookFromResults(book)),
+  addBook: (book) => dispatch(addBook(book)),
   searchBooks: (input) => dispatch(searchBooks(input)),
 })
 

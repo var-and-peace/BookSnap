@@ -8,6 +8,7 @@ initialScanResults = []
 
 // ACTION CONSTANTS
 const GOT_SCAN_RESULTS = 'GOT_SCAN_RESULTS'
+const REMOVE_SCAN_ITEMS = 'REMOVE_SCAN_ITEMS'
 
 // ACTION CREATORS
 export const gotScanResults = (scanResults) => ({

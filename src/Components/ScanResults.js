@@ -2,9 +2,13 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Text, View, ScrollView } from 'react-native'
 import { getScanResults } from '../reducers/scanReducer'
+
 import BookCard from './BookCard'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import { addScanSelection, removeScanSelection } from '../reducers/scanSelectReducer'
+import {
+  addScanSelection,
+  removeScanSelection,
+} from '../reducers/scanSelectReducer'
 
 const sampleBooks = [
   {

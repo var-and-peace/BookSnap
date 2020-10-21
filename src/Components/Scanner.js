@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { connect } from 'react-redux'
 import Camera from './Camera'
 import ScanResults from './ScanResults'
+import { addSelectedBooks } from '../reducers/libraryReducer'
 import Profile from './Profile'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import { NavigationContainer } from '@react-navigation/native'
@@ -43,10 +44,17 @@ class Scanner extends React.Component {
             )}
             <Text style={style.scannerTitle}>Snap Books</Text>
             {this.state.selectedIndex === 1 && (
-              <TouchableOpacity style={style.addToLibraryContainer}>
+              <TouchableOpacity
+                style={style.addToLibraryContainer}
+                onPress={this.props.addSelectedBooks}
+              >
                 <Text style={style.addToLibrary}>
                   Shelve
-                  {scanSelection.length !== 0 ? ` (${scanSelection.length})` : <View/>}
+                  {scanSelection.length !== 0 ? (
+                    ` (${scanSelection.length})`
+                  ) : (
+                    <View />
+                  )}
                 </Text>
               </TouchableOpacity>
             )}
@@ -73,7 +81,11 @@ const mapState = (state) => ({
   scanSelection: state.scanSelection,
 })
 
-export default connect(mapState)(Scanner)
+const mapDispatch = (dispatch) => ({
+  addSelectedBooks: (books) => dispatch(addSelectedBooks(books)),
+})
+
+export default connect(mapState, mapDispatch)(Scanner)
 
 const style = {
   scannerHeader: {
