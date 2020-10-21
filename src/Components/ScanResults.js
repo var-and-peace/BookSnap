@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Text, View, ScrollView } from 'react-native'
 import { getScanResults } from '../reducers/scanReducer'
 import BookCard from './BookCard'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const sampleBooks = [
   {
@@ -101,8 +102,12 @@ class ScanResults extends React.Component {
   render() {
     return (
       <View style={style.resultContainer}>
-        <Text>Snap Results</Text>
         <ScrollView>
+          <View style={style.resultHeader}>
+            <TouchableOpacity>
+              <Text style={{ fontSize: 17, padding: 7.7 }}>Select All</Text>
+            </TouchableOpacity>
+          </View>
           <View>
             {sampleBooks.map((book) => (
               <BookCard book={book} checkList={true} />
@@ -118,6 +123,12 @@ const style = {
   resultContainer: {
     display: 'flex',
     flex: 1,
+    backgroundColor: '#fff1e6',
+  },
+  resultHeader: {
+    backgroundColor: '#fff1e6',
+    borderColor: '#c38e70',
+    borderBottomWidth: 0.5,
   },
 }
 

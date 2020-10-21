@@ -17,14 +17,14 @@ const BookCard = (props) => {
           (buttonChecked ? (
             <FontAwesomeIcon
               name={'check-circle'}
-              size={30}
+              size={27}
               color='#774936'
               onPress={() => toggleCheck(!buttonChecked)}
             />
           ) : (
             <FontAwesomeIcon
               name={'circle-thin'}
-              size={30}
+              size={27}
               color='#774936'
               onPress={() => toggleCheck(!buttonChecked)}
             />
@@ -113,7 +113,7 @@ const style = {
     display: 'flex',
     justifyContent: 'center',
     marginLeft: 10,
-    marginRight: 5,
+    marginRight: 0,
     // borderRightWidth: 2,
   },
   rating: {
