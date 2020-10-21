@@ -1,9 +1,16 @@
 import React from 'react'
-import { Text, View, TextInput, StyleSheet, Pressable, ScrollView } from 'react-native'
+import {
+  Text,
+  View,
+  TextInput,
+  StyleSheet,
+  Pressable,
+  ScrollView,
+} from 'react-native'
 import { useForm, Controller } from 'react-hook-form'
 import { connect } from 'react-redux'
 import { addBookFromResults } from '../reducers/libraryReducer'
-import { searchBooks } from '../reducers/scanReducer'
+import { searchBooks } from '../reducers/searchReducer'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import BookCard from './BookCard'
 
@@ -41,9 +48,7 @@ const BookForm = (props) => {
       {props.results.length ? (
         <ScrollView style={{ backgroundColor: '#fff1e6' }}>
           {props.results.map((book) => {
-            return (
-              <BookCard book={book} checkList={false} addBook={onAdd}/>
-            )
+            return <BookCard book={book} checkList={false} addBook={onAdd} />
           })}
         </ScrollView>
       ) : (
@@ -54,7 +59,7 @@ const BookForm = (props) => {
 }
 
 const mapState = (state) => ({
-  results: state.scanResults,
+  results: state.searchResults,
 })
 
 const mapDispatch = (dispatch) => ({
@@ -76,8 +81,8 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
     backgroundColor: '#ddbea9',
-    flex: 1
-  }, 
+    flex: 1,
+  },
   inputView: {
     padding: 10,
     justifyContent: 'space-between',

@@ -16,6 +16,7 @@ export const gotScanResults = (scanResults) => ({
 })
 
 // THUNK CREATORS
+// takes array of detected text -> makes api call -> sets results to parsed data
 export const getScanResults = (scanArray) => async (dispatch) => {
   try {
     // takes the array of scan results and queries Google Books API
@@ -36,25 +37,14 @@ export const getScanResults = (scanArray) => async (dispatch) => {
     console.error(err)
   }
 }
-export const searchBooks = input => async dispatch => {
-  try {
-    const { data: queryResult } = await axios.get(
-      `https://www.googleapis.com/books/v1/volumes?q=${input.searchQuery}&maxResults=10`
-    )
-    const books = queryResult.items.map(book => parse(book))
-    dispatch(gotScanResults(books))
-  } catch (err) {
-    console.error(err)
-  }
-}
 
 // LIBRARY REDUCER
-const scanReducer = (state = initialScanResults, action) => {
+const scanReducer = (scanResults = initialScanResults, action) => {
   switch (action.type) {
     case GOT_SCAN_RESULTS:
-      return action.scanResults
+      return [...scanResults, ...action.scanResults]
     default:
-      return state
+      return scanResults
   }
 }
 

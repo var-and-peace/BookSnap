@@ -99,6 +99,26 @@ const sampleBooks = [
 ]
 
 class ScanResults extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      selectedBooks: [],
+    }
+    this.toggleSelection = this.toggleSelection.bind(this)
+  }
+
+  toggleSelection(book) {
+    if (this.state.selectedBooks.map((elt) => elt.BookId).includes(book.id)) {
+      const newSelectedBooks = selectedBooks.filter(
+        (elt) => elt.BookId !== book.id
+      )
+      this.setState({ selectedBooks: newSelectedBooks })
+    } else {
+      const newSelectedBooks = [...this.state.selectedBooks, book]
+      this.setState({ selectedBooks: newSelectedBooks })
+    }
+  }
+
   render() {
     return (
       <View style={style.resultContainer}>
@@ -110,7 +130,11 @@ class ScanResults extends React.Component {
           </View>
           <View>
             {sampleBooks.map((book) => (
-              <BookCard book={book} checkList={true} />
+              <BookCard
+                book={book}
+                checkList={true}
+                toggleSelection={this.toggleSelection}
+              />
             ))}
           </View>
         </ScrollView>
@@ -134,6 +158,7 @@ const style = {
 
 const mapState = (state) => ({
   scanResults: state.scanResults,
+  scanSelection: state.scanSelection,
 })
 
 const mapDispatch = (dispatch) => ({
