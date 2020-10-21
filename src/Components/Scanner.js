@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import Camera from './Camera'
 import ScanResults from './ScanResults'
 import { addSelectedBooks } from '../reducers/libraryReducer'
+import { resetScanSelection } from '../reducers/scanSelectReducer'
+import { removeScanItems } from '../reducers/scanReducer'
 import Profile from './Profile'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import { NavigationContainer } from '@react-navigation/native'
@@ -46,7 +48,13 @@ class Scanner extends React.Component {
             {this.state.selectedIndex === 1 && (
               <TouchableOpacity
                 style={style.addToLibraryContainer}
-                onPress={this.props.addSelectedBooks}
+                onPress={async () => {
+                  await this.props.addSelectedBooks()
+                  let ids = scanSelection.map(book => book.BookId)
+                  let scanResultsFiltered = this.props.scanResults.filter(book => ids.includes(book.BookId))
+                  this.props.removeScanItems(scanResultsFiltered)
+                  this.props.resetScanSelection()
+                }}
               >
                 <Text style={style.addToLibrary}>
                   Shelve
@@ -83,6 +91,8 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => ({
   addSelectedBooks: (books) => dispatch(addSelectedBooks(books)),
+  resetScanSelection: () => dispatch(resetScanSelection()),
+  removeScanItems: (books) => dispatch(removeScanItems(books))
 })
 
 export default connect(mapState, mapDispatch)(Scanner)
