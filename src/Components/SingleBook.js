@@ -75,7 +75,8 @@ const mapDispatch = (dispatch) => ({
   getBook: () => dispatch(getBook()),
   removeBook: (bookId) => dispatch(removeBook(bookId)),
   setBook: (bookId) => dispatch(setBook(bookId)),
-  setFavorite: (bookId, isFavorite) => dispatch(setFavorite(bookId, isFavorite)),
+  setFavorite: (bookId, isFavorite) =>
+    dispatch(setFavorite(bookId, isFavorite)),
 })
 
 export default connect(mapState, mapDispatch)(SingleBook)

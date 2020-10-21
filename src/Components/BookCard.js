@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { View, Image, Text, TouchableOpacity } from 'react-native'
-import AntIcon from 'react-native-vector-icons/AntDesign'
+import { View, Image, Text } from 'react-native'
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome'
 
 const BookCard = (props) => {

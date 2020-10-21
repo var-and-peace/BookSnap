@@ -28,11 +28,10 @@ class Scanner extends React.Component {
             this.setState({
               selectedIndex: event.nativeEvent.selectedSegmentIndex,
             })
-          
           }}
           style={style.segmentedTabContainer}
         />
-        {this.state.selectedIndex === 0 ? <Camera /> : <ScanResults /> }
+        {this.state.selectedIndex === 0 ? <Camera /> : <ScanResults />}
         {/* <MaterialTopTabs.Navigator
           style={style.tabContainer}
           tabBarOptions={{ style: style.individualTab }}
@@ -54,11 +53,11 @@ const style = {
     backgroundColor: '#F4F1EA',
   },
   segmentedTabContainer: {
-    marginTop: 100, 
-    marginLeft: 20, 
+    marginTop: 100,
+    marginLeft: 20,
     marginRight: 20,
-    marginBottom: 5
-  }
+    marginBottom: 5,
+  },
 }
 
 const mapState = (state) => ({

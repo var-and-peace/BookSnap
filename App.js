@@ -32,7 +32,6 @@ class App extends React.Component {
     const realms = await Realm.open({
       schema: [LibrarySchema, UserSchema, ScanResultSchema],
     })
-    // return realms
   }
   render() {
     return (
