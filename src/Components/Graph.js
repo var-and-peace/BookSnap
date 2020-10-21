@@ -94,19 +94,24 @@ class Graph extends React.Component {
               </VictoryChart>
           )}
           {this.state.chartIndex === 2 && (
-            <VictoryChart polar>
-              <VictoryArea
-                data={data}
-                labels={({ datum }) => {datum.xValue}}
-                x='xValue'
-                y='yValue'
-              />
-            </VictoryChart>
+            <VictoryVoronoi
+              style={{
+                data: {
+                  stroke: "#00FF80", strokeWidth: 3
+                },
+                labels: {
+                  fontSize: 10, fill: "#80FF00", padding: 15
+                }
+              }}
+              size={50}
+              data={sampleData}
+              labels={({ datum }) => datum.xValue}
+            />
           )}
         </View>
         <View>
           <SegmentedControl
-            values={['Pie Chart', 'Bar Chart', 'Polar Chart']}
+            values={['Pie Chart', 'Bar Chart', 'Voronoi Chart']}
             selectedIndex={this.state.chartIndex}
             onChange={(event) => {
               this.setState({
