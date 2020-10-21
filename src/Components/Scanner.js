@@ -22,6 +22,7 @@ class Scanner extends React.Component {
   }
   render() {
     const scanSelection = this.props.scanSelection
+    console.log(scanSelection)
     return (
       <React.Fragment>
         <View style={style.scannerHeader}>
@@ -45,7 +46,7 @@ class Scanner extends React.Component {
               <TouchableOpacity style={style.addToLibraryContainer}>
                 <Text style={style.addToLibrary}>
                   Shelve
-                  {scanSelection.length !== 0 && ` (${scanSelection.length})`}
+                  {scanSelection.length !== 0 ? ` (${scanSelection.length})` : <View/>}
                 </Text>
               </TouchableOpacity>
             )}
@@ -66,6 +67,13 @@ class Scanner extends React.Component {
     )
   }
 }
+
+const mapState = (state) => ({
+  scanResults: state.scanResults,
+  scanSelection: state.scanSelection,
+})
+
+export default connect(mapState)(Scanner)
 
 const style = {
   scannerHeader: {
@@ -102,10 +110,3 @@ const style = {
     marginBottom: 8,
   },
 }
-
-const mapState = (state) => ({
-  scanResults: state.scanResults,
-  scanSelection: state.scanSelection,
-})
-
-export default connect(mapState)(Scanner)

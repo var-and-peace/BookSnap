@@ -6,11 +6,12 @@ const ADD_SCAN_SELECTION = 'ADD_SCAN_SELECTION'
 const REMOVE_SCAN_SELECTION = 'REMOVE_SCAN_SELECTION'
 
 // ACTION CREATORS
-export const addScanSelection = (scanItem) => ({
-  type: ADD_SCAN_SELECTION,
-  scanItem,
-})
-
+export const addScanSelection = (scanItem) => {
+  return {
+    type: ADD_SCAN_SELECTION,
+    scanItem,
+  }
+}
 export const removeScanSelection = (scanItem) => ({
   type: REMOVE_SCAN_SELECTION,
   scanItem,
@@ -23,8 +24,9 @@ const scanSelectReducer = (scanSelection = initialScanSelection, action) => {
       return [...scanSelection, action.scanItem]
     case REMOVE_SCAN_SELECTION:
       const newScanSelection = scanSelection.filter(
-        (elt) => elt !== scanItem.BookId
+        (elt) => elt.BookId !== action.scanItem.BookId
       )
+      return newScanSelection
     default:
       return scanSelection
   }

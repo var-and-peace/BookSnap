@@ -46,8 +46,7 @@ class AllBooks extends React.Component {
           this.props.navigation.navigate(book.item.BookId)
         }}
       >
-        {book.item.coverImage ===
-        'https://s.gr-assets.com/assets/nophoto/book/111x148-bcc042a9c91a29c1d680899eff700a03.png' ? (
+        {book.item.coverImage === null ? (
           <View style={styles.item}>
             <Text style={styles.itemText}>{book.item.title}</Text>
             <Text style={styles.itemText}>{book.item.author}</Text>

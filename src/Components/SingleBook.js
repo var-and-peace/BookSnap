@@ -35,8 +35,7 @@ class SingleBook extends React.Component {
           {this.props.book.title} by {this.props.book.author}
         </Text>
         <Text>ID: {this.props.book.BookId}</Text>
-        {this.props.book.coverImage ===
-        'https://s.gr-assets.com/assets/nophoto/book/111x148-bcc042a9c91a29c1d680899eff700a03.png' ? (
+        {this.props.book.coverImage === null ? (
           <View style={styles.item}>
             <Text style={styles.itemText}>{this.props.book.title}</Text>
             <Text style={styles.itemText}>{this.props.book.author}</Text>

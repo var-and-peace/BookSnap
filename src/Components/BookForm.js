@@ -41,9 +41,9 @@ const BookForm = (props) => {
           name='searchQuery'
           defaultValue=''
         />
-        <Pressable style={styles.button} onPress={handleSubmit(onSearch)}>
+        <TouchableOpacity style={styles.button} onPress={handleSubmit(onSearch)}>
           <Text style={{ color: 'white' }}>Submit</Text>
-        </Pressable>
+        </TouchableOpacity>
       </View>
       {props.results.length ? (
         <ScrollView style={{ backgroundColor: '#fff1e6' }}>

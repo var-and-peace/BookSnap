@@ -4,17 +4,15 @@ import { Rating, AirbnbRating } from 'react-native-elements'
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome'
 import { addBookFromResults, removeBook } from '../reducers/libraryReducer'
 import { connect } from 'react-redux'
-import AntIcon from 'react-native-vector-icons/AntDesign'
+import { addScanSelection, removeScanSelection } from '../reducers/scanSelectReducer'
 
 const BookCardColor = '#fff1e6'
 const BookCard = (props) => {
   const { book, checkList, toggleSelection } = props
-  let addedToLibrary = false
   const [buttonChecked, toggleCheck] = useState(false)
-  if (
-    props.library.filter((ownedBook) => ownedBook.BookId === book.BookId)
-      .length > 0
-  ) {
+
+  let addedToLibrary = false
+  if (props.library.filter((ownedBook) => ownedBook.BookId === book.BookId).length > 0) {
     addedToLibrary = true
   }
 
@@ -29,7 +27,7 @@ const BookCard = (props) => {
               color='#774936'
               onPress={() => {
                 toggleCheck(!buttonChecked)
-                toggleSelection(book)
+                props.removeScanSelection(book)
               }}
             />
           ) : (
@@ -39,7 +37,7 @@ const BookCard = (props) => {
               color='#774936'
               onPress={() => {
                 toggleCheck(!buttonChecked)
-                toggleSelection(book)
+                props.addScanSelection(book)
               }}
             />
           ))}
@@ -113,11 +111,14 @@ const BookCard = (props) => {
 
 const mapState = (state) => ({
   library: state.library,
+  scanSelection: state.scanSelection
 })
 
 const mapDispatch = (dispatch) => ({
   addBook: (bookId) => dispatch(addBookFromResults(bookId)),
   removeBook: (bookId) => dispatch(removeBook(bookId)),
+  addScanSelection: (book) => dispatch(addScanSelection(book)),
+  removeScanSelection: (book) => dispatch(removeScanSelection(book))
 })
 
 export default connect(mapState, mapDispatch)(BookCard)

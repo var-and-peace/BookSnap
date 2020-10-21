@@ -126,7 +126,9 @@ const styles = StyleSheet.create({
   },
   container: {
     flexDirection: 'column',
-    backgroundColor: '#fff1e6'
+    backgroundColor: '#fff1e6',
+    justifyContent: 'space-around',
+    flex: 1
   },
   pie: {
     alignItems: 'center',

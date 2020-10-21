@@ -4,6 +4,7 @@ import { Text, View, ScrollView } from 'react-native'
 import { getScanResults } from '../reducers/scanReducer'
 import BookCard from './BookCard'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import { addScanSelection, removeScanSelection } from '../reducers/scanSelectReducer'
 
 const sampleBooks = [
   {
@@ -99,26 +100,6 @@ const sampleBooks = [
 ]
 
 class ScanResults extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      selectedBooks: [],
-    }
-    this.toggleSelection = this.toggleSelection.bind(this)
-  }
-
-  toggleSelection(book) {
-    if (this.state.selectedBooks.map((elt) => elt.BookId).includes(book.id)) {
-      const newSelectedBooks = selectedBooks.filter(
-        (elt) => elt.BookId !== book.id
-      )
-      this.setState({ selectedBooks: newSelectedBooks })
-    } else {
-      const newSelectedBooks = [...this.state.selectedBooks, book]
-      this.setState({ selectedBooks: newSelectedBooks })
-    }
-  }
-
   render() {
     return (
       <View style={style.resultContainer}>
