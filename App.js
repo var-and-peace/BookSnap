@@ -39,7 +39,7 @@ class App extends React.Component {
       <Provider store={store}>
         <NavigationContainer>
           <Tabs.Navigator
-            barStyle={{ backgroundColor: 'rgb(50,50,50)' }}
+            barStyle={{ backgroundColor: '#774936', borderTopWidth: 0 }}
             tabBarOptions={{ showIcon: true }}
             labeled={false}
           >

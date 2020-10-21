@@ -17,6 +17,8 @@ const sampleBooks = [
     numPages: 192,
     title: 'Matilda',
     year: '2020',
+    averageRating: 4,
+    ratingsCount: 23,
   },
   {
     BookId: 'EXZCAAAAQBAJ',
@@ -30,6 +32,8 @@ const sampleBooks = [
     numPages: 450,
     title: 'A First Course in Modular Forms',
     year: '2006',
+    averageRating: 4,
+    ratingsCount: 23,
   },
   {
     BookId: 'iARl5C-ye-AC',
@@ -43,6 +47,8 @@ const sampleBooks = [
     numPages: 368,
     title: 'The Heart Is a Lonely Hunter',
     year: '2010',
+    averageRating: 4,
+    ratingsCount: 23,
   },
   {
     BookId: 'u0W4zg1OzBEC',
@@ -56,6 +62,8 @@ const sampleBooks = [
     numPages: 704,
     title: 'The Bonfire of the Vanities',
     year: '2002',
+    averageRating: 4,
+    ratingsCount: 23,
   },
   {
     BookId: '3ccaAAAAQBAJ',
@@ -69,17 +77,23 @@ const sampleBooks = [
     numPages: 368,
     title: 'Native Speaker',
     year: '1996',
+    averageRating: 4,
+    ratingsCount: 23,
   },
   {
     BookId: 'THIS_IS_A_BOOK_ID',
     ISBN: 'some_isbn_string',
-    author: ['BookSnaps'],
+    author: [
+      'BookSnaps Is the Author but Is it Realy the author when I have so many',
+    ],
     coverImage:
       'http://books.google.com/books/content?id=3ccaAAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
     genres: ['Fiction'],
     numPages: 368,
     title: 'A Book With A Really Long Title Just So I Can See Wrapping',
     year: '1996',
+    averageRating: 4.3,
+    ratingsCount: 23,
   },
 ]
 
