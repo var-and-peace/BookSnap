@@ -14,13 +14,12 @@ import SegmentedControl from '@react-native-community/segmented-control'
 class Graph extends React.Component {
   constructor() {
     super()
-    this.state = { statIndex: 0, chartIndex: 0 }
+    this.state = { statIndex: 0, chartIndex: 0, selected: false}
   }
   countForPie = (value) => {
     const dataObj = {}
     const dataArr = []
     this.props.library.forEach((item) => {
-      console.log('>>>>>>>>>>>>>>>>>>>', [ ...item.genres, item.author])
       if (dataObj[item[value]]) {
         dataObj[item[value]]++
       } else {
@@ -46,6 +45,26 @@ class Graph extends React.Component {
     const values = ['author', 'genres', 'isFavorite', 'unread']
     const idx = this.state.statIndex
     const data = this.countForPie(values[idx])
+    if(idx === 2){
+      data = data.map(obj => {
+        if(obj.xValue){//if favorite is true
+          obj.xValue = 'Favorite'
+        } else{
+          obj.xValue = 'Other Books'
+        }
+        return obj
+      })
+    }
+    if(idx === 3){
+      data = data.map(obj => {
+        if(obj.xValue){//if read is true
+          obj.xValue = 'Read'
+        } else{
+          obj.xValue = 'Unread'
+        }
+        return obj
+      })
+    }
     const width = Dimensions.get('window').width
     return (
       <View style={styles.container}>
@@ -106,7 +125,9 @@ class Graph extends React.Component {
           />
         </View>
         <View>
-          <Text>HEY THERE</Text>
+        {this.state.selected ? 
+        (<Text>Graph Info</Text>) :
+        (<Text>HEY THERE! Touch a graph to find out more!</Text>)}
         </View>
       </View>
     )
