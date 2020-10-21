@@ -4,6 +4,7 @@ import { useForm, Controller } from 'react-hook-form'
 import { connect } from 'react-redux'
 import { addBookFromResults } from '../reducers/libraryReducer'
 import { searchBooks } from '../reducers/scanReducer'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 import BookCard from './BookCard'
 
 const BookForm = (props) => {
