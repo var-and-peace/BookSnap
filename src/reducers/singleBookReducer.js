@@ -55,6 +55,21 @@ export const setFavorite = (bookId, isFavorite) => async (dispatch) => {
     console.error(err)
   }
 }
+export const setRead = (bookId, isRead) => async (dispatch) => {
+  try {
+    const read = await Realm.open({ schema: [LibrarySchema] })
+    read.write(() => {
+      const readData = read.create(
+        'Library',
+        { BookId: bookId, isRead },
+        'modified'
+      )
+      dispatch(gotBook(readData))
+    })
+  } catch (err) {
+    console.error(err)
+  }
+}
 
 // SINGLE BOOK REDUCER
 const singleBookReducer = (state = initialBook, action) => {

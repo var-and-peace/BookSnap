@@ -44,11 +44,11 @@ class Graph extends React.Component {
   render() {
     const values = ['author', 'genres', 'isFavorite', 'unread']
     const idx = this.state.statIndex
-    const data = this.countForPie(values[idx])
+    let data = this.countForPie(values[idx])
     if(idx === 2){
       data = data.map(obj => {
-        if(obj.xValue){//if favorite is true
-          obj.xValue = 'Favorite'
+        if(obj.xValue === "true"){//if favorite is true
+          obj.xValue = 'Favorites'
         } else{
           obj.xValue = 'Other Books'
         }
@@ -57,7 +57,7 @@ class Graph extends React.Component {
     }
     if(idx === 3){
       data = data.map(obj => {
-        if(obj.xValue){//if read is true
+        if(obj.xValue === "false"){//if read is true
           obj.xValue = 'Read'
         } else{
           obj.xValue = 'Unread'
