@@ -4,7 +4,6 @@ import {
   VictoryPie,
   VictoryTheme,
   VictoryBar,
-  VictoryArea,
   VictoryChart,
   VictoryLabel
 } from 'victory-native'
