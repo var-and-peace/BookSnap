@@ -87,10 +87,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     paddingBottom: 20,
+    marginTop: 50
   },
   container: {
     flexDirection: 'column',
-    marginTop: 50,
+    backgroundColor: '#fff1e6'
   },
   pie: {
     alignItems: 'center',

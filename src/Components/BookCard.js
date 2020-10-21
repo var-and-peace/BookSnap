@@ -1,15 +1,19 @@
 import React, { useState } from 'react'
-import { View, Image, Text, TouchableOpacity } from 'react-native'
-import { Rating, AirbnbRating } from 'react-native-elements'
-import AntIcon from 'react-native-vector-icons/AntDesign'
+import { View, Image, Text } from 'react-native'
+import { Rating } from 'react-native-elements'
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome'
+import { addBookFromResults, removeBook } from '../reducers/libraryReducer'
+import { connect } from 'react-redux'
 
 const BookCardColor = '#fff1e6'
 const BookCard = (props) => {
   const { book, checkList } = props
-
+  let addedToLibrary = false
   const [buttonChecked, toggleCheck] = useState(false)
-  console.log(book.coverImage)
+  if (props.library.filter(ownedBook => ownedBook.BookId === book.BookId).length > 0) {
+    addedToLibrary = true
+  }
+
   return (
     <View style={style.container}>
       <View style={style.buttonContainer}>
@@ -29,6 +33,29 @@ const BookCard = (props) => {
               onPress={() => toggleCheck(!buttonChecked)}
             />
           ))}
+          {
+            !checkList && (addedToLibrary ? (
+              <FontAwesomeIcon
+                name={'check'}
+                size={20}
+                color='#774936'
+                onPress={() => {
+                  addedToLibrary = !addedToLibrary
+                  props.removeBook(book.BookId)
+                }}
+              />
+            ) : (
+              <FontAwesomeIcon
+                name={'plus'}
+                size={25}
+                color='#774936'
+                onPress={() => {
+                  addedToLibrary = !addedToLibrary
+                  props.addBook(book)
+                }}
+              />
+            ))
+          }
       </View>
       <View style={style.cardProfile}>
         <Image style={style.coverImage} source={{ uri: book.coverImage }} />
@@ -36,9 +63,15 @@ const BookCard = (props) => {
           <Text style={style.title} numberOfLines={2}>
             {book.title}
           </Text>
-          <Text style={style.author} numberOfLines={1}>
-            by {book.author.join(', ')}
-          </Text>
+          {
+            book.author ? (
+              <Text style={style.author} numberOfLines={1}>
+                by {book.author.join(', ')}
+              </Text>
+            ) : (
+              <View/>
+            )
+          }
           <View style={style.metaData}>
             <Rating
               readonly
@@ -70,6 +103,17 @@ const BookCard = (props) => {
     </View>
   )
 }
+
+const mapState = state => ({
+  library: state.library
+})
+
+const mapDispatch = dispatch => ({
+  addBook: (bookId) => dispatch(addBookFromResults(bookId)),
+  removeBook: (bookId) => dispatch(removeBook(bookId))
+})
+
+export default connect(mapState, mapDispatch)(BookCard)
 
 const style = {
   container: {
@@ -130,4 +174,3 @@ const style = {
   },
 }
 
-export default BookCard
