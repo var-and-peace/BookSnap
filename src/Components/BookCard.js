@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { View, Image, Text } from 'react-native'
-import { Rating } from 'react-native-elements'
+import { View, Image, Text, TouchableOpacity } from 'react-native'
+import { Rating, AirbnbRating } from 'react-native-elements'
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome'
 import { addBookFromResults, removeBook } from '../reducers/libraryReducer'
 import { connect } from 'react-redux'
+import AntIcon from 'react-native-vector-icons/AntDesign'
 
 const BookCardColor = '#fff1e6'
 const BookCard = (props) => {
