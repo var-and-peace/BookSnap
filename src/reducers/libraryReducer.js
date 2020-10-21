@@ -48,7 +48,6 @@ export const addBookFromResults = (book) => async (dispatch) => {
 }
 export const addBook = (input) => async (dispatch) => {
   try {
-    console.log('addBook runs!!!')
     const { data: queryResult } = await axios.get(
       `https://www.googleapis.com/books/v1/volumes?q=${input.searchQuery}&maxResults=1`
     )

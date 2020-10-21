@@ -1,4 +1,5 @@
 import React from 'react'
+import { View, Text } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { connect } from 'react-redux'
 import Camera from './Camera'
@@ -21,44 +22,40 @@ class Scanner extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <SegmentedControl
-          values={['Camera', 'Results']}
-          selectedIndex={this.state.selectedIndex}
-          onChange={(event) => {
-            this.setState({
-              selectedIndex: event.nativeEvent.selectedSegmentIndex,
-            })
-          
-          }}
-          style={style.segmentedTabContainer}
-        />
-        {this.state.selectedIndex === 0 ? <Camera /> : <ScanResults /> }
-        {/* <MaterialTopTabs.Navigator
-          style={style.tabContainer}
-          tabBarOptions={{ style: style.individualTab }}
-        >
-          <MaterialTopTabs.Screen name='Camera' component={Camera} />
-          <MaterialTopTabs.Screen name='Results' component={Profile} />
-        </MaterialTopTabs.Navigator> */}
+        <View style={style.scannerHeader}>
+          <Text style={style.scannerTitle}>Snap Books</Text>
+          <SegmentedControl
+            values={['Camera', 'Results']}
+            selectedIndex={this.state.selectedIndex}
+            onChange={(event) => {
+              this.setState({
+                selectedIndex: event.nativeEvent.selectedSegmentIndex,
+              })
+            }}
+            style={style.segmentedTabContainer}
+          />
+        </View>
+        {this.state.selectedIndex === 0 ? <Camera /> : <ScanResults />}
       </React.Fragment>
     )
   }
 }
 
 const style = {
-  tabContainer: {
-    paddingTop: 100,
-    backgroundColor: '#F4F1EA',
+  scannerHeader: {
+    paddingTop: 58,
+    backgroundColor: '#ddbea9',
   },
-  individualTab: {
-    backgroundColor: '#F4F1EA',
+  scannerTitle: {
+    fontSize: 20,
+    textAlign: 'center',
+    marginBottom: 18,
   },
   segmentedTabContainer: {
-    marginTop: 100, 
-    marginLeft: 20, 
+    marginLeft: 20,
     marginRight: 20,
-    marginBottom: 5
-  }
+    marginBottom: 8,
+  },
 }
 
 const mapState = (state) => ({
