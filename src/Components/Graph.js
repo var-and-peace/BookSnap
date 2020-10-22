@@ -20,6 +20,7 @@ class Graph extends React.Component {
     const dataObj = {}
     const dataArr = []
     this.props.library.forEach((item) => {
+      console.log(this.props.library[0].author)
       if (dataObj[item[value]]) {
         dataObj[item[value]]++
       } else {
@@ -28,14 +29,14 @@ class Graph extends React.Component {
     })
     Object.keys(dataObj).forEach((key) => {
       dataArr.push({
-        xValue: key.replace(' ', '\n'),
+        xValue: key.replace(' ', '\n').replace(',', ' &\n'),
         yValue: dataObj[key],
       })
     })
     return value === 'author' || value === 'genres'
       ? dataArr
           .sort((x, y) => {
-            return y.value - x.value
+            return y.yValue - x.yValue
           })
           .slice(0, 10)
       : dataArr
@@ -100,8 +101,7 @@ class Graph extends React.Component {
                 animate={{ duration: 1500, easing: 'bounce' }}
                 domainPadding={20}
                 labelPosition={'centroid'}
-                labelPlacement={'perpendicular'
-                }
+                labelPlacement={'perpendicular'}
                 innerRadius={width * 0.2}
                 x='xValue'
                 y='yValue'
@@ -156,20 +156,20 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingBottom: 15,
     marginTop: 50,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   container: {
     flexDirection: 'column',
     backgroundColor: '#fff1e6',
     justifyContent: 'space-around',
-    flex: 1
+    flex: 1,
   },
   pie: {
     alignItems: 'center',
   },
   header: {
     backgroundColor: '#ddbea9',
-  }
+  },
 })
 
 export default connect(mapState, mapDispatch)(Graph)

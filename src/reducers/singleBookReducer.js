@@ -64,7 +64,6 @@ export const setRead = (bookId, unread) => async (dispatch) => {
         { BookId: bookId, unread },
         'modified'
       )
-      console.log(readData.unread)
       dispatch(gotBook(readData))
     })
   } catch (err) {
