@@ -18,7 +18,7 @@ export const searchBooks = (input) => async (dispatch) => {
     const books = queryResult.items.map((book) => parse(book))
     dispatch(gotSearchResults(books))
   } catch (err) {
-    console.error(err)
+    // console.error(err)
   }
 }
 
