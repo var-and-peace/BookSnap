@@ -14,7 +14,8 @@ import { setBook } from '../reducers/singleBookReducer'
 import SegmentedControl from '@react-native-community/segmented-control'
 
 const WIDTH = Dimensions.get('window').width / 2.3
-const HEIGHT = Dimensions.get('window').height / 3.2
+const HEIGHT = 1.5555555555555556 * WIDTH
+//Dimensions.get('window').height / 3.2
 const numColumns = 2
 
 class AllBooks extends React.Component {
