@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 import { useForm, Controller } from 'react-hook-form'
 import { connect } from 'react-redux'
-import { searchBooks } from '../reducers/scanReducer'
+import { searchBooks } from '../reducers/searchReducer'
 import { addBook } from '../reducers/libraryReducer'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import BookCard from './BookCard'

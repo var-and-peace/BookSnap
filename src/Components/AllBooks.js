@@ -63,26 +63,26 @@ class AllBooks extends React.Component {
     )
   }
   render() {
-    let library = this.props.library;
+    let library = [...this.props.library];
     if(this.state.sortIndex === 0){
       library = this.props.library;
     } else if(this.state.sortIndex === 1){//by author
-      library = this.props.library.sort(function(bookA, bookB){
-        let authorA = bookA.author;
-        let authorB = bookB.author;
+      library = library.sort(function(bookA, bookB){
+        let authorA = bookA.author.length === 0 ? 'z zz' : bookA.author[0].split(' ')[1];
+        let authorB = bookB.author.length === 0 ? 'z zz' : bookB.author[0].split(' ')[1];
         return authorA.localeCompare(authorB);
       })
     } else if(this.state.sortIndex === 2){//by title
-      library = this.props.library.sort(function(bookA, bookB){
+      library = library.sort(function(bookA, bookB){
         let titleA = bookA.title;
         let titleB = bookB.title;
         return titleA.localeCompare(titleB);
       })
     } else if(this.state.sortIndex === 3){//by year
-      library = this.props.library.sort(function(bookA, bookB){
+      library = library.sort(function(bookA, bookB){
         let yearA = parseInt(bookA.year);
         let yearB = parseInt(bookB.year);
-        return yearA - yearB;
+        return yearB - yearA;
       })
     }
     return (
