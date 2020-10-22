@@ -11,6 +11,7 @@ import {
 import { connect } from 'react-redux'
 import { getBooks } from '../reducers/libraryReducer'
 import { setBook } from '../reducers/singleBookReducer'
+import SegmentedControl from '@react-native-community/segmented-control'
 
 const HEIGHT = Dimensions.get('window').height / 3.2
 const numColumns = 2
@@ -18,6 +19,7 @@ const numColumns = 2
 class AllBooks extends React.Component {
   constructor() {
     super()
+    this.state = {sortIndex: 0}
     this.formatData = this.formatData.bind(this)
     this.renderBook = this.renderBook.bind(this)
   }
@@ -61,12 +63,43 @@ class AllBooks extends React.Component {
     )
   }
   render() {
+    let library = this.props.library;
+    if(this.state.sortIndex === 0){
+      library = this.props.library;
+    } else if(this.state.sortIndex === 1){//by author
+      library = this.props.library.sort(function(bookA, bookB){
+        let authorA = bookA.author;
+        let authorB = bookB.author;
+        return authorA.localeCompare(authorB);
+      })
+    } else if(this.state.sortIndex === 2){//by title
+      library = this.props.library.sort(function(bookA, bookB){
+        let titleA = bookA.title;
+        let titleB = bookB.title;
+        return titleA.localeCompare(titleB);
+      })
+    } else if(this.state.sortIndex === 3){//by year
+      library = this.props.library.sort(function(bookA, bookB){
+        let yearA = parseInt(bookA.year);
+        let yearB = parseInt(bookB.year);
+        return yearA - yearB;
+      })
+    }
     return (
       <View style={{ backgroundColor: '#ddbea9', flex: 1 }}>
         <Text style={styles.text}>Library</Text>
+        <SegmentedControl
+          values={['Unsorted', 'Author', 'Title', 'Year']}
+          selectedIndex={this.state.statIndex}
+          onChange={(event) => {
+            this.setState({
+              sortIndex: event.nativeEvent.selectedSegmentIndex,
+            })
+          }}
+        />
         <View style={styles.container}>
           <FlatList
-            data={this.formatData(this.props.library, numColumns)}
+            data={this.formatData(library, numColumns)}
             renderItem={this.renderBook}
             keyExtractor={(book, index) => index.toString()}
             numColumns={numColumns}
