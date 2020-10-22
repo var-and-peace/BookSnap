@@ -13,6 +13,7 @@ app.use(express.urlencoded({ extended: true }))
 const delim = '!!^&*#(@)!!'
 app.post('/sd_api', async (req, res, next) => {
   try {
+    console.log('HEY WHAT IS UP')
     let pyshell = new PythonShell('script.py')
     pyshell.send(req.body.base64)
     pyshell.on('message', function (message) {

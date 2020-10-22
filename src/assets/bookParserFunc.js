@@ -1,7 +1,10 @@
 import toTitleCase from './toTitleCase'
 
 export default (book) => {
-  const DATE = book.volumeInfo.publishedDate
+  if (!book.volumeInfo) {
+    book = book.items[0]
+  }
+  const DATE = book.volumeInfo.publishedDate || null
   const IMAGE_URL = book.volumeInfo.imageLinks
   const ISBN_CODE = book.volumeInfo.industryIdentifiers
   const AVERAGE_RATING = book.volumeInfo.averageRating
