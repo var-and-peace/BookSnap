@@ -38,7 +38,7 @@ const BookForm = (props) => {
           style={styles.button}
           onPress={handleSubmit(onSearch)}
         >
-          <Text style={{ color: 'white' }}>Submit</Text>
+          <Text style={{ color: 'white', paddingLeft: 20, paddingRight: 20 }}>Submit</Text>
         </TouchableOpacity>
       </View>
       {props.results.length ? (
@@ -96,17 +96,18 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 10,
     backgroundColor: 'rgb(50,50,50)',
-    width: 80,
     height: 40,
     justifyContent: 'center',
     alignItems: 'center',
+    flex: 1
   },
   input: {
     height: 40,
-    width: 305,
     borderColor: 'gray',
     borderWidth: 1,
     borderRadius: 10,
     backgroundColor: 'white',
+    flex: 7,
+    marginRight: 10
   },
 })

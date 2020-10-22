@@ -19,6 +19,7 @@ import {
 import { removeBook } from '../reducers/libraryReducer'
 
 const HEIGHT = Dimensions.get('window').height / 3.2
+const WIDTH = Dimensions.get('window').width / 2.3
 
 class SingleBook extends React.Component {
   componentDidMount() {
@@ -40,17 +41,14 @@ class SingleBook extends React.Component {
         <ScrollView
           style={{
             flex: 1,
-            backgroundColor: '#fff1e6'
+            backgroundColor: '#fff1e6',
+            padding: 20
           }}
           contentContainerStyle={{
             justifyContent: 'center',
             alignItems: 'center',
           }}
         >
-          <Text>
-            {this.props.book.title} by {this.props.book.author}
-          </Text>
-          <Text>ID: {this.props.book.BookId}</Text>
           {this.props.book.coverImage === null ? (
             <View style={styles.item}>
               <Text style={styles.itemText}>{this.props.book.title}</Text>
@@ -58,31 +56,85 @@ class SingleBook extends React.Component {
             </View>
           ) : (
             <Image
-              style={{ width: 177, height: HEIGHT, borderRadius: 10 }}
+              style={{ width: WIDTH, height: HEIGHT, borderRadius: 10 , marginBottom: 25}}
               source={{ uri: this.props.book.coverImage }}
             />
           )}
+          <Text style={{textAlign: 'center'}}>
+            By {this.props.book.author ? this.props.book.author.join(', ') + '\n' + this.props.book.year : ''}
+          </Text>
           <Text style={{ padding: 20 }}>{this.props.book.description}</Text>
-          <Button
-            title='Remove from Library'
+          <TouchableOpacity
             onPress={() => {
               this.props.removeBook(this.props.book.BookId)
               this.props.setBook('EMPTY')
               this.props.navigation.goBack()
             }}
-          />
-          <Button
-            title={!isFavorite ? 'Add to favorites' : 'Remove from favorites'}
+            style={{
+              margin: 5,
+              borderRadius: 9,
+              backgroundColor: '#ddbea9',
+              borderColor: '#ddbea9',
+              width: 180
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 15,
+                padding: 5,
+                fontWeight: 'bold',
+                textAlign: 'center',
+              }}
+            >
+              Remove from Library
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
             onPress={() => {
               this.props.setFavorite(this.props.book.BookId, !isFavorite)
             }}
-          />
-          <Button
-            title={isRead ? 'Mark as finished' : 'Mark as unfinished'}
+            style={{
+              margin: 5,
+              borderRadius: 9,
+              backgroundColor: '#ddbea9',
+              borderColor: '#ddbea9',
+              width: 180
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 15,
+                padding: 5,
+                fontWeight: 'bold',
+                textAlign: 'center',
+              }}
+            >
+              {!isFavorite ? 'Add to favorites' : 'Remove from favorites'}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
             onPress={() => {
               this.props.setRead(this.props.book.BookId, !isRead)
             }}
-          />
+            style={{
+              margin: 5,
+              borderRadius: 9,
+              backgroundColor: '#ddbea9',
+              borderColor: '#ddbea9',
+              width: 180
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 15,
+                padding: 5,
+                fontWeight: 'bold',
+                textAlign: 'center',
+              }}
+            >
+              {isRead ? 'Mark as finished' : 'Mark as unfinished'}
+            </Text>
+          </TouchableOpacity>
         </ScrollView>
       </View>
     )
