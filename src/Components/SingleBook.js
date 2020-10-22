@@ -62,15 +62,15 @@ class SingleBook extends React.Component {
           }}
         />
         <Button
-          title={!isFavorite ? 'Add to favorites' : 'Remove from favorites'}
+          title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
           onPress={() => {
             this.props.setFavorite(this.props.book.BookId, !isFavorite)
           }}
         />
         <Button
-          title={!isRead ? 'Mark as read' : 'Mark as unread'}
+          title={isRead ? 'Mark as finished' : 'Mark as unfinished'}
           onPress={() => {
-            this.props.setRead(this.props.book.unread, !isRead)
+            this.props.setRead(this.props.book.BookId, !isRead)
           }}
         />
       </ScrollView>

@@ -55,15 +55,16 @@ export const setFavorite = (bookId, isFavorite) => async (dispatch) => {
     console.error(err)
   }
 }
-export const setRead = (bookId, isRead) => async (dispatch) => {
+export const setRead = (bookId, unread) => async (dispatch) => {
   try {
     const read = await Realm.open({ schema: [LibrarySchema] })
     read.write(() => {
       const readData = read.create(
         'Library',
-        { BookId: bookId, isRead },
+        { BookId: bookId, unread },
         'modified'
       )
+      console.log(readData.unread)
       dispatch(gotBook(readData))
     })
   } catch (err) {
