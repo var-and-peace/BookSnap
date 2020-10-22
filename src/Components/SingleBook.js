@@ -22,13 +22,14 @@ class SingleBook extends React.Component {
 
   render() {
     const { isFavorite } = this.props.book
+    let title = this.props.book.title
     return (
       <View style={{ backgroundColor: '#ddbea9', flex: 1 }}>
         <View style={{flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between'}}>
           <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
             <Text style={{marginBottom: 15, marginLeft: 15, fontSize: 20}}>Back</Text>
           </TouchableOpacity>
-          <Text style={styles.text}>{this.props.book.title.length > 20 ? this.props.book.title.slice(0, 20) + '...' : this.props.book.title}</Text>
+          <Text style={styles.text}>{title && title.length > 20 ? title.slice(0, 20) + '...' : title}</Text>
           <Text style={styles.invisibleButton}>Back</Text>
         </View>
         <ScrollView
