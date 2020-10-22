@@ -51,11 +51,11 @@ const BookForm = (props) => {
       {props.results.length ? (
         <ScrollView style={{ backgroundColor: '#fff1e6' }}>
           {props.results.map((book) => {
-            return <BookCard book={book} checkList={false} addBook={onAdd} />
+            return <BookCard key={book.BookId} book={book} checkList={false} addBook={onAdd} />
           })}
         </ScrollView>
       ) : (
-        <View />
+        <View style={{flex: 1, backgroundColor: '#fff1e6'}}/>
       )}
     </View>
   )
@@ -78,8 +78,9 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     textAlign: 'center',
-    paddingBottom: 20,
+    paddingBottom: 5,
     marginTop: 50,
+    fontWeight: 'bold'
   },
   container: {
     flexDirection: 'column',

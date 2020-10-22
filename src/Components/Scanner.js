@@ -44,7 +44,7 @@ class Scanner extends React.Component {
                 {scanSelection.length !== 0 && ` (${scanSelection.length})`}
               </Text>
             )}
-            <Text style={style.scannerTitle}>Snap Books</Text>
+            <Text style={style.scannerTitle}>BookSnap</Text>
             {this.state.selectedIndex === 1 && (
               <TouchableOpacity
                 style={style.addToLibraryContainer}
@@ -99,28 +99,28 @@ export default connect(mapState, mapDispatch)(Scanner)
 
 const style = {
   scannerHeader: {
-    paddingTop: 58,
+    paddingTop: 50,
     backgroundColor: '#ddbea9',
   },
   dummyText: {
     color: '#ddbea9',
     fontSize: 20,
+    marginLeft: 15
   },
   scannerTitle: {
     fontSize: 20,
+    fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 18,
+    marginBottom: 15,
     borderColor: 'blue',
-    // flexGrow: 1,
     padding: 0,
   },
   addToLibrary: {
     fontSize: 20,
     flex: 1,
+    marginRight: 15
   },
   addToLibraryContainer: {
-    // marginBottom: 18,
-    // borderWidth: 2,
     alignItems: 'center',
     marginBottom: 18,
     flexGrow: 1,

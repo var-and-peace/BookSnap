@@ -62,13 +62,16 @@ class AllBooks extends React.Component {
   }
   render() {
     return (
-      <View style={styles.container}>
-        <FlatList
-          data={this.formatData(this.props.library, numColumns)}
-          renderItem={this.renderBook}
-          keyExtractor={(book, index) => index.toString()}
-          numColumns={numColumns}
-        />
+      <View style={{ backgroundColor: '#ddbea9', flex: 1 }}>
+        <Text style={styles.text}>Library</Text>
+        <View style={styles.container}>
+          <FlatList
+            data={this.formatData(this.props.library, numColumns)}
+            renderItem={this.renderBook}
+            keyExtractor={(book, index) => index.toString()}
+            numColumns={numColumns}
+          />
+        </View>
       </View>
     )
   }
@@ -86,6 +89,13 @@ const mapDispatch = (dispatch) => ({
 export default connect(mapState, mapDispatch)(AllBooks)
 
 const styles = StyleSheet.create({
+  text: {
+    fontSize: 20,
+    textAlign: 'center',
+    paddingBottom: 15,
+    marginTop: 50,
+    fontWeight: 'bold'
+  },
   container: {
     flex: 1,
     padding: 10,
