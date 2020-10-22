@@ -119,7 +119,6 @@ class Graph extends React.Component {
                     horizontal
                     data={data}
                     style={{ data: { fill: ({ datum }) => datum.color}}}
-                    // style={{ data: {fill: "red"}}}
                     animate={{ duration: 800, easing: 'bounce' }}
                     labels={({ datum }) => datum.xValue}
                     labelComponent={<VictoryLabel renderInPortal dx={10} />}
