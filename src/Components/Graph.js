@@ -21,6 +21,7 @@ class Graph extends React.Component {
     const dataObj = {}
     const dataArr = []
     this.props.library.forEach((item) => {
+      console.log(this.props.library[0].author)
       if (dataObj[item[value]]) {
         dataObj[item[value]]++
       } else {
