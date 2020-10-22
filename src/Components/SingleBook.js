@@ -19,6 +19,7 @@ import {
 import { removeBook } from '../reducers/libraryReducer'
 
 const HEIGHT = Dimensions.get('window').height / 3.2
+const WIDTH = Dimensions.get('window').width / 2.3
 
 class SingleBook extends React.Component {
   componentDidMount() {
@@ -55,7 +56,7 @@ class SingleBook extends React.Component {
             </View>
           ) : (
             <Image
-              style={{ width: 177, height: HEIGHT, borderRadius: 10 , marginBottom: 25}}
+              style={{ width: WIDTH, height: HEIGHT, borderRadius: 10 , marginBottom: 25}}
               source={{ uri: this.props.book.coverImage }}
             />
           )}

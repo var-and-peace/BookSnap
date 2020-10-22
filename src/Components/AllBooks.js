@@ -13,6 +13,7 @@ import { getBooks } from '../reducers/libraryReducer'
 import { setBook } from '../reducers/singleBookReducer'
 import SegmentedControl from '@react-native-community/segmented-control'
 
+const WIDTH = Dimensions.get('window').width / 2.3
 const HEIGHT = Dimensions.get('window').height / 3.2
 const numColumns = 2
 
@@ -55,7 +56,7 @@ class AllBooks extends React.Component {
           </View>
         ) : (
           <Image
-            style={{ width: 177, height: HEIGHT, borderRadius: 10 }}
+            style={{ width: WIDTH, height: HEIGHT, borderRadius: 10 }}
             source={{ uri: book.item.coverImage }}
           />
         )}
