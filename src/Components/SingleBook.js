@@ -55,7 +55,7 @@ class SingleBook extends React.Component {
             </View>
           ) : (
             <Image
-              style={{ width: 177, height: HEIGHT, borderRadius: 10 }}
+              style={{ width: 177, height: HEIGHT, borderRadius: 10 , marginBottom: 25}}
               source={{ uri: this.props.book.coverImage }}
             />
           )}
@@ -82,6 +82,7 @@ class SingleBook extends React.Component {
               borderRadius: 9,
               backgroundColor: '#ddbea9',
               borderColor: '#ddbea9',
+              width: 180
             }}
           >
             <Text
@@ -89,6 +90,7 @@ class SingleBook extends React.Component {
                 fontSize: 15,
                 padding: 5,
                 fontWeight: 'bold',
+                textAlign: 'center',
               }}
             >
               Remove from Library
@@ -103,6 +105,7 @@ class SingleBook extends React.Component {
               borderRadius: 9,
               backgroundColor: '#ddbea9',
               borderColor: '#ddbea9',
+              width: 180
             }}
           >
             <Text
@@ -110,17 +113,12 @@ class SingleBook extends React.Component {
                 fontSize: 15,
                 padding: 5,
                 fontWeight: 'bold',
+                textAlign: 'center',
               }}
             >
               {!isFavorite ? 'Add to favorites' : 'Remove from favorites'}
             </Text>
           </TouchableOpacity>
-          {/* <Button
-            title={!isFavorite ? 'Add to favorites' : 'Remove from favorites'}
-            onPress={() => {
-              this.props.setFavorite(this.props.book.BookId, !isFavorite)
-            }}
-          /> */}
           <TouchableOpacity
             onPress={() => {
               this.props.setRead(this.props.book.BookId, !isRead)
@@ -130,6 +128,7 @@ class SingleBook extends React.Component {
               borderRadius: 9,
               backgroundColor: '#ddbea9',
               borderColor: '#ddbea9',
+              width: 180
             }}
           >
             <Text
@@ -137,17 +136,12 @@ class SingleBook extends React.Component {
                 fontSize: 15,
                 padding: 5,
                 fontWeight: 'bold',
+                textAlign: 'center',
               }}
             >
               {isRead ? 'Mark as finished' : 'Mark as unfinished'}
             </Text>
           </TouchableOpacity>
-          {/* <Button
-            title={isRead ? 'Mark as finished' : 'Mark as unfinished'}
-            onPress={() => {
-              this.props.setRead(this.props.book.BookId, !isRead)
-            }}
-          /> */}
         </ScrollView>
       </View>
     )
