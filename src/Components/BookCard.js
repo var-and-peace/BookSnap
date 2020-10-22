@@ -35,7 +35,6 @@ const BookCard = (props) => {
               size={27}
               color='#774936'
               onPress={() => {
-                // toggleCheck(!buttonChecked)
                 props.removeScanSelection(book)
               }}
             />
@@ -45,7 +44,6 @@ const BookCard = (props) => {
               size={27}
               color='#774936'
               onPress={() => {
-                // toggleCheck(!buttonChecked)
                 props.addScanSelection(book)
               }}
             />
@@ -175,7 +173,6 @@ const style = {
     justifyContent: 'center',
     marginLeft: 10,
     marginRight: 0,
-    // borderRightWidth: 2,
   },
   rating: {
     padding: 0,
@@ -186,7 +183,6 @@ const style = {
     display: 'flex',
     flexDirection: 'row',
     marginTop: 5,
-    // justifyContent: 'center',
     alignItems: 'center',
   },
 }

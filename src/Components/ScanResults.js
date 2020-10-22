@@ -28,7 +28,6 @@ class ScanResults extends React.Component {
                 this.props.resetScanSelection()
               }}
               style={{
-                // borderWidth: 2,
                 margin: 5,
                 borderRadius: 9,
                 backgroundColor: '#ddbea9',
@@ -39,9 +38,7 @@ class ScanResults extends React.Component {
                 style={{
                   fontSize: 15,
                   padding: 5,
-                  // color: 'white',
                   fontWeight: 'bold',
-                  // borderColor: 'blue',
                 }}
               >
                 Clear Selected
@@ -63,7 +60,6 @@ class ScanResults extends React.Component {
                 }
               }}
               style={{
-                // borderWidth: 2,
                 margin: 5,
                 borderRadius: 9,
                 backgroundColor: '#ddbea9',
@@ -74,9 +70,7 @@ class ScanResults extends React.Component {
                 style={{
                   fontSize: 15,
                   padding: 5,
-                  // color: 'white',
                   fontWeight: 'bold',
-                  // borderColor: 'blue',
                 }}
               >
                 {scanSelection.length === scanResults.length
