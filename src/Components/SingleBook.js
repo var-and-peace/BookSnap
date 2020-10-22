@@ -18,8 +18,8 @@ import {
 } from '../reducers/singleBookReducer'
 import { removeBook } from '../reducers/libraryReducer'
 
-const HEIGHT = Dimensions.get('window').height / 3.2
 const WIDTH = Dimensions.get('window').width / 2.3
+const HEIGHT = 1.5555555555555556 * WIDTH
 
 class SingleBook extends React.Component {
   componentDidMount() {
