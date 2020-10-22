@@ -17,7 +17,6 @@ class ScanResults extends React.Component {
   }
   render() {
     const { scanSelection, scanResults } = this.props
-    console.log('length comparison', scanSelection.length, scanResults.length)
     return (
       <View style={style.resultContainer}>
         <ScrollView>

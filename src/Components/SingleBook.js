@@ -18,7 +18,8 @@ import {
 } from '../reducers/singleBookReducer'
 import { removeBook } from '../reducers/libraryReducer'
 
-const HEIGHT = Dimensions.get('window').height / 3.2
+const WIDTH = Dimensions.get('window').width / 2.3
+const HEIGHT = 1.5555555555555556 * WIDTH
 
 class SingleBook extends React.Component {
   componentDidMount() {
@@ -40,7 +41,8 @@ class SingleBook extends React.Component {
         <ScrollView
           style={{
             flex: 1,
-            backgroundColor: '#fff1e6'
+            backgroundColor: '#fff1e6',
+            padding: 20
           }}
           contentContainerStyle={{
             justifyContent: 'center',
@@ -54,12 +56,12 @@ class SingleBook extends React.Component {
             </View>
           ) : (
             <Image
-              style={{ width: 177, height: HEIGHT, borderRadius: 10 }}
+              style={{ width: WIDTH, height: HEIGHT, borderRadius: 10 , marginBottom: 25}}
               source={{ uri: this.props.book.coverImage }}
             />
           )}
-          <Text>
-            By {this.props.book.author}
+          <Text style={{textAlign: 'center'}}>
+            By {this.props.book.author ? this.props.book.author.join(', ') + '\n' + this.props.book.year : ''}
           </Text>
           <Text style={{ padding: 20 }}>{this.props.book.description}</Text>
           <TouchableOpacity
@@ -73,6 +75,7 @@ class SingleBook extends React.Component {
               borderRadius: 9,
               backgroundColor: '#ddbea9',
               borderColor: '#ddbea9',
+              width: 180
             }}
           >
             <Text
@@ -80,6 +83,7 @@ class SingleBook extends React.Component {
                 fontSize: 15,
                 padding: 5,
                 fontWeight: 'bold',
+                textAlign: 'center',
               }}
             >
               Remove from Library
@@ -94,6 +98,7 @@ class SingleBook extends React.Component {
               borderRadius: 9,
               backgroundColor: '#ddbea9',
               borderColor: '#ddbea9',
+              width: 180
             }}
           >
             <Text
@@ -101,6 +106,7 @@ class SingleBook extends React.Component {
                 fontSize: 15,
                 padding: 5,
                 fontWeight: 'bold',
+                textAlign: 'center',
               }}
             >
               {!isFavorite ? 'Add to favorites' : 'Remove from favorites'}
@@ -115,6 +121,7 @@ class SingleBook extends React.Component {
               borderRadius: 9,
               backgroundColor: '#ddbea9',
               borderColor: '#ddbea9',
+              width: 180
             }}
           >
             <Text
@@ -122,6 +129,7 @@ class SingleBook extends React.Component {
                 fontSize: 15,
                 padding: 5,
                 fontWeight: 'bold',
+                textAlign: 'center',
               }}
             >
               {isRead ? 'Mark as finished' : 'Mark as unfinished'}

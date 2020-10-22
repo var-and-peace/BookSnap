@@ -13,7 +13,9 @@ import { getBooks } from '../reducers/libraryReducer'
 import { setBook } from '../reducers/singleBookReducer'
 import SegmentedControl from '@react-native-community/segmented-control'
 
-const HEIGHT = Dimensions.get('window').height / 3.2
+const WIDTH = Dimensions.get('window').width / 2.3
+const HEIGHT = 1.5555555555555556 * WIDTH
+//Dimensions.get('window').height / 3.2
 const numColumns = 2
 
 class AllBooks extends React.Component {
@@ -55,7 +57,7 @@ class AllBooks extends React.Component {
           </View>
         ) : (
           <Image
-            style={{ width: 177, height: HEIGHT, borderRadius: 10 }}
+            style={{ width: WIDTH, height: HEIGHT, borderRadius: 10 }}
             source={{ uri: book.item.coverImage }}
           />
         )}
@@ -90,7 +92,8 @@ class AllBooks extends React.Component {
         <Text style={styles.text}>Library</Text>
         <SegmentedControl
           values={['Unsorted', 'Author', 'Title', 'Year']}
-          selectedIndex={this.state.statIndex}
+          selectedIndex={this.state.sortIndex}
+          style={{marginBottom: 8, marginRight: 20, marginLeft: 20}}
           onChange={(event) => {
             this.setState({
               sortIndex: event.nativeEvent.selectedSegmentIndex,
