@@ -59,18 +59,10 @@ class SingleBook extends React.Component {
               source={{ uri: this.props.book.coverImage }}
             />
           )}
-          <Text>
-            By {this.props.book.author}
+          <Text style={{textAlign: 'center'}}>
+            By {this.props.book.author ? this.props.book.author.join(', ') + '\n' + this.props.book.year : ''}
           </Text>
           <Text style={{ padding: 20 }}>{this.props.book.description}</Text>
-          {/* <Button
-            title='Remove from Library'
-            onPress={() => {
-              this.props.removeBook(this.props.book.BookId)
-              this.props.setBook('EMPTY')
-              this.props.navigation.goBack()
-            }}
-          /> */}
           <TouchableOpacity
             onPress={() => {
               this.props.removeBook(this.props.book.BookId)
