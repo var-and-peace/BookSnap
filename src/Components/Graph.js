@@ -5,7 +5,7 @@ import {
   VictoryTheme,
   VictoryBar,
   VictoryChart,
-  VictoryLabel
+  VictoryLabel,
 } from 'victory-native'
 import { connect } from 'react-redux'
 import { getBooks } from '../reducers/libraryReducer'
@@ -14,7 +14,7 @@ import SegmentedControl from '@react-native-community/segmented-control'
 class Graph extends React.Component {
   constructor() {
     super()
-    this.state = { statIndex: 0, chartIndex: 0 }
+    this.state = { statIndex: 0, chartIndex: 0, selected: false }
   }
   countForPie = (value) => {
     const dataObj = {}
@@ -44,13 +44,36 @@ class Graph extends React.Component {
   render() {
     const values = ['author', 'genres', 'isFavorite', 'unread']
     const idx = this.state.statIndex
-    const data = this.countForPie(values[idx])
+    let data = this.countForPie(values[idx])
+    if (idx === 2) {
+      data = data.map((obj) => {
+        if (obj.xValue === 'true') {
+          //if favorite is true
+          obj.xValue = 'Favorites'
+        } else {
+          obj.xValue = 'Other Books'
+        }
+        return obj
+      })
+    }
+    if (idx === 3) {
+      data = data.map((obj) => {
+        if (obj.xValue === 'false') {
+          //if read is true
+          obj.xValue = 'Read'
+        } else {
+          obj.xValue = 'Unread'
+        }
+        return obj
+      })
+    }
     const width = Dimensions.get('window').width
     return (
       <View style={styles.container}>
         <Text style={styles.text}>Your Library Statistics</Text>
         <View style={{ width: width * 0.95, alignSelf: 'center' }}>
           <SegmentedControl
+            tintColor='#ac694e'
             values={['Author', 'Genres', 'Favorites', 'Unread']}
             selectedIndex={this.state.statIndex}
             onChange={(event) => {
@@ -69,32 +92,31 @@ class Graph extends React.Component {
               animate={{ duration: 1000, easing: 'bounce' }}
               domainPadding={20}
               labelPosition={'centroid'}
-              labelPlacement={({ index }) =>
-                index ? 'perpendicular' : 'vertical'
-              }
+              labelPlacement={'perpendicular'}
               innerRadius={width * 0.2}
               x='xValue'
               y='yValue'
             />
           )}
           {this.state.chartIndex === 1 && (
-              <VictoryChart
-                theme={VictoryTheme.material}
-                width={width * 0.9}
-                domainPadding={20}
-              >
-                <VictoryBar
-                  horizontal
-                  data={data}
-                  labels={({ datum }) => datum.xValue}
-                  labelComponent={<VictoryLabel renderInPortal dx={10} />}
-                  y='yValue'
-                />
-              </VictoryChart>
+            <VictoryChart
+              theme={VictoryTheme.material}
+              width={width * 0.9}
+              domainPadding={20}
+            >
+              <VictoryBar
+                horizontal
+                data={data}
+                labels={({ datum }) => datum.xValue}
+                labelComponent={<VictoryLabel renderInPortal dx={10} />}
+                y='yValue'
+              />
+            </VictoryChart>
           )}
         </View>
         <View>
           <SegmentedControl
+            tintColor='#ac694e'
             values={['Pie Chart', 'Bar Chart']}
             selectedIndex={this.state.chartIndex}
             onChange={(event) => {
@@ -103,6 +125,13 @@ class Graph extends React.Component {
               })
             }}
           />
+        </View>
+        <View>
+          {this.state.selected ? (
+            <Text>Graph Info</Text>
+          ) : (
+            <Text>HEY THERE! Touch a graph to find out more!</Text>
+          )}
         </View>
       </View>
     )
@@ -122,11 +151,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     paddingBottom: 20,
-    marginTop: 50
+    marginTop: 50,
   },
   container: {
     flexDirection: 'column',
-    backgroundColor: '#fff1e6'
+    backgroundColor: '#fff1e6',
   },
   pie: {
     alignItems: 'center',

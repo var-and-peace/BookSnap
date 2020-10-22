@@ -11,7 +11,7 @@ const LibrarySchema = {
     author: 'string[]',
     ISBN: 'string?',
     coverImage: 'string?',
-    genres: { type: 'string[]', default: [''] },
+    genres: { type: 'string[]', default: ['Unlisted'] },
     year: 'string?',
     unread: { type: 'bool', default: true },
     isReading: { type: 'bool', default: false },

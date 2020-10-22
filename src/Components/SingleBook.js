@@ -9,7 +9,12 @@ import {
   ScrollView,
 } from 'react-native'
 import { connect } from 'react-redux'
-import { getBook, setBook, setFavorite } from '../reducers/singleBookReducer'
+import {
+  getBook,
+  setBook,
+  setFavorite,
+  setRead,
+} from '../reducers/singleBookReducer'
 import { removeBook } from '../reducers/libraryReducer'
 
 const HEIGHT = Dimensions.get('window').height / 3.2
@@ -20,7 +25,7 @@ class SingleBook extends React.Component {
   }
 
   render() {
-    const { isFavorite } = this.props.book
+    const { isFavorite, unread: isRead } = this.props.book
     return (
       <ScrollView
         style={{
@@ -57,9 +62,15 @@ class SingleBook extends React.Component {
           }}
         />
         <Button
-          title={!isFavorite ? 'Add to favorites' : 'Remove from favorites'}
+          title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
           onPress={() => {
             this.props.setFavorite(this.props.book.BookId, !isFavorite)
+          }}
+        />
+        <Button
+          title={isRead ? 'Mark as finished' : 'Mark as unfinished'}
+          onPress={() => {
+            this.props.setRead(this.props.book.BookId, !isRead)
           }}
         />
       </ScrollView>
@@ -75,7 +86,9 @@ const mapDispatch = (dispatch) => ({
   getBook: () => dispatch(getBook()),
   removeBook: (bookId) => dispatch(removeBook(bookId)),
   setBook: (bookId) => dispatch(setBook(bookId)),
-  setFavorite: (bookId, isFavorite) => dispatch(setFavorite(bookId, isFavorite)),
+  setFavorite: (bookId, isFavorite) =>
+    dispatch(setFavorite(bookId, isFavorite)),
+  setRead: (bookId, isRead) => dispatch(setRead(bookId, isRead)),
 })
 
 export default connect(mapState, mapDispatch)(SingleBook)
