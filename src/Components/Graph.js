@@ -116,6 +116,7 @@ class Graph extends React.Component {
                   <VictoryBar
                     horizontal
                     data={data}
+                    style={{ data:  { fill: (d) => d.fill, opacity: (d) => d.opacity }}}
                     animate={{ duration: 800, easing: 'bounce' }}
                     labels={({ datum }) => datum.xValue}
                     labelComponent={<VictoryLabel renderInPortal dx={10} />}
