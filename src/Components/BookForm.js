@@ -1,14 +1,8 @@
 import React from 'react'
-import {
-  Text,
-  View,
-  TextInput,
-  StyleSheet,
-  ScrollView,
-} from 'react-native'
+import { Text, View, TextInput, StyleSheet, ScrollView } from 'react-native'
 import { useForm, Controller } from 'react-hook-form'
 import { connect } from 'react-redux'
-import { searchBooks } from '../reducers/scanReducer'
+import { searchBooks } from '../reducers/searchReducer'
 import { addBook } from '../reducers/libraryReducer'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import BookCard from './BookCard'
@@ -50,11 +44,18 @@ const BookForm = (props) => {
       {props.results.length ? (
         <ScrollView style={{ backgroundColor: '#fff1e6' }}>
           {props.results.map((book) => {
-            return <BookCard key={book.BookId} book={book} checkList={false} addBook={onAdd} />
+            return (
+              <BookCard
+                key={book.BookId}
+                book={book}
+                checkList={false}
+                addBook={onAdd}
+              />
+            )
           })}
         </ScrollView>
       ) : (
-        <View style={{flex: 1, backgroundColor: '#fff1e6'}}/>
+        <View style={{ flex: 1, backgroundColor: '#fff1e6' }} />
       )}
     </View>
   )
@@ -79,7 +80,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingBottom: 5,
     marginTop: 50,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   container: {
     flexDirection: 'column',
@@ -109,4 +110,3 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
 })
-

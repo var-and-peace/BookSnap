@@ -94,27 +94,26 @@ class Graph extends React.Component {
                 animate={{ duration: 1000, easing: 'bounce' }}
                 domainPadding={20}
                 labelPosition={'centroid'}
-                labelPlacement={'perpendicular'
-                }
+                labelPlacement={'perpendicular'}
                 innerRadius={width * 0.2}
                 x='xValue'
                 y='yValue'
               />
             )}
             {this.state.chartIndex === 1 && (
-                <VictoryChart
-                  theme={VictoryTheme.material}
-                  width={width * 0.9}
-                  domainPadding={20}
-                >
-                  <VictoryBar
-                    horizontal
-                    data={data}
-                    labels={({ datum }) => datum.xValue}
-                    labelComponent={<VictoryLabel renderInPortal dx={10} />}
-                    y='yValue'
-                  />
-                </VictoryChart>
+              <VictoryChart
+                theme={VictoryTheme.material}
+                width={width * 0.9}
+                domainPadding={20}
+              >
+                <VictoryBar
+                  horizontal
+                  data={data}
+                  labels={({ datum }) => datum.xValue}
+                  labelComponent={<VictoryLabel renderInPortal dx={10} />}
+                  y='yValue'
+                />
+              </VictoryChart>
             )}
           </View>
           <View>
@@ -155,20 +154,20 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingBottom: 15,
     marginTop: 50,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   container: {
     flexDirection: 'column',
     backgroundColor: '#fff1e6',
     justifyContent: 'space-around',
-    flex: 1
+    flex: 1,
   },
   pie: {
     alignItems: 'center',
   },
   header: {
     backgroundColor: '#ddbea9',
-  }
+  },
 })
 
 export default connect(mapState, mapDispatch)(Graph)
