@@ -90,7 +90,8 @@ class AllBooks extends React.Component {
         <Text style={styles.text}>Library</Text>
         <SegmentedControl
           values={['Unsorted', 'Author', 'Title', 'Year']}
-          selectedIndex={this.state.statIndex}
+          selectedIndex={this.state.sortIndex}
+          style={{marginBottom: 8, marginRight: 20, marginLeft: 20}}
           onChange={(event) => {
             this.setState({
               sortIndex: event.nativeEvent.selectedSegmentIndex,
