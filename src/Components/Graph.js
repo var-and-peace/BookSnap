@@ -69,9 +69,11 @@ class Graph extends React.Component {
         return obj
       })
     }
+    const colors = ["brown","red", "orange", "yellow","lime", "green", "cyan", "blue","purple", "violet"]
     if(idy === 1){//if it's a bar chart
       for(let i = 0; i < data.length; i++){
         data[i].count = i + 1;
+        data[i].color = colors[i];
       }
     }
     const width = Dimensions.get('window').width
@@ -116,7 +118,8 @@ class Graph extends React.Component {
                   <VictoryBar
                     horizontal
                     data={data}
-                    animate={{ duration: 1500, easing: 'bounce' }}
+                    style={{ data: { fill: ({ datum }) => datum.color}}}
+                    animate={{ duration: 800, easing: 'bounce' }}
                     labels={({ datum }) => datum.xValue}
                     labelComponent={<VictoryLabel renderInPortal dx={10} />}
                     x='count'
