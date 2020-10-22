@@ -58,9 +58,7 @@ export const addSelectedBooks = () => async (dispatch, getState) => {
       )
     })
     dispatch(getBooks())
-  } catch (error) {
-    console.error(err)
-  }
+  } catch (error) {}
 }
 
 export const removeBook = (bookId) => async (dispatch) => {
