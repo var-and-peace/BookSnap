@@ -40,7 +40,7 @@ class Scanner extends React.Component {
           >
             {this.state.selectedIndex === 1 && (
               <Text style={style.dummyText}>
-                Shelve
+                Add
                 {scanSelection.length !== 0 && ` (${scanSelection.length})`}
               </Text>
             )}
@@ -57,7 +57,7 @@ class Scanner extends React.Component {
                 }}
               >
                 <Text style={style.addToLibrary}>
-                  Shelve
+                  Add
                   {scanSelection.length !== 0 ? (
                     ` (${scanSelection.length})`
                   ) : (

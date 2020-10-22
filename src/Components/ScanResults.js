@@ -5,10 +5,6 @@ import { getScanResults } from '../reducers/scanReducer'
 
 import BookCard from './BookCard'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import {
-  addScanSelection,
-  removeScanSelection,
-} from '../reducers/scanSelectReducer'
 
 class ScanResults extends React.Component {
   render() {

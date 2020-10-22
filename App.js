@@ -77,13 +77,13 @@ class App extends React.Component {
                 ),
               }}
             />
-            <Tabs.Screen
+            {/* <Tabs.Screen
               name='profile'
               component={Profile}
               options={{
                 tabBarIcon: () => <Icon name='user' color='white' size={24} />,
               }}
-            />
+            /> */}
           </Tabs.Navigator>
         </NavigationContainer>
       </Provider>
