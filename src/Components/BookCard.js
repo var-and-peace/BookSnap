@@ -2,16 +2,26 @@ import React, { useState } from 'react'
 import { View, Image, Text, TouchableOpacity } from 'react-native'
 import { Rating, AirbnbRating } from 'react-native-elements'
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome'
-import { addBookFromResults, removeBook } from '../reducers/libraryReducer'
+import { addBook, removeBook } from '../reducers/libraryReducer'
 import { connect } from 'react-redux'
-import AntIcon from 'react-native-vector-icons/AntDesign'
+import {
+  addScanSelection,
+  removeScanSelection,
+} from '../reducers/scanSelectReducer'
 
 const BookCardColor = '#fff1e6'
 const BookCard = (props) => {
-  const { book, checkList } = props
+  const { book, checkList, toggleSelection } = props
+
+  const buttonChecked = props.scanSelection
+    .map((elt) => elt.BookId)
+    .includes(book.BookId)
+
   let addedToLibrary = false
-  const [buttonChecked, toggleCheck] = useState(false)
-  if (props.library.filter(ownedBook => ownedBook.BookId === book.BookId).length > 0) {
+  if (
+    props.library.filter((ownedBook) => ownedBook.BookId === book.BookId)
+      .length > 0
+  ) {
     addedToLibrary = true
   }
 
@@ -24,39 +34,44 @@ const BookCard = (props) => {
               name={'check-circle'}
               size={27}
               color='#774936'
-              onPress={() => toggleCheck(!buttonChecked)}
+              onPress={() => {
+                // toggleCheck(!buttonChecked)
+                props.removeScanSelection(book)
+              }}
             />
           ) : (
             <FontAwesomeIcon
               name={'circle-thin'}
               size={27}
               color='#774936'
-              onPress={() => toggleCheck(!buttonChecked)}
+              onPress={() => {
+                // toggleCheck(!buttonChecked)
+                props.addScanSelection(book)
+              }}
             />
           ))}
-          {
-            !checkList && (addedToLibrary ? (
-              <FontAwesomeIcon
-                name={'check'}
-                size={20}
-                color='#774936'
-                onPress={() => {
-                  addedToLibrary = !addedToLibrary
-                  props.removeBook(book.BookId)
-                }}
-              />
-            ) : (
-              <FontAwesomeIcon
-                name={'plus'}
-                size={25}
-                color='#774936'
-                onPress={() => {
-                  addedToLibrary = !addedToLibrary
-                  props.addBook(book)
-                }}
-              />
-            ))
-          }
+        {!checkList &&
+          (addedToLibrary ? (
+            <FontAwesomeIcon
+              name={'check'}
+              size={20}
+              color='#774936'
+              onPress={() => {
+                addedToLibrary = !addedToLibrary
+                props.removeBook(book.BookId)
+              }}
+            />
+          ) : (
+            <FontAwesomeIcon
+              name={'plus'}
+              size={25}
+              color='#774936'
+              onPress={() => {
+                addedToLibrary = !addedToLibrary
+                props.addBook(book)
+              }}
+            />
+          ))}
       </View>
       <View style={style.cardProfile}>
         <Image style={style.coverImage} source={{ uri: book.coverImage }} />
@@ -64,15 +79,13 @@ const BookCard = (props) => {
           <Text style={style.title} numberOfLines={2}>
             {book.title}
           </Text>
-          {
-            book.author ? (
-              <Text style={style.author} numberOfLines={1}>
-                by {book.author.join(', ')}
-              </Text>
-            ) : (
-              <View/>
-            )
-          }
+          {book.author ? (
+            <Text style={style.author} numberOfLines={1}>
+              by {book.author.join(', ')}
+            </Text>
+          ) : (
+            <View />
+          )}
           <View style={style.metaData}>
             <Rating
               readonly
@@ -105,13 +118,16 @@ const BookCard = (props) => {
   )
 }
 
-const mapState = state => ({
-  library: state.library
+const mapState = (state) => ({
+  library: state.library,
+  scanSelection: state.scanSelection,
 })
 
-const mapDispatch = dispatch => ({
-  addBook: (bookId) => dispatch(addBookFromResults(bookId)),
-  removeBook: (bookId) => dispatch(removeBook(bookId))
+const mapDispatch = (dispatch) => ({
+  addBook: (bookId) => dispatch(addBook(bookId)),
+  removeBook: (bookId) => dispatch(removeBook(bookId)),
+  addScanSelection: (book) => dispatch(addScanSelection(book)),
+  removeScanSelection: (book) => dispatch(removeScanSelection(book)),
 })
 
 export default connect(mapState, mapDispatch)(BookCard)
@@ -174,4 +190,3 @@ const style = {
     alignItems: 'center',
   },
 }
-

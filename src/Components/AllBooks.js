@@ -46,8 +46,7 @@ class AllBooks extends React.Component {
           this.props.navigation.navigate(book.item.BookId)
         }}
       >
-        {book.item.coverImage ===
-        'https://s.gr-assets.com/assets/nophoto/book/111x148-bcc042a9c91a29c1d680899eff700a03.png' ? (
+        {book.item.coverImage === null ? (
           <View style={styles.item}>
             <Text style={styles.itemText}>{book.item.title}</Text>
             <Text style={styles.itemText}>{book.item.author}</Text>
@@ -63,13 +62,16 @@ class AllBooks extends React.Component {
   }
   render() {
     return (
-      <View style={styles.container}>
-        <FlatList
-          data={this.formatData(this.props.library, numColumns)}
-          renderItem={this.renderBook}
-          keyExtractor={(book, index) => index.toString()}
-          numColumns={numColumns}
-        />
+      <View style={{ backgroundColor: '#ddbea9', flex: 1 }}>
+        <Text style={styles.text}>Library</Text>
+        <View style={styles.container}>
+          <FlatList
+            data={this.formatData(this.props.library, numColumns)}
+            renderItem={this.renderBook}
+            keyExtractor={(book, index) => index.toString()}
+            numColumns={numColumns}
+          />
+        </View>
       </View>
     )
   }
@@ -87,9 +89,17 @@ const mapDispatch = (dispatch) => ({
 export default connect(mapState, mapDispatch)(AllBooks)
 
 const styles = StyleSheet.create({
+  text: {
+    fontSize: 20,
+    textAlign: 'center',
+    paddingBottom: 15,
+    marginTop: 50,
+    fontWeight: 'bold'
+  },
   container: {
     flex: 1,
-    padding: 10,
+    paddingRight: 10,
+    paddingLeft: 10,
     backgroundColor: '#fff1e6'
   },
   item: {
