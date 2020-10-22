@@ -16,6 +16,7 @@ class Graph extends React.Component {
     super()
     this.state = { statIndex: 0, chartIndex: 0, selected: false }
   }
+
   countForPie = (value) => {
     const dataObj = {}
     const dataArr = []
@@ -28,14 +29,14 @@ class Graph extends React.Component {
     })
     Object.keys(dataObj).forEach((key) => {
       dataArr.push({
-        xValue: key.replace(' ', '\n'),
+        xValue: key.replace(' ', '\n').replace(',', ' &\n'),
         yValue: dataObj[key],
       })
     })
     return value === 'author' || value === 'genres'
       ? dataArr
           .sort((x, y) => {
-            return y.value - x.value
+            return y.yValue - x.yValue
           })
           .slice(0, 10)
       : dataArr
