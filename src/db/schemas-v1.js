@@ -29,10 +29,3 @@ const UserSchema = {
     library: { type: 'list', objectType: LIBRARY_SCHEMA },
   },
 }
-
-// module.exports = {
-//   LIBRARY_SCHEMA,
-//   USER_SCHEMA,
-//   UserSchema,
-//   LibrarySchema,
-// }

@@ -16,7 +16,7 @@ class Graph extends React.Component {
     super()
     this.state = { statIndex: 0, chartIndex: 0, selected: false }
   }
-  countForPie = (value) => {
+  countForGraph = (value) => {
     const dataObj = {}
     const dataArr = []
     this.props.library.forEach((item) => {
@@ -43,8 +43,9 @@ class Graph extends React.Component {
 
   render() {
     const values = ['author', 'genres', 'isFavorite', 'unread']
-    const idx = this.state.statIndex
-    let data = this.countForPie(values[idx])
+    let idx = this.state.statIndex
+    let idy = this.state.chartIndex
+    let data = this.countForGraph(values[idx])
     if (idx === 2) {
       data = data.map((obj) => {
         if (obj.xValue === 'true') {
@@ -66,6 +67,11 @@ class Graph extends React.Component {
         }
         return obj
       })
+    }
+    if(idy === 1){//if it's a bar chart
+      for(let i = 0; i < data.length; i++){
+        data[i].count = i + 1;
+      }
     }
     const width = Dimensions.get('window').width
     return (
@@ -91,7 +97,7 @@ class Graph extends React.Component {
                 width={width * 0.95}
                 data={data}
                 theme={VictoryTheme.material}
-                animate={{ duration: 1000, easing: 'bounce' }}
+                animate={{ duration: 1500, easing: 'bounce' }}
                 domainPadding={20}
                 labelPosition={'centroid'}
                 labelPlacement={'perpendicular'
@@ -110,8 +116,10 @@ class Graph extends React.Component {
                   <VictoryBar
                     horizontal
                     data={data}
+                    animate={{ duration: 1500, easing: 'bounce' }}
                     labels={({ datum }) => datum.xValue}
                     labelComponent={<VictoryLabel renderInPortal dx={10} />}
+                    x='count'
                     y='yValue'
                   />
                 </VictoryChart>
