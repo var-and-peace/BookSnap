@@ -62,14 +62,6 @@ class SingleBook extends React.Component {
             By {this.props.book.author}
           </Text>
           <Text style={{ padding: 20 }}>{this.props.book.description}</Text>
-          {/* <Button
-            title='Remove from Library'
-            onPress={() => {
-              this.props.removeBook(this.props.book.BookId)
-              this.props.setBook('EMPTY')
-              this.props.navigation.goBack()
-            }}
-          /> */}
           <TouchableOpacity
             onPress={() => {
               this.props.removeBook(this.props.book.BookId)
@@ -114,12 +106,6 @@ class SingleBook extends React.Component {
               {!isFavorite ? 'Add to favorites' : 'Remove from favorites'}
             </Text>
           </TouchableOpacity>
-          {/* <Button
-            title={!isFavorite ? 'Add to favorites' : 'Remove from favorites'}
-            onPress={() => {
-              this.props.setFavorite(this.props.book.BookId, !isFavorite)
-            }}
-          /> */}
           <TouchableOpacity
             onPress={() => {
               this.props.setRead(this.props.book.BookId, !isRead)
@@ -141,12 +127,6 @@ class SingleBook extends React.Component {
               {isRead ? 'Mark as finished' : 'Mark as unfinished'}
             </Text>
           </TouchableOpacity>
-          {/* <Button
-            title={isRead ? 'Mark as finished' : 'Mark as unfinished'}
-            onPress={() => {
-              this.props.setRead(this.props.book.BookId, !isRead)
-            }}
-          /> */}
         </ScrollView>
       </View>
     )
