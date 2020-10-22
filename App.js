@@ -12,7 +12,6 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import Library from './src/Components/Library'
 import Graph from './src/Components/Graph'
 import Scanner from './src/Components/Scanner'
-import Profile from './src/Components/Profile'
 import BookForm from './src/Components/BookForm'
 // Orientation
 import Orientation from 'react-native-orientation'
@@ -75,13 +74,6 @@ class App extends React.Component {
                 tabBarIcon: () => (
                   <Icon name='area-chart' color='white' size={24} />
                 ),
-              }}
-            />
-            <Tabs.Screen
-              name='profile'
-              component={Profile}
-              options={{
-                tabBarIcon: () => <Icon name='user' color='white' size={24} />,
               }}
             />
           </Tabs.Navigator>

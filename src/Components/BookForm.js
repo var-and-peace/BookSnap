@@ -9,8 +9,14 @@ import {
 } from 'react-native'
 import { useForm, Controller } from 'react-hook-form'
 import { connect } from 'react-redux'
+<<<<<<< HEAD
 import { addBookFromResults } from '../reducers/libraryReducer'
 import { searchBooks } from '../reducers/scanReducer'
+=======
+import { addBook } from '../reducers/libraryReducer'
+import { searchBooks } from '../reducers/searchReducer'
+import { TouchableOpacity } from 'react-native-gesture-handler'
+>>>>>>> 2c0d5ac9debcd246ea87d116208a10b02faabbd8
 import BookCard from './BookCard'
 
 const BookForm = (props) => {
@@ -40,29 +46,36 @@ const BookForm = (props) => {
           name='searchQuery'
           defaultValue=''
         />
-        <Pressable style={styles.button} onPress={handleSubmit(onSearch)}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={handleSubmit(onSearch)}
+        >
           <Text style={{ color: 'white' }}>Submit</Text>
-        </Pressable>
+        </TouchableOpacity>
       </View>
       {props.results.length ? (
         <ScrollView style={{ backgroundColor: '#fff1e6' }}>
           {props.results.map((book) => {
+<<<<<<< HEAD
             return <BookCard book={book} checkList={false} addBook={onAdd} />
+=======
+            return <BookCard key={book.BookId} book={book} checkList={false} addBook={onAdd} />
+>>>>>>> 2c0d5ac9debcd246ea87d116208a10b02faabbd8
           })}
         </ScrollView>
       ) : (
-        <View />
+        <View style={{flex: 1, backgroundColor: '#fff1e6'}}/>
       )}
     </View>
   )
 }
 
 const mapState = (state) => ({
-  results: state.scanResults,
+  results: state.searchResults,
 })
 
 const mapDispatch = (dispatch) => ({
-  addBook: (book) => dispatch(addBookFromResults(book)),
+  addBook: (book) => dispatch(addBook(book)),
   searchBooks: (input) => dispatch(searchBooks(input)),
 })
 
@@ -74,8 +87,9 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     textAlign: 'center',
-    paddingBottom: 20,
+    paddingBottom: 5,
     marginTop: 50,
+    fontWeight: 'bold'
   },
   container: {
     flexDirection: 'column',
@@ -105,4 +119,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
 })
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2c0d5ac9debcd246ea87d116208a10b02faabbd8

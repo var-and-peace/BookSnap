@@ -4,6 +4,9 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { connect } from 'react-redux'
 import Camera from './Camera'
 import ScanResults from './ScanResults'
+import { addSelectedBooks } from '../reducers/libraryReducer'
+import { resetScanSelection } from '../reducers/scanSelectReducer'
+import { removeScanItems } from '../reducers/scanReducer'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import SegmentedControl from '@react-native-community/segmented-control'
 import { TouchableOpacity } from 'react-native-gesture-handler'
@@ -19,6 +22,8 @@ class Scanner extends React.Component {
     }
   }
   render() {
+    const scanSelection = this.props.scanSelection
+    console.log(scanSelection)
     return (
       <React.Fragment>
         <View style={style.scannerHeader}>
@@ -32,12 +37,31 @@ class Scanner extends React.Component {
             }}
           >
             {this.state.selectedIndex === 1 && (
-              <Text style={style.dummyText}>Shelve (2)</Text>
+              <Text style={style.dummyText}>
+                Add
+                {scanSelection.length !== 0 && ` (${scanSelection.length})`}
+              </Text>
             )}
-            <Text style={style.scannerTitle}>Snap Books</Text>
+            <Text style={style.scannerTitle}>BookSnap</Text>
             {this.state.selectedIndex === 1 && (
-              <TouchableOpacity style={style.addToLibraryContainer}>
-                <Text style={style.addToLibrary}>Shelve (2)</Text>
+              <TouchableOpacity
+                style={style.addToLibraryContainer}
+                onPress={async () => {
+                  await this.props.addSelectedBooks()
+                  let ids = scanSelection.map(book => book.BookId)
+                  let scanResultsFiltered = this.props.scanResults.filter(book => ids.includes(book.BookId))
+                  this.props.removeScanItems(scanResultsFiltered)
+                  this.props.resetScanSelection()
+                }}
+              >
+                <Text style={style.addToLibrary}>
+                  Add
+                  {scanSelection.length !== 0 ? (
+                    ` (${scanSelection.length})`
+                  ) : (
+                    <View />
+                  )}
+                </Text>
               </TouchableOpacity>
             )}
           </View>
@@ -58,30 +82,43 @@ class Scanner extends React.Component {
   }
 }
 
+const mapState = (state) => ({
+  scanResults: state.scanResults,
+  scanSelection: state.scanSelection,
+})
+
+const mapDispatch = (dispatch) => ({
+  addSelectedBooks: (books) => dispatch(addSelectedBooks(books)),
+  resetScanSelection: () => dispatch(resetScanSelection()),
+  removeScanItems: (books) => dispatch(removeScanItems(books))
+})
+
+export default connect(mapState, mapDispatch)(Scanner)
+
 const style = {
   scannerHeader: {
-    paddingTop: 58,
+    paddingTop: 50,
     backgroundColor: '#ddbea9',
   },
   dummyText: {
     color: '#ddbea9',
     fontSize: 20,
+    marginLeft: 15
   },
   scannerTitle: {
     fontSize: 20,
+    fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 18,
+    marginBottom: 15,
     borderColor: 'blue',
-    // flexGrow: 1,
     padding: 0,
   },
   addToLibrary: {
     fontSize: 20,
     flex: 1,
+    marginRight: 15
   },
   addToLibraryContainer: {
-    // marginBottom: 18,
-    // borderWidth: 2,
     alignItems: 'center',
     marginBottom: 18,
     flexGrow: 1,
@@ -93,9 +130,3 @@ const style = {
     marginBottom: 8,
   },
 }
-
-const mapState = (state) => ({
-  scanResults: state.scanResults,
-})
-
-export default connect(mapState)(Scanner)

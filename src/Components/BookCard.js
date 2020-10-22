@@ -2,15 +2,22 @@ import React, { useState } from 'react'
 import { View, Image, Text, TouchableOpacity } from 'react-native'
 import { Rating, AirbnbRating } from 'react-native-elements'
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome'
-import { addBookFromResults, removeBook } from '../reducers/libraryReducer'
+import { addBook, removeBook } from '../reducers/libraryReducer'
 import { connect } from 'react-redux'
-import AntIcon from 'react-native-vector-icons/AntDesign'
+import {
+  addScanSelection,
+  removeScanSelection,
+} from '../reducers/scanSelectReducer'
 
 const BookCardColor = '#fff1e6'
 const BookCard = (props) => {
-  const { book, checkList } = props
+  const { book, checkList, toggleSelection } = props
+
+  const buttonChecked = props.scanSelection
+    .map((elt) => elt.BookId)
+    .includes(book.BookId)
+
   let addedToLibrary = false
-  const [buttonChecked, toggleCheck] = useState(false)
   if (
     props.library.filter((ownedBook) => ownedBook.BookId === book.BookId)
       .length > 0
@@ -27,14 +34,20 @@ const BookCard = (props) => {
               name={'check-circle'}
               size={27}
               color='#774936'
-              onPress={() => toggleCheck(!buttonChecked)}
+              onPress={() => {
+                // toggleCheck(!buttonChecked)
+                props.removeScanSelection(book)
+              }}
             />
           ) : (
             <FontAwesomeIcon
               name={'circle-thin'}
               size={27}
               color='#774936'
-              onPress={() => toggleCheck(!buttonChecked)}
+              onPress={() => {
+                // toggleCheck(!buttonChecked)
+                props.addScanSelection(book)
+              }}
             />
           ))}
         {!checkList &&
@@ -107,11 +120,14 @@ const BookCard = (props) => {
 
 const mapState = (state) => ({
   library: state.library,
+  scanSelection: state.scanSelection,
 })
 
 const mapDispatch = (dispatch) => ({
-  addBook: (bookId) => dispatch(addBookFromResults(bookId)),
+  addBook: (bookId) => dispatch(addBook(bookId)),
   removeBook: (bookId) => dispatch(removeBook(bookId)),
+  addScanSelection: (book) => dispatch(addScanSelection(book)),
+  removeScanSelection: (book) => dispatch(removeScanSelection(book)),
 })
 
 export default connect(mapState, mapDispatch)(BookCard)

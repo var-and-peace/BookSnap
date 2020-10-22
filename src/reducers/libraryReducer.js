@@ -33,36 +33,36 @@ export const getBooks = () => async (dispatch) => {
     console.error(err)
   }
 }
-export const addBookFromResults = (book) => async (dispatch) => {
+export const addBook = (book) => async (dispatch) => {
   try {
     const library = await Realm.open({
       schema: [LibrarySchema],
     })
     library.write(() => {
-      library.create('Library', book)
+      library.create(LIBRARY_SCHEMA, book)
     })
     dispatch(getBooks())
   } catch (err) {
     console.error(err)
   }
 }
-export const addBook = (input) => async (dispatch) => {
+
+export const addSelectedBooks = () => async (dispatch, getState) => {
   try {
-    const { data: queryResult } = await axios.get(
-      `https://www.googleapis.com/books/v1/volumes?q=${input.searchQuery}&maxResults=1`
-    )
-    const newBook = parse(queryResult)
     const library = await Realm.open({
       schema: [LibrarySchema],
     })
     library.write(() => {
-      library.create('Library', newBook)
+      getState().scanSelection.forEach((book) =>
+        library.create(LIBRARY_SCHEMA, book)
+      )
     })
     dispatch(getBooks())
-  } catch (err) {
+  } catch (error) {
     console.error(err)
   }
 }
+
 export const removeBook = (bookId) => async (dispatch) => {
   const library = await Realm.open({
     schema: [LibrarySchema],

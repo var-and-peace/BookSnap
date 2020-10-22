@@ -70,61 +70,64 @@ class Graph extends React.Component {
     const width = Dimensions.get('window').width
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>Your Library Statistics</Text>
-        <View style={{ width: width * 0.95, alignSelf: 'center' }}>
-          <SegmentedControl
-            tintColor='#ac694e'
-            values={['Author', 'Genres', 'Favorites', 'Unread']}
-            selectedIndex={this.state.statIndex}
-            onChange={(event) => {
-              this.setState({
-                statIndex: event.nativeEvent.selectedSegmentIndex,
-              })
-            }}
-          />
+        <View style={styles.header}>
+          <Text style={styles.text}>Your Library Statistics</Text>
         </View>
-        <View style={styles.pie}>
-          {this.state.chartIndex === 0 && (
-            <VictoryPie
-              width={width * 0.95}
-              data={data}
-              theme={VictoryTheme.material}
-              animate={{ duration: 1000, easing: 'bounce' }}
-              domainPadding={20}
-              labelPosition={'centroid'}
-              labelPlacement={'perpendicular'}
-              innerRadius={width * 0.2}
-              x='xValue'
-              y='yValue'
+        <View style={styles.container}>
+          <View style={{ width: width * 0.95, alignSelf: 'center' }}>
+            <SegmentedControl
+              values={['Author', 'Genres', 'Favorites', 'Unread']}
+              selectedIndex={this.state.statIndex}
+              onChange={(event) => {
+                this.setState({
+                  statIndex: event.nativeEvent.selectedSegmentIndex,
+                })
+              }}
             />
-          )}
-          {this.state.chartIndex === 1 && (
-            <VictoryChart
-              theme={VictoryTheme.material}
-              width={width * 0.9}
-              domainPadding={20}
-            >
-              <VictoryBar
-                horizontal
+          </View>
+          <View style={styles.pie}>
+            {this.state.chartIndex === 0 && (
+              <VictoryPie
+                width={width * 0.95}
                 data={data}
-                labels={({ datum }) => datum.xValue}
-                labelComponent={<VictoryLabel renderInPortal dx={10} />}
+                theme={VictoryTheme.material}
+                animate={{ duration: 1000, easing: 'bounce' }}
+                domainPadding={20}
+                labelPosition={'centroid'}
+                labelPlacement={'perpendicular'
+                }
+                innerRadius={width * 0.2}
+                x='xValue'
                 y='yValue'
               />
-            </VictoryChart>
-          )}
-        </View>
-        <View>
-          <SegmentedControl
-            tintColor='#ac694e'
-            values={['Pie Chart', 'Bar Chart']}
-            selectedIndex={this.state.chartIndex}
-            onChange={(event) => {
-              this.setState({
-                chartIndex: event.nativeEvent.selectedSegmentIndex,
-              })
-            }}
-          />
+            )}
+            {this.state.chartIndex === 1 && (
+                <VictoryChart
+                  theme={VictoryTheme.material}
+                  width={width * 0.9}
+                  domainPadding={20}
+                >
+                  <VictoryBar
+                    horizontal
+                    data={data}
+                    labels={({ datum }) => datum.xValue}
+                    labelComponent={<VictoryLabel renderInPortal dx={10} />}
+                    y='yValue'
+                  />
+                </VictoryChart>
+            )}
+          </View>
+          <View>
+            <SegmentedControl
+              values={['Pie Chart', 'Bar Chart']}
+              selectedIndex={this.state.chartIndex}
+              onChange={(event) => {
+                this.setState({
+                  chartIndex: event.nativeEvent.selectedSegmentIndex,
+                })
+              }}
+            />
+          </View>
         </View>
         <View>
           {this.state.selected ? (
@@ -150,16 +153,22 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     textAlign: 'center',
-    paddingBottom: 20,
+    paddingBottom: 15,
     marginTop: 50,
+    fontWeight: 'bold'
   },
   container: {
     flexDirection: 'column',
     backgroundColor: '#fff1e6',
+    justifyContent: 'space-around',
+    flex: 1
   },
   pie: {
     alignItems: 'center',
   },
+  header: {
+    backgroundColor: '#ddbea9',
+  }
 })
 
 export default connect(mapState, mapDispatch)(Graph)
