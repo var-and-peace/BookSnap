@@ -1,7 +1,5 @@
 import axios from 'axios'
 import parse from '../assets/bookParserFunc'
-const Realm = require('realm')
-import { LIBRARY_SCHEMA, LibrarySchema } from '../db/currentSchemas'
 
 // INITIAL LIBRARY STATE
 initialScanResults = []
@@ -36,12 +34,12 @@ export const getScanResults = (scanArray) => async (dispatch) => {
     console.error(err)
   }
 }
-export const searchBooks = input => async dispatch => {
+export const searchBooks = (input) => async (dispatch) => {
   try {
     const { data: queryResult } = await axios.get(
       `https://www.googleapis.com/books/v1/volumes?q=${input.searchQuery}&maxResults=10`
     )
-    const books = queryResult.items.map(book => parse(book))
+    const books = queryResult.items.map((book) => parse(book))
     dispatch(gotScanResults(books))
   } catch (err) {
     console.error(err)

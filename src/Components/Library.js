@@ -11,12 +11,9 @@ class Library extends React.Component {
   render() {
     return (
       <Stack.Navigator>
-        <Stack.Screen
-          name='Library'
-          component={AllBooks}
-        />
+        <Stack.Screen name='Library' component={AllBooks} />
         {this.props.library.map((book) => {
-          return ( 
+          return (
             <Stack.Screen
               key={book.BookId}
               name={book.BookId}
