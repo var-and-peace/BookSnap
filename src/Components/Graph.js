@@ -129,13 +129,6 @@ class Graph extends React.Component {
             />
           </View>
         </View>
-        <View>
-          {this.state.selected ? (
-            <Text>Graph Info</Text>
-          ) : (
-            <Text>HEY THERE! Touch a graph to find out more!</Text>
-          )}
-        </View>
       </View>
     )
   }
