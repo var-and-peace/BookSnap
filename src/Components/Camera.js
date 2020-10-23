@@ -64,6 +64,10 @@ class PhotoCamera extends React.PureComponent {
     }
   }
 
+  onBarCodeRead = (e) => {
+    console.log("Barcode value is" + e.data , "\nBarcode type is" + e.type);
+  }
+
   render() {
     const { type } = this.state
     return (
@@ -75,6 +79,7 @@ class PhotoCamera extends React.PureComponent {
           type={type}
           style={styles.preview}
           captureAudio={false}
+          onBarCodeRead={this.onBarCodeRead}
         />
         <View style={styles.cameraButton}>
           <TouchableOpacity onPress={this.takePhoto}>
