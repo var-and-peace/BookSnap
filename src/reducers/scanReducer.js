@@ -121,12 +121,25 @@ export const getScanResults = (scanArray) => async (dispatch) => {
         )
       )
     )
-    const scanParse = scanResults
+    const scanResultsParse = scanResults
       .filter((result) => result.data.items)
       .map((result) => {
         return parse(result.data.items[0])
       })
-    dispatch(gotScanResults(scanParse))
+    dispatch(gotScanResults(scanResultsParse))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const getBarcodeResult = (isbn) => async (dispatch) => {
+  try {
+    const res = await axios.get(
+      `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}&maxResults=1`
+    )
+    if (res.data.items) {
+      dispatch(gotScanResults([parse(res.data.items[0])]))
+    }
   } catch (err) {
     console.error(err)
   }
