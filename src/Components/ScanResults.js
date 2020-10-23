@@ -6,6 +6,7 @@ import {
   addScanSelection,
   resetScanSelection,
 } from '../reducers/scanSelectReducer'
+import ScanLoadingScreen from './ScanLoadingScreen'
 
 import BookCard from './BookCard'
 import { TouchableOpacity } from 'react-native-gesture-handler'
@@ -18,6 +19,8 @@ class ScanResults extends React.Component {
   render() {
     const { scanSelection, scanResults } = this.props
     return (
+      // <ScanLoadingScreen />
+
       <View style={style.resultContainer}>
         <ScrollView>
           <View style={style.resultHeader}>
