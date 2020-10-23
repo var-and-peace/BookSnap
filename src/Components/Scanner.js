@@ -81,7 +81,7 @@ class Scanner extends React.Component {
             )}
           </View>
           <SegmentedControl
-            values={['Camera', 'Results', 'Loading Screen']}
+            values={['Camera', 'Results']}
             selectedIndex={this.state.selectedIndex}
             onChange={(event) => {
               this.setState({
@@ -98,7 +98,6 @@ class Scanner extends React.Component {
               finishLoading={this.finishLoading}
             />,
             <ScanResults loadingResults={this.state.loadingResults} />,
-            <ScanLoadingScreen />,
           ][this.state.selectedIndex]
         }
         {/* {this.state.selectedIndex === 0 ? <Camera /> : <ScanResults />} */}
