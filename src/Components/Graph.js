@@ -80,10 +80,10 @@ class Graph extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.text}>Your Library Statistics</Text>
+          <Text style={styles.text}>Analytics</Text>
         </View>
         <View style={styles.container}>
-          <View style={{ width: width * 0.95, alignSelf: 'center' }}>
+          <View style={{ width: width * 0.95, alignSelf: 'center', paddingTop: 10 }}>
             <SegmentedControl
               values={['Author', 'Genres', 'Favorites', 'Unread']}
               selectedIndex={this.state.statIndex}
@@ -128,7 +128,7 @@ class Graph extends React.Component {
                 </VictoryChart>
             )}
           </View>
-          <View>
+          <View style={{width: width * .95, alignSelf: 'center', paddingBottom: 10}}>
             <SegmentedControl
               values={['Pie Chart', 'Bar Chart']}
               selectedIndex={this.state.chartIndex}
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
     backgroundColor: '#fff1e6',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     flex: 1,
   },
   pie: {
