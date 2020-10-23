@@ -23,6 +23,7 @@ app.post('/sd_api', async (req, res, next) => {
         0,
         -delim.length
       )
+      console.log('DECODED MESSAGE', message)
       res.json({ message })
     })
   } catch (error) {
