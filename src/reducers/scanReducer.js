@@ -106,7 +106,7 @@ export const gotScanResults = (scanResults) => ({
 })
 export const removeScanItems = (books) => ({
   type: REMOVE_SCAN_ITEMS,
-  books
+  books,
 })
 
 // THUNK CREATORS
@@ -124,7 +124,7 @@ export const getScanResults = (scanArray) => async (dispatch) => {
     const scanParse = scanResults
       .filter((result) => result.data.items)
       .map((result) => {
-        return parse(result.data)
+        return parse(result.data.items[0])
       })
     dispatch(gotScanResults(scanParse))
   } catch (err) {
@@ -138,9 +138,10 @@ const scanReducer = (scanResults = initialScanResults, action) => {
     case GOT_SCAN_RESULTS:
       return [...scanResults, ...action.scanResults]
     case REMOVE_SCAN_ITEMS:
-      let ids = action.books.map(book => book.BookId)
-      let scanResultsFiltered = scanResults
-        .filter(book => !ids.includes(book.BookId))
+      let ids = action.books.map((book) => book.BookId)
+      let scanResultsFiltered = scanResults.filter(
+        (book) => !ids.includes(book.BookId)
+      )
       return scanResultsFiltered
     default:
       return scanResults

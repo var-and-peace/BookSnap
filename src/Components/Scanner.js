@@ -48,8 +48,10 @@ class Scanner extends React.Component {
                 style={style.addToLibraryContainer}
                 onPress={async () => {
                   await this.props.addSelectedBooks()
-                  let ids = scanSelection.map(book => book.BookId)
-                  let scanResultsFiltered = this.props.scanResults.filter(book => ids.includes(book.BookId))
+                  let ids = scanSelection.map((book) => book.BookId)
+                  let scanResultsFiltered = this.props.scanResults.filter(
+                    (book) => ids.includes(book.BookId)
+                  )
                   this.props.removeScanItems(scanResultsFiltered)
                   this.props.resetScanSelection()
                 }}
@@ -90,7 +92,7 @@ const mapState = (state) => ({
 const mapDispatch = (dispatch) => ({
   addSelectedBooks: (books) => dispatch(addSelectedBooks(books)),
   resetScanSelection: () => dispatch(resetScanSelection()),
-  removeScanItems: (books) => dispatch(removeScanItems(books))
+  removeScanItems: (books) => dispatch(removeScanItems(books)),
 })
 
 export default connect(mapState, mapDispatch)(Scanner)
@@ -102,8 +104,9 @@ const style = {
   },
   dummyText: {
     color: '#ddbea9',
-    fontSize: 20,
-    marginLeft: 15
+    fontSize: 17,
+    marginLeft: 15,
+    marginTop: 2,
   },
   scannerTitle: {
     fontSize: 20,
@@ -114,9 +117,10 @@ const style = {
     padding: 0,
   },
   addToLibrary: {
-    fontSize: 20,
+    fontSize: 17,
     flex: 1,
-    marginRight: 15
+    marginRight: 15,
+    marginTop: 2,
   },
   addToLibraryContainer: {
     alignItems: 'center',

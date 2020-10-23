@@ -108,7 +108,7 @@ const BookCard = (props) => {
             </Text>
             <Text style={{ fontSize: 12 }}>{book.ratingsCount}</Text>
             <Text style={{ fontSize: 2, margin: 'auto', marginHorizontal: 7 }}>
-              {'\u2B24'}
+              {book.year && '\u2B24'}
             </Text>
             <Text style={{ fontSize: 12 }}>{book.year}</Text>
           </View>
