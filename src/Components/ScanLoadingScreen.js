@@ -28,13 +28,13 @@ const ScanLoadingScreen = () => {
     Animated.sequence([
       Animated.timing(fadeAnim, {
         toValue: 1,
-        duration: 2000,
+        duration: 1000,
         useNativeDriver: true,
       }),
-      Animated.delay(3000),
+      Animated.delay(4000),
       Animated.timing(fadeAnim, {
         toValue: 0,
-        duration: 2000,
+        duration: 1000,
         useNativeDriver: true,
       }),
     ]).start(() => {
@@ -69,9 +69,7 @@ const style = StyleSheet.create({
     backgroundColor: '#fff1e6',
   },
   quoteContainer: {
-    // borderWidth: 2,
-    // position: 'relative',
-    // top: 200,
+    height: 150,
   },
   quote: {
     width: 250,
