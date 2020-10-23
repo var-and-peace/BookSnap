@@ -118,6 +118,7 @@ class SingleBook extends React.Component {
             }}
             style={{
               margin: 5,
+              marginBottom: 50,
               borderRadius: 9,
               backgroundColor: '#ddbea9',
               borderColor: '#ddbea9',
