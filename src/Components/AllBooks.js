@@ -66,21 +66,19 @@ class AllBooks extends React.Component {
   }
   render() {
     let library = [...this.props.library];
-    if(this.state.sortIndex === 0){
-      library = this.props.library;
-    } else if(this.state.sortIndex === 1){//by author
+    if(this.state.sortIndex === 0){ // by title
+      library = library.sort(function(bookA, bookB){
+        let titleA = bookA.title;
+        let titleB = bookB.title;
+        return titleA.localeCompare(titleB);
+      })    
+    } else if(this.state.sortIndex === 1){ // by author
       library = library.sort(function(bookA, bookB){
         let authorA = bookA.author.length === 0 ? 'z zz' : bookA.author[0].split(' ')[1];
         let authorB = bookB.author.length === 0 ? 'z zz' : bookB.author[0].split(' ')[1];
         return authorA.localeCompare(authorB);
       })
-    } else if(this.state.sortIndex === 2){//by title
-      library = library.sort(function(bookA, bookB){
-        let titleA = bookA.title;
-        let titleB = bookB.title;
-        return titleA.localeCompare(titleB);
-      })
-    } else if(this.state.sortIndex === 3){//by year
+    } else if(this.state.sortIndex === 2){ // by year
       library = library.sort(function(bookA, bookB){
         let yearA = parseInt(bookA.year);
         let yearB = parseInt(bookB.year);
@@ -91,7 +89,7 @@ class AllBooks extends React.Component {
       <View style={{ backgroundColor: '#ddbea9', flex: 1 }}>
         <Text style={styles.text}>Library</Text>
         <SegmentedControl
-          values={['Unsorted', 'Author', 'Title', 'Year']}
+          values={['Title', 'Author', 'Year']}
           selectedIndex={this.state.sortIndex}
           style={{marginBottom: 8, marginRight: 20, marginLeft: 20}}
           onChange={(event) => {
