@@ -20,8 +20,20 @@ class Scanner extends React.Component {
     super()
     this.state = {
       selectedIndex: 0,
+      loadingResults: false,
     }
+    this.startLoading = this.startLoading.bind(this)
+    this.finishLoading = this.finishLoading.bind(this)
   }
+
+  startLoading() {
+    this.setState({ loadingResults: true })
+  }
+
+  finishLoading() {
+    this.setState({ loadingResults: false })
+  }
+
   render() {
     const scanSelection = this.props.scanSelection
     console.log(scanSelection)
@@ -80,9 +92,14 @@ class Scanner extends React.Component {
           />
         </View>
         {
-          [<Camera />, <ScanResults />, <ScanLoadingScreen />][
-            this.state.selectedIndex
-          ]
+          [
+            <Camera
+              startLoading={this.startLoading}
+              finishLoading={this.finishLoading}
+            />,
+            <ScanResults loadingResults={this.state.loadingResults} />,
+            <ScanLoadingScreen />,
+          ][this.state.selectedIndex]
         }
         {/* {this.state.selectedIndex === 0 ? <Camera /> : <ScanResults />} */}
       </React.Fragment>

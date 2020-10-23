@@ -18,80 +18,85 @@ class ScanResults extends React.Component {
   }
   render() {
     const { scanSelection, scanResults } = this.props
+    console.log('SCAN RESULTS RENDERS', this.props.loadingResults)
     return (
-      // <ScanLoadingScreen />
-
-      <View style={style.resultContainer}>
-        <ScrollView>
-          <View style={style.resultHeader}>
-            <TouchableOpacity
-              onPress={() => {
-                this.props.removeScanItems(scanSelection)
-                this.props.resetScanSelection()
-              }}
-              style={{
-                margin: 5,
-                borderRadius: 9,
-                backgroundColor: '#ddbea9',
-                borderColor: '#ddbea9',
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 15,
-                  padding: 5,
-                  fontWeight: 'bold',
-                }}
-              >
-                Clear Selected
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                if (scanSelection.length !== scanResults.length) {
-                  const scanSelectionIds = scanSelection.map(
-                    (book) => book.BookId
-                  )
-                  scanResults.map((book) => {
-                    if (!scanSelectionIds.includes(book.BookId)) {
-                      this.props.addScanSelection(book)
+      <React.Fragment>
+        {this.props.loadingResults ? (
+          <ScanLoadingScreen />
+        ) : (
+          <View style={style.resultContainer}>
+            <ScrollView>
+              <View style={style.resultHeader}>
+                <TouchableOpacity
+                  onPress={() => {
+                    this.props.removeScanItems(scanSelection)
+                    this.props.resetScanSelection()
+                  }}
+                  style={{
+                    margin: 5,
+                    borderRadius: 9,
+                    backgroundColor: '#ddbea9',
+                    borderColor: '#ddbea9',
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 15,
+                      padding: 5,
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    Clear Selected
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    if (scanSelection.length !== scanResults.length) {
+                      const scanSelectionIds = scanSelection.map(
+                        (book) => book.BookId
+                      )
+                      scanResults.map((book) => {
+                        if (!scanSelectionIds.includes(book.BookId)) {
+                          this.props.addScanSelection(book)
+                        }
+                      })
+                    } else {
+                      this.props.resetScanSelection()
                     }
-                  })
-                } else {
-                  this.props.resetScanSelection()
-                }
-              }}
-              style={{
-                margin: 5,
-                borderRadius: 9,
-                backgroundColor: '#ddbea9',
-                borderColor: '#ddbea9',
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 15,
-                  padding: 5,
-                  fontWeight: 'bold',
-                }}
-              >
-                {scanSelection.length === scanResults.length
-                  ? 'Deselect All'
-                  : 'Select All'}
-              </Text>
-            </TouchableOpacity>
+                  }}
+                  style={{
+                    margin: 5,
+                    borderRadius: 9,
+                    backgroundColor: '#ddbea9',
+                    borderColor: '#ddbea9',
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 15,
+                      padding: 5,
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    {scanSelection.length === scanResults.length
+                      ? 'Deselect All'
+                      : 'Select All'}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              <View>
+                {this.props.scanResults.map((book) => (
+                  <BookCard
+                    book={book}
+                    checkList={true}
+                    toggleSelection={this.toggleSelection}
+                  />
+                ))}
+              </View>
+            </ScrollView>
           </View>
-          <View>
-            {this.props.scanResults.map((book) => (
-              <BookCard
-                book={book}
-                checkList={true}
-                toggleSelection={this.toggleSelection}
-              />
-            ))}
-          </View>
-        </ScrollView>
-      </View>
+        )}
+      </React.Fragment>
     )
   }
 }
