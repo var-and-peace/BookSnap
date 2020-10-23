@@ -134,11 +134,16 @@ export const getScanResults = (scanArray) => async (dispatch) => {
 
 // LIBRARY REDUCER
 const scanReducer = (scanResults = initialScanResults, action) => {
+  let ids
   switch (action.type) {
     case GOT_SCAN_RESULTS:
-      return [...scanResults, ...action.scanResults]
+      ids = scanResults.map((elt) => elt.BookId)
+      const filteredScanResults = action.scanResults.filter(
+        (elt) => !ids.includes(elt.BookId)
+      )
+      return [...scanResults, ...filteredScanResults]
     case REMOVE_SCAN_ITEMS:
-      let ids = action.books.map((book) => book.BookId)
+      ids = action.books.map((book) => book.BookId)
       let scanResultsFiltered = scanResults.filter(
         (book) => !ids.includes(book.BookId)
       )
