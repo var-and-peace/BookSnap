@@ -98,6 +98,7 @@ const initialScanResults = [
 // ACTION CONSTANTS
 const GOT_SCAN_RESULTS = 'GOT_SCAN_RESULTS'
 const REMOVE_SCAN_ITEMS = 'REMOVE_SCAN_ITEMS'
+const ADD_SCAN_RESULT = 'ADD_SCAN_RESULT'
 
 // ACTION CREATORS
 export const gotScanResults = (scanResults) => ({
@@ -107,6 +108,10 @@ export const gotScanResults = (scanResults) => ({
 export const removeScanItems = (books) => ({
   type: REMOVE_SCAN_ITEMS,
   books,
+})
+export const addScanResult = book => ({
+  type: ADD_SCAN_RESULT,
+  book
 })
 
 // THUNK CREATORS
@@ -131,6 +136,15 @@ export const getScanResults = (scanArray) => async (dispatch) => {
     console.error(err)
   }
 }
+export const addBarcodeResult = isbn => async dispatch => {
+  try {
+    const { data: book } = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`)
+    console.log(book)
+    // dispatch(addScanResult(book))
+  } catch (err) {
+    console.error(err)
+  }
+}
 
 // LIBRARY REDUCER
 const scanReducer = (scanResults = initialScanResults, action) => {
@@ -143,6 +157,8 @@ const scanReducer = (scanResults = initialScanResults, action) => {
         (book) => !ids.includes(book.BookId)
       )
       return scanResultsFiltered
+    case ADD_SCAN_RESULT:
+      return [...scanResults, action.book]
     default:
       return scanResults
   }

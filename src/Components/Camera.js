@@ -4,7 +4,7 @@ import { RNCamera } from 'react-native-camera'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import axios from 'axios'
 import ip_address from '../../ip_address'
-import { getScanResults } from '../reducers/scanReducer'
+import { getScanResults, addBarcodeResult } from '../reducers/scanReducer'
 import { connect } from 'react-redux'
 
 process.env.GOOGLE_APPLICATION_CREDENTIALS =
@@ -65,7 +65,7 @@ class PhotoCamera extends React.PureComponent {
   }
 
   onBarCodeRead = (e) => {
-    console.log("Barcode value is" + e.data , "\nBarcode type is" + e.type);
+    this.props.addBarcodeResult(e.data)
   }
 
   render() {
@@ -97,6 +97,7 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => ({
   getScanResults: (data) => dispatch(getScanResults(data)),
+  addBarcodeResult: (isbn) => dispatch(addBarcodeResult(isbn))
 })
 
 export default connect(mapState, mapDispatch)(PhotoCamera)
