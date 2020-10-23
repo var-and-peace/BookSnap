@@ -3,15 +3,16 @@
 import base64
 import io
 import cv2
-from imageio import imread
 import numpy as np
 import google_vision
 import itertools
 from collections import OrderedDict
+from imageio import imread
 
-
-# read the stdin from the express server
 b64_string = input()
+# print ('HELLO there traveler')
+# # read the stdin from the express server
+# b64_string = input()
 
 # decode base64 -> bytes -> BGR numpy array -> RGB numpy array
 img = imread(io.BytesIO(base64.b64decode(b64_string)))
@@ -113,11 +114,11 @@ textDetected[:] = [text for text in textDetected if text != '!!^&*#(@)!!']
 # send an array of detected text strings to express server
 print(textDetected)
 
-scale_percent = 30
-new_width = int(width * scale_percent / 100)
-new_height = int(height * scale_percent / 100)
-dim = (new_width, new_height)
-img = cv2.resize(img, dim)
-cv2.imshow('img', img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+# scale_percent = 30
+# new_width = int(width * scale_percent / 100)
+# new_height = int(height * scale_percent / 100)
+# dim = (new_width, new_height)
+# img = cv2.resize(img, dim)
+# cv2.imshow('img', img)
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
