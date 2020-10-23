@@ -87,12 +87,33 @@
 //   },
 // }
 
-import React, { useRef } from 'react'
+import React, { useRef, useEffect } from 'react'
 import { Animated, Text, View, StyleSheet, Button } from 'react-native'
 
 const ScanLoadingScreen = () => {
   // fadeAnim will be used as the value for opacity. Initial Value: 0
   const fadeAnim = useRef(new Animated.Value(0)).current
+
+  useEffect(() => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.delay(1000),
+        Animated.timing(fadeAnim, {
+          toValue: 1,
+          duration: 2000,
+          useNativeDriver: true,
+        }),
+        Animated.timing(fadeAnim, {
+          toValue: 0,
+          duration: 2000,
+          useNativeDriver: true,
+        }),
+      ]),
+      {
+        iterations: 10,
+      }
+    ).start()
+  }, [])
 
   const fadeIn = () => {
     // Will change fadeAnim value to 1 in 5 seconds
@@ -106,6 +127,12 @@ const ScanLoadingScreen = () => {
         Animated.timing(fadeAnim, {
           toValue: 1,
           duration: 2000,
+          useNativeDriver: true,
+        }),
+        Animated.timing(fadeAnim, {
+          toValue: 0,
+          duration: 2000,
+          useNativeDriver: true,
         }),
       ]),
       {
@@ -126,7 +153,7 @@ const ScanLoadingScreen = () => {
     <View style={styles.container}>
       <Animated.View
         style={[
-          styles.fadingContainer,
+          //   styles.fadingContainer,
           {
             opacity: fadeAnim, // Bind opacity to animated value
           },
@@ -134,10 +161,10 @@ const ScanLoadingScreen = () => {
       >
         <Text style={styles.fadingText}>Fading View!</Text>
       </Animated.View>
-      <View style={styles.buttonRow}>
+      {/* <View style={styles.buttonRow}>
         <Button title='Fade In' onPress={fadeIn} />
         <Button title='Fade Out' onPress={fadeOut} />
-      </View>
+      </View> */}
     </View>
   )
 }
@@ -153,11 +180,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     backgroundColor: 'powderblue',
   },
-  fadingText: {
-    fontSize: 28,
-    textAlign: 'center',
-    margin: 10,
-  },
+  //   fadingText: {
+  //     fontSize: 28,
+  //     textAlign: 'center',
+  //     margin: 10,
+  //   },
   buttonRow: {
     flexDirection: 'row',
     marginVertical: 16,
