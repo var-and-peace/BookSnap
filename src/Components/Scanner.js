@@ -10,6 +10,7 @@ import { removeScanItems } from '../reducers/scanReducer'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import SegmentedControl from '@react-native-community/segmented-control'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import ScanLoadingScreen from './ScanLoadingScreen'
 
 const MaterialTopTabs = createMaterialTopTabNavigator()
 const Stack = createStackNavigator()
@@ -19,8 +20,20 @@ class Scanner extends React.Component {
     super()
     this.state = {
       selectedIndex: 0,
+      loadingResults: false,
     }
+    this.startLoading = this.startLoading.bind(this)
+    this.finishLoading = this.finishLoading.bind(this)
   }
+
+  startLoading() {
+    this.setState({ loadingResults: true })
+  }
+
+  finishLoading() {
+    this.setState({ loadingResults: false })
+  }
+
   render() {
     const scanSelection = this.props.scanSelection
     console.log(scanSelection)
@@ -33,7 +46,7 @@ class Scanner extends React.Component {
               flexDirection: 'row',
               alignItems: 'stretch',
               justifyContent:
-                this.state.selectedIndex === 0 ? 'center' : 'space-between',
+                this.state.selectedIndex !== 1 ? 'center' : 'space-between',
             }}
           >
             {this.state.selectedIndex === 1 && (
@@ -68,7 +81,7 @@ class Scanner extends React.Component {
             )}
           </View>
           <SegmentedControl
-            values={['Camera', 'Results']}
+            values={['Camera', 'Results', 'Loading Screen']}
             selectedIndex={this.state.selectedIndex}
             onChange={(event) => {
               this.setState({
@@ -78,7 +91,17 @@ class Scanner extends React.Component {
             style={style.segmentedTabContainer}
           />
         </View>
-        {this.state.selectedIndex === 0 ? <Camera /> : <ScanResults />}
+        {
+          [
+            <Camera
+              startLoading={this.startLoading}
+              finishLoading={this.finishLoading}
+            />,
+            <ScanResults loadingResults={this.state.loadingResults} />,
+            <ScanLoadingScreen />,
+          ][this.state.selectedIndex]
+        }
+        {/* {this.state.selectedIndex === 0 ? <Camera /> : <ScanResults />} */}
       </React.Fragment>
     )
   }
