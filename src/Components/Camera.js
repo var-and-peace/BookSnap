@@ -4,7 +4,7 @@ import { RNCamera } from 'react-native-camera'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import axios from 'axios'
 import ip_address from '../../ip_address'
-import { getScanResults } from '../reducers/scanReducer'
+import { getScanResults, getBarcodeResult } from '../reducers/scanReducer'
 import { connect } from 'react-redux'
 
 process.env.GOOGLE_APPLICATION_CREDENTIALS =
@@ -15,6 +15,7 @@ class PhotoCamera extends React.PureComponent {
     type: RNCamera.Constants.Type.back,
     wordList: [],
     base64: '',
+    barcode: '',
   }
 
   flipCamera = () =>
@@ -65,10 +66,18 @@ class PhotoCamera extends React.PureComponent {
   }
 
   onBarCodeRead = (e) => {
-    console.log("Barcode value is" + e.data , "\nBarcode type is" + e.type);
+    if (this.state.barcode !== e.data) {
+      console.log('Barcode value is' + e.data, '\nBarcode type is' + e.type)
+      this.props.getBarcodeResult(e.data)
+      this.setState({ barcode: e.data })
+    } else {
+      // alert user that they have already scanned this.
+      console.log('ALREADY SCANNED YO')
+    }
   }
 
   render() {
+    console.log('RENDER CAMERA')
     const { type } = this.state
     return (
       <View style={styles.container}>
@@ -97,6 +106,7 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => ({
   getScanResults: (data) => dispatch(getScanResults(data)),
+  getBarcodeResult: (barcode) => dispatch(getBarcodeResult(barcode)),
 })
 
 export default connect(mapState, mapDispatch)(PhotoCamera)
