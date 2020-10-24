@@ -14,14 +14,14 @@ import { setBook } from '../reducers/singleBookReducer'
 import SegmentedControl from '@react-native-community/segmented-control'
 
 const WIDTH = Dimensions.get('window').width / 2.3
-const HEIGHT = 1.5555555555555556 * WIDTH
+const HEIGHT = 1.6 * WIDTH
 //Dimensions.get('window').height / 3.2
 const numColumns = 2
 
 class AllBooks extends React.Component {
   constructor() {
     super()
-    this.state = {sortIndex: 0}
+    this.state = { sortIndex: 0 }
     this.formatData = this.formatData.bind(this)
     this.renderBook = this.renderBook.bind(this)
   }
@@ -57,7 +57,11 @@ class AllBooks extends React.Component {
           </View>
         ) : (
           <Image
-            style={{ width: WIDTH, height: HEIGHT, borderRadius: 10 }}
+            style={{
+              width: WIDTH,
+              height: HEIGHT,
+              borderRadius: 10,
+            }}
             source={{ uri: book.item.coverImage }}
           />
         )}
@@ -65,24 +69,29 @@ class AllBooks extends React.Component {
     )
   }
   render() {
-    let library = [...this.props.library];
-    if(this.state.sortIndex === 0){ // by title
-      library = library.sort(function(bookA, bookB){
-        let titleA = bookA.title;
-        let titleB = bookB.title;
-        return titleA.localeCompare(titleB);
-      })    
-    } else if(this.state.sortIndex === 1){ // by author
-      library = library.sort(function(bookA, bookB){
-        let authorA = bookA.author.length === 0 ? 'z zz' : bookA.author[0].split(' ')[1];
-        let authorB = bookB.author.length === 0 ? 'z zz' : bookB.author[0].split(' ')[1];
-        return authorA.localeCompare(authorB);
+    let library = [...this.props.library]
+    if (this.state.sortIndex === 0) {
+      // by title
+      library = library.sort(function (bookA, bookB) {
+        let titleA = bookA.title
+        let titleB = bookB.title
+        return titleA.localeCompare(titleB)
       })
-    } else if(this.state.sortIndex === 2){ // by year
-      library = library.sort(function(bookA, bookB){
-        let yearA = parseInt(bookA.year);
-        let yearB = parseInt(bookB.year);
-        return yearB - yearA;
+    } else if (this.state.sortIndex === 1) {
+      // by author
+      library = library.sort(function (bookA, bookB) {
+        let authorA =
+          bookA.author.length === 0 ? 'z zz' : bookA.author[0].split(' ')[1]
+        let authorB =
+          bookB.author.length === 0 ? 'z zz' : bookB.author[0].split(' ')[1]
+        return authorA.localeCompare(authorB)
+      })
+    } else if (this.state.sortIndex === 2) {
+      // by year
+      library = library.sort(function (bookA, bookB) {
+        let yearA = parseInt(bookA.year)
+        let yearB = parseInt(bookB.year)
+        return yearB - yearA
       })
     }
     return (
@@ -91,7 +100,7 @@ class AllBooks extends React.Component {
         <SegmentedControl
           values={['Title', 'Author', 'Year']}
           selectedIndex={this.state.sortIndex}
-          style={{marginBottom: 8, marginRight: 20, marginLeft: 20}}
+          style={{ marginBottom: 8, marginRight: 20, marginLeft: 20 }}
           onChange={(event) => {
             this.setState({
               sortIndex: event.nativeEvent.selectedSegmentIndex,
@@ -128,13 +137,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingBottom: 15,
     marginTop: 50,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   container: {
     flex: 1,
     paddingRight: 10,
     paddingLeft: 10,
-    backgroundColor: '#fff1e6'
+    backgroundColor: '#fff1e6',
   },
   item: {
     backgroundColor: '#FFC771',
@@ -144,6 +153,8 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 10,
     borderRadius: 10,
+    shadowOffset: { width: 5, height: 5 },
+    shadowOpacity: 0.15,
   },
   itemText: {
     color: '#fff',
@@ -153,4 +164,3 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
 })
-
