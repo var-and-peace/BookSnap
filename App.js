@@ -18,9 +18,10 @@ import Orientation from 'react-native-orientation'
 // Realm
 const Realm = require('realm')
 import {
-  LibrarySchema,
+  BookSchema,
   UserSchema,
   ScanResultSchema,
+  BOOK_SCHEMA,
 } from './src/db/currentSchemas'
 
 const Tabs = createMaterialBottomTabNavigator()
@@ -28,10 +29,10 @@ const Tabs = createMaterialBottomTabNavigator()
 class App extends React.Component {
   async componentDidMount() {
     Orientation.lockToPortrait()
-    const realms = await Realm.open({
-      schema: [LibrarySchema, UserSchema, ScanResultSchema],
-    })
-    // return realms
+    // const realms = await Realm.open({
+    //   schema: [BookSchema, UserSchema],
+    // })
+    // console.log(realms)
   }
   render() {
     return (

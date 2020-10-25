@@ -1,9 +1,10 @@
-const LIBRARY_SCHEMA = 'Library'
+const BOOK_SCHEMA = 'Book'
 const USER_SCHEMA = 'User'
 const SCAN_RESULT_SCHEMA = 'SCAN_RESULT'
+const BOOKSHELF_SCHEMA = 'BOOKSHELF'
 
-const LibrarySchema = {
-  name: LIBRARY_SCHEMA,
+const BookSchema = {
+  name: BOOK_SCHEMA,
   primaryKey: 'BookId',
   properties: {
     BookId: 'string',
@@ -23,6 +24,7 @@ const LibrarySchema = {
       type: 'string?',
       default: 'No description available at this time.',
     },
+    mainBookshelf: 'string?',
   },
 }
 
@@ -32,7 +34,7 @@ const UserSchema = {
     firstName: 'string',
     lastName: 'string?',
     profilePic: 'string?',
-    library: { type: 'list', objectType: LIBRARY_SCHEMA },
+    library: { type: 'list', objectType: BOOK_SCHEMA },
   },
 }
 
@@ -40,17 +42,27 @@ const ScanResultSchema = {
   name: SCAN_RESULT_SCHEMA,
   properties: {
     scanResult: {
-      objectType: LIBRARY_SCHEMA,
+      objectType: BOOK_SCHEMA,
       type: 'list',
     },
   },
 }
 
+const BookshelfSchema = {
+  name: BOOKSHELF_SCHEMA,
+  properties: {
+    name: 'string',
+    books: `${BOOKSHELF_SCHEMA}[]`,
+  },
+}
+
 module.exports = {
-  LIBRARY_SCHEMA,
+  BOOK_SCHEMA,
   USER_SCHEMA,
   SCAN_RESULT_SCHEMA,
-  LibrarySchema,
+  BOOKSHELF_SCHEMA,
+  BookSchema,
   UserSchema,
   ScanResultSchema,
+  BookshelfSchema,
 }

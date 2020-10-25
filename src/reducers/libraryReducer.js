@@ -1,6 +1,6 @@
 import axios from 'axios'
 const Realm = require('realm')
-import { LIBRARY_SCHEMA, LibrarySchema } from '../db/currentSchemas'
+import { BOOK_SCHEMA, BookSchema } from '../db/currentSchemas'
 import parse from '../assets/bookParserFunc'
 
 // INITIAL LIBRARY STATE
@@ -25,9 +25,10 @@ export const addedBook = (book) => ({
 export const getBooks = () => async (dispatch) => {
   try {
     const library = await Realm.open({
-      schema: [LibrarySchema],
+      schema: [BookSchema],
+      schemaVersion: 2,
     })
-    let books = [...library.objects(LIBRARY_SCHEMA)]
+    let books = [...library.objects(BOOK_SCHEMA)]
     dispatch(gotBooks(books))
   } catch (err) {
     console.error(err)
@@ -36,10 +37,10 @@ export const getBooks = () => async (dispatch) => {
 export const addBook = (book) => async (dispatch) => {
   try {
     const library = await Realm.open({
-      schema: [LibrarySchema],
+      schema: [BookSchema],
     })
     library.write(() => {
-      library.create(LIBRARY_SCHEMA, book)
+      library.create(BOOK_SCHEMA, book)
     })
     dispatch(getBooks())
   } catch (err) {
@@ -50,11 +51,11 @@ export const addBook = (book) => async (dispatch) => {
 export const addSelectedBooks = () => async (dispatch, getState) => {
   try {
     const library = await Realm.open({
-      schema: [LibrarySchema],
+      schema: [BookSchema],
     })
     library.write(() => {
       getState().scanSelection.forEach((book) =>
-        library.create(LIBRARY_SCHEMA, book)
+        library.create(BOOK_SCHEMA, book)
       )
     })
     dispatch(getBooks())
@@ -63,13 +64,13 @@ export const addSelectedBooks = () => async (dispatch, getState) => {
 
 export const removeBook = (bookId) => async (dispatch) => {
   const library = await Realm.open({
-    schema: [LibrarySchema],
+    schema: [BookSchema],
   })
-  let book = library.objects(LIBRARY_SCHEMA).filtered(`BookId = '${bookId}'`)[0]
+  let book = library.objects(BOOK_SCHEMA).filtered(`BookId = '${bookId}'`)[0]
   library.write(() => {
     library.delete(book)
   })
-  let books = library.objects(LIBRARY_SCHEMA)
+  let books = library.objects(BOOK_SCHEMA)
   dispatch(gotBooks(books))
 }
 
