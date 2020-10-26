@@ -10,14 +10,13 @@ import { connect } from 'react-redux'
 process.env.GOOGLE_APPLICATION_CREDENTIALS =
   '../../edge_detection_server/booksnap-service_account.json'
 
-
 class PhotoCamera extends React.PureComponent {
   state = {
     type: RNCamera.Constants.Type.back,
     wordList: [],
     base64: '',
     barcode: [''],
-    alert: false
+    alert: false,
   }
 
   flipCamera = () =>
@@ -67,16 +66,16 @@ class PhotoCamera extends React.PureComponent {
     }
   }
   barcodeAlert = (title, message) => {
-      Alert.alert(
-        title,
-        message,
-        [
-          {
-            text: 'Okay',
-          },
-        ],
-        { cancelable: false }
-      )
+    Alert.alert(
+      title,
+      message,
+      [
+        {
+          text: 'Okay',
+        },
+      ],
+      { cancelable: false }
+    )
   }
 
   alertTimeout = (time) => {

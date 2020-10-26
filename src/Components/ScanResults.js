@@ -86,6 +86,7 @@ class ScanResults extends React.Component {
               <View>
                 {this.props.scanResults.map((book) => (
                   <BookCard
+                    id={book.BookId}
                     book={book}
                     checkList={true}
                     toggleSelection={this.toggleSelection}
