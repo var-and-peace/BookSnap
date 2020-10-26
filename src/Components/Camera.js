@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, TouchableOpacity, StyleSheet, Alert } from 'react-native'
 import { RNCamera } from 'react-native-camera'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import axios from 'axios'
@@ -71,7 +71,11 @@ class PhotoCamera extends React.PureComponent {
       this.setState({ barcode: e.data })
     } else {
       // alert user that they have already scanned this.
-      console.warn('This has already been scanned')
+      Alert.alert('Already scanned', 'This barcode has already been scanned', [
+        {
+          text: 'Okay',
+        },
+      ])
     }
   }
 
