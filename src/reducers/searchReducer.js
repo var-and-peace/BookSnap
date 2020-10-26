@@ -17,8 +17,7 @@ export const searchBooks = (input) => async (dispatch) => {
     )
     const books = queryResult.items.map((book) => parse(book))
     dispatch(gotSearchResults(books))
-  } catch (err) {
-  }
+  } catch (err) {}
 }
 
 const searchReducer = (searchResults = initialSearchResults, action) => {

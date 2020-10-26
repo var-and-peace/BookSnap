@@ -7,7 +7,7 @@ import {
   Button,
   Dimensions,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native'
 import { connect } from 'react-redux'
 import {
@@ -31,18 +31,28 @@ class SingleBook extends React.Component {
     let title = this.props.book.title
     return (
       <View style={{ backgroundColor: '#ddbea9', flex: 1 }}>
-        <View style={{flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between'}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'flex-end',
+            justifyContent: 'space-between',
+          }}
+        >
           <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-            <Text style={{marginBottom: 15, marginLeft: 15, fontSize: 20}}>Back</Text>
+            <Text style={{ marginBottom: 15, marginLeft: 15, fontSize: 20 }}>
+              Back
+            </Text>
           </TouchableOpacity>
-          <Text style={styles.text}>{title && title.length > 20 ? title.slice(0, 20) + '...' : title}</Text>
+          <Text style={styles.text}>
+            {title && title.length > 20 ? title.slice(0, 20) + '...' : title}
+          </Text>
           <Text style={styles.invisibleButton}>Back</Text>
         </View>
         <ScrollView
           style={{
             flex: 1,
             backgroundColor: '#fff1e6',
-            padding: 20
+            padding: 20,
           }}
           contentContainerStyle={{
             justifyContent: 'center',
@@ -56,12 +66,20 @@ class SingleBook extends React.Component {
             </View>
           ) : (
             <Image
-              style={{ width: WIDTH, height: HEIGHT, borderRadius: 10 , marginBottom: 25}}
+              style={{
+                width: WIDTH,
+                height: HEIGHT,
+                borderRadius: 10,
+                marginBottom: 25,
+              }}
               source={{ uri: this.props.book.coverImage }}
             />
           )}
-          <Text style={{textAlign: 'center'}}>
-            By {this.props.book.author ? this.props.book.author.join(', ') + '\n' + this.props.book.year : ''}
+          <Text style={{ textAlign: 'center' }}>
+            By{' '}
+            {this.props.book.author
+              ? this.props.book.author.join(', ') + '\n' + this.props.book.year
+              : ''}
           </Text>
           <Text style={{ padding: 20 }}>{this.props.book.description}</Text>
           <TouchableOpacity
@@ -75,7 +93,7 @@ class SingleBook extends React.Component {
               borderRadius: 9,
               backgroundColor: '#ddbea9',
               borderColor: '#ddbea9',
-              width: 180
+              width: 180,
             }}
           >
             <Text
@@ -98,7 +116,7 @@ class SingleBook extends React.Component {
               borderRadius: 9,
               backgroundColor: '#ddbea9',
               borderColor: '#ddbea9',
-              width: 180
+              width: 180,
             }}
           >
             <Text
@@ -122,7 +140,7 @@ class SingleBook extends React.Component {
               borderRadius: 9,
               backgroundColor: '#ddbea9',
               borderColor: '#ddbea9',
-              width: 180
+              width: 180,
             }}
           >
             <Text
@@ -163,7 +181,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingBottom: 15,
     marginTop: 50,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   item: {
     backgroundColor: '#FFC771',
@@ -183,6 +201,6 @@ const styles = StyleSheet.create({
     color: '#ddbea9',
     marginBottom: 15,
     marginLeft: 15,
-    fontSize: 20
-  }
+    fontSize: 20,
+  },
 })

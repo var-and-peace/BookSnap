@@ -18,7 +18,6 @@ class ScanResults extends React.Component {
   }
   render() {
     const { scanSelection, scanResults } = this.props
-    console.log('SCAN RESULTS RENDERS', this.props.loadingResults)
     return (
       <React.Fragment>
         {this.props.loadingResults ? (

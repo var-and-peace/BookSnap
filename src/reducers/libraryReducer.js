@@ -1,7 +1,5 @@
-import axios from 'axios'
 const Realm = require('realm')
 import { LIBRARY_SCHEMA, LibrarySchema } from '../db/currentSchemas'
-import parse from '../assets/bookParserFunc'
 
 // INITIAL LIBRARY STATE
 

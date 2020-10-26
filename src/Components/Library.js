@@ -10,13 +10,8 @@ const Stack = createStackNavigator()
 class Library extends React.Component {
   render() {
     return (
-      <Stack.Navigator 
-        screenOptions={{ headerShown: false }}
-      >
-        <Stack.Screen
-          name='Library'
-          component={AllBooks}
-        />
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name='Library' component={AllBooks} />
         {this.props.library.map((book) => {
           return (
             <Stack.Screen

@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { Animated, Text, View, StyleSheet, Button } from 'react-native'
+import { Animated, Text, View, StyleSheet } from 'react-native'
 import AnimatedEllipsis from 'react-native-animated-ellipsis'
 
 const quotes = [
@@ -23,7 +23,6 @@ const ScanLoadingScreen = () => {
 
   let [currIndex, nextIndex] = useState(0)
 
-  //   let currIndex = 0
   useEffect(() => {
     Animated.sequence([
       Animated.timing(fadeAnim, {
@@ -38,8 +37,6 @@ const ScanLoadingScreen = () => {
         useNativeDriver: true,
       }),
     ]).start(() => {
-      //   currIndex = (currIndex + 1) % quotes.length
-      console.log('inside loop', currIndex)
       nextIndex((currIndex + 1) % quotes.length)
     })
   }, [currIndex])

@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import { View, Image, Text, TouchableOpacity } from 'react-native'
-import { Rating, AirbnbRating } from 'react-native-elements'
+import React from 'react'
+import { View, Image, Text } from 'react-native'
+import { Rating } from 'react-native-elements'
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome'
 import { addBook, removeBook } from '../reducers/libraryReducer'
 import { connect } from 'react-redux'
@@ -11,7 +11,7 @@ import {
 
 const BookCardColor = '#fff1e6'
 const BookCard = (props) => {
-  const { book, checkList, toggleSelection } = props
+  const { book, checkList } = props
 
   const buttonChecked = props.scanSelection
     .map((elt) => elt.BookId)
