@@ -67,17 +67,15 @@ class PhotoCamera extends React.PureComponent {
 
   onBarCodeRead = (e) => {
     if (this.state.barcode !== e.data) {
-      console.log('Barcode value is' + e.data, '\nBarcode type is' + e.type)
       this.props.getBarcodeResult(e.data)
       this.setState({ barcode: e.data })
     } else {
       // alert user that they have already scanned this.
-      console.log('ALREADY SCANNED YO')
+      console.warn('This has already been scanned')
     }
   }
 
   render() {
-    console.log('RENDER CAMERA')
     const { type } = this.state
     return (
       <View style={styles.container}>

@@ -30,7 +30,6 @@ class Scanner extends React.Component {
 
   render() {
     const scanSelection = this.props.scanSelection
-    console.log(scanSelection)
     return (
       <React.Fragment>
         <View style={style.scannerHeader}>
