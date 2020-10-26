@@ -134,7 +134,7 @@ class Graph extends React.Component {
                   style={{ data: { fill: ({ datum }) => datum.color } }}
                   animate={{ duration: 800, easing: 'bounce' }}
                   labels={({ datum }) => datum.xValue}
-                  labelComponent={<VictoryLabel renderInPortal dx={10} />}
+                  labelComponent={<VictoryLabel dx={10} />}
                   x='count'
                   y='yValue'
                 />
