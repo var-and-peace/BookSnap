@@ -69,11 +69,23 @@ class Graph extends React.Component {
         return obj
       })
     }
-    const colors = ["brown","red", "orange", "yellow","lime", "green", "cyan", "blue","purple", "violet"]
-    if(idy === 1){//if it's a bar chart
-      for(let i = 0; i < data.length; i++){
-        data[i].count = i + 1;
-        data[i].color = colors[i];
+    const colors = [
+      'brown',
+      'red',
+      'orange',
+      'yellow',
+      'lime',
+      'green',
+      'cyan',
+      'blue',
+      'purple',
+      'violet',
+    ]
+    if (idy === 1) {
+      //if it's a bar chart
+      for (let i = 0; i < data.length; i++) {
+        data[i].count = i + 1
+        data[i].color = colors[i]
       }
     }
     const width = Dimensions.get('window').width
@@ -83,7 +95,9 @@ class Graph extends React.Component {
           <Text style={styles.text}>Analytics</Text>
         </View>
         <View style={styles.container}>
-          <View style={{ width: width * 0.95, alignSelf: 'center', paddingTop: 10 }}>
+          <View
+            style={{ width: width * 0.95, alignSelf: 'center', paddingTop: 10 }}
+          >
             <SegmentedControl
               values={['Author', 'Genres', 'Favorites', 'Unread']}
               selectedIndex={this.state.statIndex}
@@ -110,25 +124,31 @@ class Graph extends React.Component {
               />
             )}
             {this.state.chartIndex === 1 && (
-                <VictoryChart
-                  theme={VictoryTheme.material}
-                  width={width * 0.9}
-                  domainPadding={20}
-                >
-                  <VictoryBar
-                    horizontal
-                    data={data}
-                    style={{ data: { fill: ({ datum }) => datum.color}}}
-                    animate={{ duration: 800, easing: 'bounce' }}
-                    labels={({ datum }) => datum.xValue}
-                    labelComponent={<VictoryLabel renderInPortal dx={10} />}
-                    x='count'
-                    y='yValue'
-                  />
-                </VictoryChart>
+              <VictoryChart
+                theme={VictoryTheme.material}
+                width={width * 0.9}
+                domainPadding={20}
+              >
+                <VictoryBar
+                  horizontal
+                  data={data}
+                  style={{ data: { fill: ({ datum }) => datum.color } }}
+                  animate={{ duration: 800, easing: 'bounce' }}
+                  labels={({ datum }) => datum.xValue}
+                  labelComponent={<VictoryLabel renderInPortal dx={10} />}
+                  x='count'
+                  y='yValue'
+                />
+              </VictoryChart>
             )}
           </View>
-          <View style={{width: width * .95, alignSelf: 'center', paddingBottom: 10}}>
+          <View
+            style={{
+              width: width * 0.95,
+              alignSelf: 'center',
+              paddingBottom: 10,
+            }}
+          >
             <SegmentedControl
               values={['Pie Chart', 'Bar Chart']}
               selectedIndex={this.state.chartIndex}

@@ -8,7 +8,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import BookCard from './BookCard'
 
 const BookForm = (props) => {
-  const { control, handleSubmit, errors } = useForm()
+  const { control, handleSubmit } = useForm()
   const onSearch = (searchQuery) => {
     props.searchBooks(searchQuery)
   }
@@ -38,7 +38,9 @@ const BookForm = (props) => {
           style={styles.button}
           onPress={handleSubmit(onSearch)}
         >
-          <Text style={{ color: 'white', paddingLeft: 20, paddingRight: 20 }}>Submit</Text>
+          <Text style={{ color: 'white', paddingLeft: 20, paddingRight: 20 }}>
+            Submit
+          </Text>
         </TouchableOpacity>
       </View>
       {props.results.length ? (
@@ -99,7 +101,7 @@ const styles = StyleSheet.create({
     height: 40,
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 1
+    flex: 1,
   },
   input: {
     height: 40,
@@ -108,6 +110,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: 'white',
     flex: 7,
-    marginRight: 10
+    marginRight: 10,
   },
 })

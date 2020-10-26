@@ -10,7 +10,9 @@ export default (book) => {
   return {
     BookId: `${book.id}`,
     title: toTitleCase(book.volumeInfo.title),
-    author: AUTHORS ? AUTHORS.map(author => toTitleCase(author)) : ['Unknown'],
+    author: AUTHORS
+      ? AUTHORS.map((author) => toTitleCase(author))
+      : ['Unknown'],
     ISBN: ISBN_CODE ? ISBN_CODE[0].identifier : null,
     coverImage: IMAGE_URL ? IMAGE_URL.thumbnail : null,
     genres: GENRES ? GENRES.map((genre) => toTitleCase(genre)) : 'Unlisted',

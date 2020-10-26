@@ -1,19 +1,13 @@
 import React from 'react'
 import { View, Text } from 'react-native'
-import { createStackNavigator } from '@react-navigation/stack'
 import { connect } from 'react-redux'
 import Camera from './Camera'
 import ScanResults from './ScanResults'
 import { addSelectedBooks } from '../reducers/libraryReducer'
 import { resetScanSelection } from '../reducers/scanSelectReducer'
 import { removeScanItems } from '../reducers/scanReducer'
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import SegmentedControl from '@react-native-community/segmented-control'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import ScanLoadingScreen from './ScanLoadingScreen'
-
-const MaterialTopTabs = createMaterialTopTabNavigator()
-const Stack = createStackNavigator()
 
 class Scanner extends React.Component {
   constructor() {
@@ -100,7 +94,6 @@ class Scanner extends React.Component {
             <ScanResults loadingResults={this.state.loadingResults} />,
           ][this.state.selectedIndex]
         }
-        {/* {this.state.selectedIndex === 0 ? <Camera /> : <ScanResults />} */}
       </React.Fragment>
     )
   }

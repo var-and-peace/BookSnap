@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { Animated, Text, View, StyleSheet, Button } from 'react-native'
+import { Animated, Text, View, StyleSheet } from 'react-native'
 import AnimatedEllipsis from 'react-native-animated-ellipsis'
 
 const quotes = [
