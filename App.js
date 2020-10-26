@@ -21,6 +21,7 @@ const Tabs = createMaterialBottomTabNavigator()
 class App extends React.Component {
   componentDidMount() {
     Orientation.lockToPortrait()
+    console.disableYellowBox = true
   }
   render() {
     return (
