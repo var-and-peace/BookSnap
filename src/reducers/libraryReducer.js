@@ -1,10 +1,13 @@
 import axios from 'axios'
 const Realm = require('realm')
-import { BOOK_SCHEMA, BookSchema } from '../db/currentSchemas'
+import {
+  BOOK_SCHEMA,
+  BookSchema,
+  BookSchemaVersion,
+} from '../db/currentSchemas'
 import parse from '../assets/bookParserFunc'
 
 // INITIAL LIBRARY STATE
-
 initialLibrary = []
 
 // ACTION CONSTANTS
@@ -26,7 +29,7 @@ export const getBooks = () => async (dispatch) => {
   try {
     const library = await Realm.open({
       schema: [BookSchema],
-      schemaVersion: 2,
+      schemaVersion: BookSchemaVersion,
     })
     let books = [...library.objects(BOOK_SCHEMA)]
     dispatch(gotBooks(books))
@@ -38,6 +41,7 @@ export const addBook = (book) => async (dispatch) => {
   try {
     const library = await Realm.open({
       schema: [BookSchema],
+      schemaVersion: BookSchemaVersion,
     })
     library.write(() => {
       library.create(BOOK_SCHEMA, book)
@@ -52,6 +56,7 @@ export const addSelectedBooks = () => async (dispatch, getState) => {
   try {
     const library = await Realm.open({
       schema: [BookSchema],
+      schemaVersion: BookSchemaVersion,
     })
     library.write(() => {
       getState().scanSelection.forEach((book) =>
@@ -65,6 +70,7 @@ export const addSelectedBooks = () => async (dispatch, getState) => {
 export const removeBook = (bookId) => async (dispatch) => {
   const library = await Realm.open({
     schema: [BookSchema],
+    schemaVersion: BookSchemaVersion,
   })
   let book = library.objects(BOOK_SCHEMA).filtered(`BookId = '${bookId}'`)[0]
   library.write(() => {

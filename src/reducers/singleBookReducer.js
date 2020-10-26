@@ -1,5 +1,9 @@
 const Realm = require('realm')
-import { BOOK_SCHEMA, BookSchema } from '../db/currentSchemas'
+import {
+  BOOK_SCHEMA,
+  BookSchema,
+  BookSchemaVersion,
+} from '../db/currentSchemas'
 
 // INITIAL LIBRARY STATE
 initialBook = {}
@@ -29,6 +33,7 @@ export const setBook = (bookId) => async (dispatch) => {
     } else {
       const library = await Realm.open({
         schema: [BookSchema],
+        schemaVersion: BookSchemaVersion,
       })
       let book = await library
         .objects(BOOK_SCHEMA)
@@ -42,7 +47,10 @@ export const setBook = (bookId) => async (dispatch) => {
 
 export const setFavorite = (bookId, isFavorite) => async (dispatch) => {
   try {
-    const fave = await Realm.open({ schema: [BookSchema] })
+    const fave = await Realm.open({
+      schema: [BookSchema],
+      schemaVersion: BookSchemaVersion,
+    })
     fave.write(() => {
       const faveData = fave.create(
         'Library',
@@ -57,7 +65,10 @@ export const setFavorite = (bookId, isFavorite) => async (dispatch) => {
 }
 export const setRead = (bookId, unread) => async (dispatch) => {
   try {
-    const read = await Realm.open({ schema: [BookSchema] })
+    const read = await Realm.open({
+      schema: [BookSchema],
+      schemaVersion: BookSchemaVersion,
+    })
     read.write(() => {
       const readData = read.create(
         'Library',

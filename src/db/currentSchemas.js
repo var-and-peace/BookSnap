@@ -27,6 +27,7 @@ const BookSchema = {
     mainBookshelf: 'string?',
   },
 }
+const BookSchemaVersion = 2
 
 const UserSchema = {
   name: USER_SCHEMA,
@@ -65,4 +66,5 @@ module.exports = {
   UserSchema,
   ScanResultSchema,
   BookshelfSchema,
+  BookSchemaVersion,
 }
