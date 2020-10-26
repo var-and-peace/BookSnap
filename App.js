@@ -15,23 +15,12 @@ import Scanner from './src/Components/Scanner'
 import BookForm from './src/Components/BookForm'
 // Orientation
 import Orientation from 'react-native-orientation'
-// Realm
-const Realm = require('realm')
-import {
-  LibrarySchema,
-  UserSchema,
-  ScanResultSchema,
-} from './src/db/currentSchemas'
 
 const Tabs = createMaterialBottomTabNavigator()
 
 class App extends React.Component {
-  async componentDidMount() {
+  componentDidMount() {
     Orientation.lockToPortrait()
-    const realms = await Realm.open({
-      schema: [LibrarySchema, UserSchema, ScanResultSchema],
-    })
-    // return realms
   }
   render() {
     return (
