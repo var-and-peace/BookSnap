@@ -10,12 +10,14 @@ import { connect } from 'react-redux'
 process.env.GOOGLE_APPLICATION_CREDENTIALS =
   '../../edge_detection_server/booksnap-service_account.json'
 
+
 class PhotoCamera extends React.PureComponent {
   state = {
     type: RNCamera.Constants.Type.back,
     wordList: [],
     base64: '',
-    barcode: '',
+    barcode: [''],
+    alert: false
   }
 
   flipCamera = () =>
@@ -64,18 +66,42 @@ class PhotoCamera extends React.PureComponent {
       this.setState({ wordList: foundWords })
     }
   }
+  barcodeAlert = (title, message) => {
+      Alert.alert(
+        title,
+        message,
+        [
+          {
+            text: 'Okay',
+          },
+        ],
+        { cancelable: false }
+      )
+  }
+
+  alertTimeout = (time) => {
+    this.setState({ alert: true })
+    setTimeout(() => this.setState({ alert: false }), time)
+  }
 
   onBarCodeRead = (e) => {
-    if (this.state.barcode !== e.data) {
+    const { barcode } = this.state
+    if (!barcode.includes(e.data)) {
       this.props.getBarcodeResult(e.data)
-      this.setState({ barcode: e.data })
-    } else {
+      this.setState({ barcode: [...barcode, e.data] })
+      this.barcodeAlert(
+        'Barcode found!',
+        'Book has been added to the results page'
+      )
+      this.alertTimeout(4000)
+    } else if (!this.state.alert && barcode.includes(e.data)) {
       // alert user that they have already scanned this.
-      Alert.alert('Already scanned', 'This barcode has already been scanned', [
-        {
-          text: 'Okay',
-        },
-      ])
+      this.barcodeAlert(
+        'Already scanned',
+        'This barcode has already been scanned!' +
+          '\nCheck the results page to see it.'
+      )
+      this.alertTimeout(2000)
     }
   }
 
