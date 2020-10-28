@@ -9,7 +9,9 @@ const quotes = [
   },
   {
     quote:
-      'The two hardest tests on the spiritual road are the patience to wait for the right moment and the courage not to be disappointed with what we encounter.',
+      'The two hardest tests on the spiritual road are the patience to wait' +
+      ' for the right moment and the courage not to be disappointed with' +
+      ' what we encounter.',
     author: 'Paulo Coelho',
   },
   {
